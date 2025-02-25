@@ -1,0 +1,3 @@
+Rehacer:
+Arquitectura:
+ - MVVM
