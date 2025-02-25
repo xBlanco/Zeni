@@ -1,4 +1,4 @@
-package com.zeni.ui.theme
+package com.zeni.core.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
