@@ -5,6 +5,8 @@
 - [ ] T4.3b Animate it
 
 ### Alex
+- [x] T2.1. Create a GitHub organization for the project.
+- [x] T2.2. Initialize a Git repository (local).
 - [x] T2.3. Add a LICENSE file.
 - [x] T4.1. Create a Product Name.
 - [ ] T4.4. Implement an About Page (team info, version, summary).
@@ -18,8 +20,7 @@
 - [ ] T1.5. Add a documentation folder.
 - [ ] T1.6. Include a design.md file explaining architectural choices.
 
-- [ ] T2.1. Create a GitHub organization for the project.
-- [ ] T2.2. Initialize a Git repository (local).
+
 - [ ] T2.4. Include a CONTRIBUTING.md file outlining the team's branching strategy.
 - [ ] T2.5. Set up required remote and local branches.
 - [ ] T2.6. Push the initial code to GitHub.
