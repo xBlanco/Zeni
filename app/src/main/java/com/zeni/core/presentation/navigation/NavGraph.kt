@@ -41,7 +41,7 @@ fun NavGraph(
 
             ItineraryScreen(viewModel = itineraryViewModel)
         }
-        composable<Settings> {
+        composable<ScreenSettings> {
             val settingsViewModel = SettingsViewModel()
 
             SettingsScreen(viewModel = settingsViewModel)

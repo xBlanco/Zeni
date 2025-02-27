@@ -12,4 +12,9 @@ object ScreenTrip
 object ScreenItinerary
 
 @Serializable
-object Settings
+object ScreenSettings
+
+@Serializable
+data class ScreenExample(
+    val id: Int
+)
