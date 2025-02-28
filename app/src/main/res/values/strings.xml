@@ -2,6 +2,15 @@
     <string name="app_name">Zeni</string>
     <string name="app_version_prefix">"Versión "</string>
 
+    <!-- Strings for the home screen -->
+    <string name="home_title">Inicio</string>
+
+    <!-- Strings for the trip screen -->
+    <string name="trip_title">Viaje</string>
+
+    <!-- Strings for the itinerary screen -->
+    <string name="itinerary_title">Itinerario</string>
+
     <!-- Strings for the settings -->
     <string name="settings_title">Configuración</string>
     <string name="about_zeni">Acerca de Zeni</string>

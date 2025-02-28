@@ -1,6 +1,10 @@
 package com.zeni.core.presentation.navigation
 
 import kotlinx.serialization.Serializable
+import kotlin.reflect.KClass
+
+@Serializable
+object ScreenInitial
 
 @Serializable
 object ScreenHome

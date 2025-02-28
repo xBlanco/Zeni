@@ -22,60 +22,25 @@ import androidx.navigation.NavHostController
 import com.zeni.R
 import com.zeni.core.domain.utils.extensions.navigateBack
 import com.zeni.core.presentation.navigation.ScreenAbout
-import com.zeni.home.presentation.BottomBar
 import com.zeni.settings.presentation.components.SettingOption
 import com.zeni.settings.presentation.components.SettingsViewModel
 
 @Composable
 fun SettingsScreen(
-    viewModel: SettingsViewModel,
+    viewModel: SettingsViewModel = SettingsViewModel(),
     navController: NavHostController
 ) {
-    Scaffold(
+    Column(
         modifier = Modifier
-            .fillMaxSize(),
-        topBar = {
-            TopBar()
-        },
-        bottomBar = {
-            BottomBar(navController)
-        },
-        containerColor = MaterialTheme.colorScheme.background
-    ) { contentPadding ->
-
-        Column(
+            .fillMaxSize()
+            .padding(horizontal = 8.dp)
+    ) {
+        Option(
+            title = stringResource(R.string.about_zeni),
+            onClick = { navController.navigate(ScreenAbout) },
             modifier = Modifier
-                .fillMaxSize()
-                .padding(contentPadding)
-                .padding(horizontal = 8.dp)
-        ) {
-            Option(
-                title = stringResource(R.string.about_zeni),
-                onClick = { navController.navigate(ScreenAbout) },
-                modifier = Modifier
-            )
-        }
+        )
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun TopBar() {
-    TopAppBar(
-        title = {
-            Text(text = stringResource(R.string.settings_title))
-        },
-        actions = {
-            IconButton(
-                onClick = { /*TODO()*/ }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = null
-                )
-            }
-        }
-    )
 }
 
 @Composable
