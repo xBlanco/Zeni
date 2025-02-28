@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
             ZeniTheme {
                 NavGraph(
                     navController = rememberNavController(),
-                    screenInitial = ScreenAbout::class
+                    screenInitial = ScreenHome::class
                 )
             }
         }

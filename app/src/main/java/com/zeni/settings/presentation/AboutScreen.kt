@@ -36,7 +36,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import coil.compose.SubcomposeAsyncImage
 import com.zeni.R
 import com.zeni.core.domain.utils.extensions.navigateBack
 import com.zeni.settings.domain.model.DevsInfo
