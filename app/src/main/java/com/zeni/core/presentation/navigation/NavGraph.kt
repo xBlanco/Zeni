@@ -1,10 +1,12 @@
 package com.zeni.core.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.zeni.home.presentation.HomeScreen
 import com.zeni.home.presentation.components.HomeViewModel
 import com.zeni.itinerary.presentation.ItineraryScreen
@@ -59,4 +61,10 @@ fun NavGraph(
             AboutScreen(navController = navController)
         }
     }
+}
+
+@Composable
+fun NavHostController.currentRoute(): String? {
+    val navBackStackEntry by currentBackStackEntryAsState()
+    return navBackStackEntry?.destination?.route
 }
