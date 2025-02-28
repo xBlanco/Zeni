@@ -15,6 +15,9 @@ object ScreenItinerary
 object ScreenSettings
 
 @Serializable
+object ScreenProfile
+
+@Serializable
 data class ScreenExample(
     val id: Int
 )
