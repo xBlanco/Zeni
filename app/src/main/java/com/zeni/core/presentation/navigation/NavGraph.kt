@@ -34,7 +34,10 @@ fun NavGraph(
         composable<ScreenHome> {
             val homeViewModel = HomeViewModel()
 
-            HomeScreen(viewModel = homeViewModel, navController = navController)
+            HomeScreen(
+                viewModel = homeViewModel,
+                navController = navController
+            )
         }
         composable<ScreenTrip> {
             val tripViewModel = TripViewModel()
@@ -49,12 +52,18 @@ fun NavGraph(
         composable<ScreenSettings> {
             val settingsViewModel = SettingsViewModel()
 
-            SettingsScreen(viewModel = settingsViewModel)
+            SettingsScreen(
+                viewModel = settingsViewModel,
+                navController = navController
+            )
         }
         composable<ScreenProfile> {
             val profileViewModel = ProfileViewModel()
 
-            ProfileScreen(viewModel = profileViewModel, navController = navController)
+            ProfileScreen(
+                viewModel = profileViewModel,
+                navController = navController
+            )
 
         }
         composable<ScreenAbout> {

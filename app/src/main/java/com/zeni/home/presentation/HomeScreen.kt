@@ -74,7 +74,7 @@ private fun TopBar() {
         actions = {
             // Search icon
             IconButton(
-                onClick = { }
+                onClick = { /*TODO()*/ }
             ) {
                 Icon(
                     imageVector = Icons.Default.Search,
@@ -86,7 +86,7 @@ private fun TopBar() {
 }
 
 @Composable
-private fun BottomBar(navController: NavHostController) {
+fun BottomBar(navController: NavHostController) {
     val currentRoute = navController.currentRoute()
     //Boton home, Trip, itinerary, settings
     NavigationBar {
