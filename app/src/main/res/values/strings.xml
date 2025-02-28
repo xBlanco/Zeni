@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Zeni</string>
+    <string name="app_version">"Versión "</string>
 </resources>

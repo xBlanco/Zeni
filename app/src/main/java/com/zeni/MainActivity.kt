@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.zeni.core.presentation.navigation.NavGraph
+import com.zeni.core.presentation.navigation.ScreenAbout
 import com.zeni.core.presentation.navigation.ScreenHome
 import com.zeni.core.presentation.theme.ZeniTheme
 
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
             ZeniTheme {
                 NavGraph(
                     navController = rememberNavController(),
-                    screenInitial = ScreenHome::class
+                    screenInitial = ScreenAbout::class
                 )
             }
         }
