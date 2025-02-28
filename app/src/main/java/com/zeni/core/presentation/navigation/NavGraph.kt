@@ -9,6 +9,8 @@ import com.zeni.home.presentation.HomeScreen
 import com.zeni.home.presentation.components.HomeViewModel
 import com.zeni.itinerary.presentation.ItineraryScreen
 import com.zeni.itinerary.presentation.components.ItineraryViewModel
+import com.zeni.profile.presentation.ProfileScreen
+import com.zeni.profile.presentation.components.ProfileViewModel
 import com.zeni.settings.presentation.AboutScreen
 import com.zeni.settings.presentation.SettingsScreen
 import com.zeni.settings.presentation.components.SettingsViewModel
@@ -46,6 +48,12 @@ fun NavGraph(
             val settingsViewModel = SettingsViewModel()
 
             SettingsScreen(viewModel = settingsViewModel)
+        }
+        composable<ScreenProfile> {
+            val profileViewModel = ProfileViewModel()
+
+            ProfileScreen(viewModel = profileViewModel, navController = navController)
+
         }
         composable<ScreenAbout> {
             AboutScreen(navController = navController)

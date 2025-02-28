@@ -18,6 +18,9 @@ object ScreenSettings
 object ScreenAbout
 
 @Serializable
+object ScreenProfile
+
+@Serializable
 data class ScreenExample(
     val id: Int
 )
