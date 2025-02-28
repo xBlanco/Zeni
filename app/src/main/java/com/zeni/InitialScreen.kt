@@ -7,8 +7,6 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -16,7 +14,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -27,14 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.zeni.core.presentation.navigation.ScreenHome
-import com.zeni.core.presentation.navigation.ScreenItinerary
-import com.zeni.core.presentation.navigation.ScreenSettings
-import com.zeni.core.presentation.navigation.ScreenTrip
-import com.zeni.core.presentation.navigation.currentRoute
 import com.zeni.home.presentation.HomeScreen
 import com.zeni.itinerary.presentation.ItineraryScreen
-import com.zeni.settings.presentation.SettingsScreen
+import com.zeni.settings.presentation.MoreScreen
 import com.zeni.trip.presentation.TripScreen
 import kotlinx.coroutines.launch
 
@@ -71,7 +63,7 @@ fun InitialScreen(
                 Screen.Home.ordinal -> HomeScreen(navController = navController)
                 Screen.Trip.ordinal -> TripScreen(navController = navController)
                 Screen.Itinerary.ordinal -> ItineraryScreen(navController = navController)
-                Screen.Settings.ordinal -> SettingsScreen(navController = navController)
+                Screen.More.ordinal -> MoreScreen(navController = navController)
             }
         }
     }
@@ -180,13 +172,13 @@ private fun BottomBar(pagerState: PagerState) {
             }
         )
 
-        val isSettingsSelected = currentScreen == Screen.Settings
+        val isMoreSelected = currentScreen == Screen.More
         NavigationBarItem(
-            selected = isSettingsSelected,
+            selected = isMoreSelected,
             onClick = {
-                if (!isSettingsSelected) {
+                if (!isMoreSelected) {
                     scope.launch {
-                        pagerState.scrollToPage(Screen.Settings.ordinal)
+                        pagerState.scrollToPage(Screen.More.ordinal)
                     }
                 }
             },
@@ -197,7 +189,7 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(R.string.settings_title))
+                Text(text = stringResource(R.string.more_title))
             }
         )
     }
@@ -210,5 +202,6 @@ enum class Screen(val title: Int) {
     Home(R.string.home_title),
     Trip(R.string.trip_title),
     Itinerary(R.string.itinerary_title),
+    More(R.string.more_title),
     Settings(R.string.settings_title)
 }

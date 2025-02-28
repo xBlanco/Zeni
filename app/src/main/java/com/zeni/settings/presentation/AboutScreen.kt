@@ -42,12 +42,12 @@ fun AboutScreen(navController: NavHostController) {
     val devs = remember {
         listOf(
             DevsInfo(
-                name = "Berto puto Dalfo",
+                name = "Alberto Arias",
                 image = R.raw.berto_image,
                 github = "https://github.com/xBlanco"
             ),
             DevsInfo(
-                name = "Alex Lillo",
+                name = "Alex Castells",
                 image = R.raw.alex_image,
                 github = "https://github.com/Xertrec"
             )

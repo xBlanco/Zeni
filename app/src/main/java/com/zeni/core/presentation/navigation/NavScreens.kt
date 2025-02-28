@@ -1,7 +1,6 @@
 package com.zeni.core.presentation.navigation
 
 import kotlinx.serialization.Serializable
-import kotlin.reflect.KClass
 
 @Serializable
 object ScreenInitial
@@ -16,13 +15,17 @@ object ScreenTrip
 object ScreenItinerary
 
 @Serializable
+object ScreenMore
+
+@Serializable
+object ScreenProfile
+
+@Serializable
 object ScreenSettings
 
 @Serializable
 object ScreenAbout
 
-@Serializable
-object ScreenProfile
 
 @Serializable
 data class ScreenExample(

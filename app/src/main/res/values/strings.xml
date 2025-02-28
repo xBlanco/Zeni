@@ -11,7 +11,9 @@
     <!-- Strings for the itinerary screen -->
     <string name="itinerary_title">Itinerario</string>
 
-    <!-- Strings for the settings -->
+    <!-- Strings for the more -->
+    <string name="more_title">Más</string>
     <string name="settings_title">Configuración</string>
+    <string name="user_title">Usuario</string>
     <string name="about_zeni">Acerca de Zeni</string>
 </resources>

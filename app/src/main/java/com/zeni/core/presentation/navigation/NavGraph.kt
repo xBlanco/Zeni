@@ -9,17 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.zeni.InitialScreen
 import com.zeni.Screen
-import com.zeni.home.presentation.HomeScreen
-import com.zeni.home.presentation.components.HomeViewModel
-import com.zeni.itinerary.presentation.ItineraryScreen
-import com.zeni.itinerary.presentation.components.ItineraryViewModel
 import com.zeni.profile.presentation.ProfileScreen
+import com.zeni.profile.presentation.SettingsScreen
 import com.zeni.profile.presentation.components.ProfileViewModel
 import com.zeni.settings.presentation.AboutScreen
-import com.zeni.settings.presentation.SettingsScreen
-import com.zeni.settings.presentation.components.SettingsViewModel
-import com.zeni.trip.presentation.TripScreen
-import com.zeni.trip.presentation.components.TripViewModel
 import kotlin.reflect.KClass
 
 @Composable
@@ -57,10 +50,10 @@ fun NavGraph(
                 initialScreen = Screen.Itinerary.ordinal
             )
         }
-        composable<ScreenSettings> {
+        composable<ScreenMore> {
             InitialScreen(
                 navController = navController,
-                initialScreen = Screen.Settings.ordinal
+                initialScreen = Screen.More.ordinal
             )
         }
         composable<ScreenProfile> {
@@ -70,7 +63,9 @@ fun NavGraph(
                 viewModel = profileViewModel,
                 navController = navController
             )
-
+        }
+        composable<ScreenSettings> {
+            SettingsScreen(navController = navController)
         }
         composable<ScreenAbout> {
             AboutScreen(navController = navController)
