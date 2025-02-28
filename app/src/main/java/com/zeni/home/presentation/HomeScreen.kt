@@ -38,111 +38,17 @@ import com.zeni.core.presentation.navigation.currentRoute
 import com.zeni.home.presentation.components.HomeViewModel
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel, navController: NavHostController) {
-    Scaffold(
+fun HomeScreen(
+    viewModel: HomeViewModel = HomeViewModel(),
+    navController: NavHostController
+) {
+    Column(
         modifier = Modifier
-            .fillMaxSize(),
-        topBar = {
-            TopBar()
-        },
-        bottomBar = {
-            BottomBar(navController)
-        },
-        containerColor = MaterialTheme.colorScheme.background
-    ) { contentPadding ->
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(contentPadding)
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun TopBar() {
-    TopAppBar(
-        title = {
-            Text(text = "Home")
-        },
-        actions = {
-            // Search icon
-            IconButton(
-                onClick = { /*TODO()*/ }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = null
-                )
-            }
-        }
-    )
-}
-
-@Composable
-fun BottomBar(navController: NavHostController) {
-    val currentRoute = navController.currentRoute()
-    //Boton home, Trip, itinerary, settings
-    NavigationBar {
-        val isHomeSelected = currentRoute?.endsWith(ScreenHome::class.java.simpleName) == true
-        NavigationBarItem(
-            selected = isHomeSelected,
-            enabled = !isHomeSelected,
-            onClick = { navController.navigate(ScreenHome) },
-            icon = {
-                Icon(
-                    imageVector = if (isHomeSelected) Icons.Rounded.Home
-                    else Icons.Outlined.Home,
-                    contentDescription = null
-                )
-            }
-        )
-
-        val isTripSelected = currentRoute?.endsWith(ScreenTrip::class.java.simpleName) == true
-        NavigationBarItem(
-            selected = isTripSelected,
-            enabled = !isTripSelected,
-            onClick = { navController.navigate(ScreenTrip) },
-            icon = {
-                Icon(
-                    painter = if (isTripSelected) painterResource(R.drawable.icon_trip_fill)
-                    else painterResource(R.drawable.icon_trip_empty),
-                    contentDescription = null
-                )
-            }
-        )
-
-        val isItinerarySelected = currentRoute?.endsWith(ScreenItinerary::class.java.simpleName) == true
-        NavigationBarItem(
-            selected = isItinerarySelected,
-            enabled = !isItinerarySelected,
-            onClick = { navController.navigate(ScreenItinerary) },
-            icon = {
-                Icon(
-                    painter = if (isItinerarySelected) painterResource(R.drawable.icon_itinerary_fill)
-                    else painterResource(R.drawable.icon_itinerary_empty),
-                    contentDescription = null
-                )
-            }
-        )
-
-        val isSettingsSelected = currentRoute?.endsWith(ScreenSettings::class.java.simpleName) == true
-        NavigationBarItem(
-            selected = isSettingsSelected,
-            enabled = !isSettingsSelected,
-            onClick = { navController.navigate(ScreenSettings) },
-            icon = {
-                Icon(
-                    imageVector = Icons.Rounded.Menu,
-                    contentDescription = null
-                )
-            }
-        )
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Home Screen")
     }
 }

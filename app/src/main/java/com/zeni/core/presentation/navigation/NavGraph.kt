@@ -7,6 +7,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.zeni.InitialScreen
+import com.zeni.Screen
 import com.zeni.home.presentation.HomeScreen
 import com.zeni.home.presentation.components.HomeViewModel
 import com.zeni.itinerary.presentation.ItineraryScreen
@@ -31,30 +33,34 @@ fun NavGraph(
         startDestination = screenInitial,
         modifier = modifier
     ) {
-        composable<ScreenHome> {
-            val homeViewModel = HomeViewModel()
-
-            HomeScreen(
-                viewModel = homeViewModel,
+        composable<ScreenInitial> {
+            InitialScreen(
                 navController = navController
             )
         }
-        composable<ScreenTrip> {
-            val tripViewModel = TripViewModel()
 
-            TripScreen(viewModel = tripViewModel)
+        composable<ScreenHome> {
+            InitialScreen(
+                navController = navController,
+                initialScreen = Screen.Home.ordinal
+            )
+        }
+        composable<ScreenTrip> {
+            InitialScreen(
+                navController = navController,
+                initialScreen = Screen.Trip.ordinal
+            )
         }
         composable<ScreenItinerary> {
-            val itineraryViewModel = ItineraryViewModel()
-
-            ItineraryScreen(viewModel = itineraryViewModel)
+            InitialScreen(
+                navController = navController,
+                initialScreen = Screen.Itinerary.ordinal
+            )
         }
         composable<ScreenSettings> {
-            val settingsViewModel = SettingsViewModel()
-
-            SettingsScreen(
-                viewModel = settingsViewModel,
-                navController = navController
+            InitialScreen(
+                navController = navController,
+                initialScreen = Screen.Settings.ordinal
             )
         }
         composable<ScreenProfile> {
