@@ -11,6 +11,7 @@ import com.zeni.InitialScreen
 import com.zeni.Screen
 import com.zeni.profile.presentation.ProfileScreen
 import com.zeni.profile.presentation.SettingsScreen
+import com.zeni.profile.presentation.TermsScreen
 import com.zeni.profile.presentation.components.ProfileViewModel
 import com.zeni.settings.presentation.AboutScreen
 import kotlin.reflect.KClass
@@ -66,6 +67,9 @@ fun NavGraph(
         }
         composable<ScreenSettings> {
             SettingsScreen(navController = navController)
+        }
+        composable<ScreenTerms>{
+            TermsScreen(navController = navController)
         }
         composable<ScreenAbout> {
             AboutScreen(navController = navController)

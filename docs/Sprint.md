@@ -6,7 +6,7 @@
 - [x] T2.4. Include a CONTRIBUTING.md file outlining the team's branching strategy.
 - [x] T2.5. Set up required remote and local branches.
 - [x] T2.7. Create the first release using GitHub Actions.
-- [x] T3.3. Document the data model in design.md.
+- [ ] T3.3. Document the data model in design.md.
 - [x] T4.2. Generate a logo for you app
 - [x] T4.3. Create a Splash Screen with the app logo.
 - [ ] T4.5. Add a Terms & Conditions screen.

@@ -24,6 +24,9 @@ object ScreenProfile
 object ScreenSettings
 
 @Serializable
+object ScreenTerms
+
+@Serializable
 object ScreenAbout
 
 

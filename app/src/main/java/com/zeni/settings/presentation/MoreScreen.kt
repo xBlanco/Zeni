@@ -15,6 +15,7 @@ import com.zeni.core.presentation.navigation.ScreenAbout
 import com.zeni.core.presentation.navigation.ScreenMore
 import com.zeni.core.presentation.navigation.ScreenProfile
 import com.zeni.core.presentation.navigation.ScreenSettings
+import com.zeni.core.presentation.navigation.ScreenTerms
 import com.zeni.settings.presentation.components.SettingOption
 import com.zeni.settings.presentation.components.SettingsViewModel
 
@@ -37,6 +38,11 @@ fun MoreScreen(
         Option(
             title = stringResource(R.string.settings_title),
             onClick = { navController.navigate(ScreenSettings) },
+            modifier = Modifier
+        )
+        Option(
+            title = stringResource(R.string.terms_title),
+            onClick = { navController.navigate(ScreenTerms) },
             modifier = Modifier
         )
         Option(
