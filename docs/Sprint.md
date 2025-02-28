@@ -24,4 +24,4 @@
 - [ ] T3.1. Develop the core screen layouts (e.g., Home with Menu and Navigation, Trip, Itinerary, User Preference).
 - [ ] T3.2. Implement core classes and its functions, annotating pending logic with @TODO.
 - [x] T4.1. Create a Product Name.
-- [ ] T4.4. Implement an About Page (team info, version, summary).
+- [x] T4.4. Implement an About Page (team info, version, summary).
