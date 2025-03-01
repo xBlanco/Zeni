@@ -6,7 +6,7 @@
 - [x] T2.4. Include a CONTRIBUTING.md file outlining the team's branching strategy.
 - [x] T2.5. Set up required remote and local branches.
 - [x] T2.7. Create the first release using GitHub Actions.
-- [ ] T3.1. Develop the core screen layouts (e.g., Home with Menu and Navigation, Trip, Itinerary, User Preference).
+- [x] T3.1. Develop the core screen layouts (e.g., Home with Menu and Navigation, Trip, Itinerary, User Preference).
 - [ ] T3.3. Document the data model in design.md.
 - [x] T4.2. Generate a logo for you app
 - [x] T4.3. Create a Splash Screen with the app logo.
