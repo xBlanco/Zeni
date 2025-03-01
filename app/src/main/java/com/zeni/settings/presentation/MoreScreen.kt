@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.zeni.R
 import com.zeni.core.presentation.navigation.ScreenAbout
-import com.zeni.core.presentation.navigation.ScreenMore
 import com.zeni.core.presentation.navigation.ScreenProfile
 import com.zeni.core.presentation.navigation.ScreenSettings
 import com.zeni.core.presentation.navigation.ScreenTerms
@@ -21,7 +20,7 @@ import com.zeni.settings.presentation.components.SettingsViewModel
 
 @Composable
 fun MoreScreen(
-//    viewModel: SettingsViewModel = SettingsViewModel(),
+    viewModel: SettingsViewModel = SettingsViewModel(),
     navController: NavHostController
 ) {
     Column(
@@ -31,7 +30,7 @@ fun MoreScreen(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Option(
-            title = stringResource(R.string.user_title),
+            title = stringResource(R.string.profile_title),
             onClick = { navController.navigate(ScreenProfile) },
             modifier = Modifier
         )

@@ -3,6 +3,9 @@ package com.zeni.core.presentation.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
+object ScreenLogin
+
+@Serializable
 object ScreenInitial
 
 @Serializable
