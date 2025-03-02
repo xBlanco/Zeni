@@ -9,7 +9,7 @@
 - [x] T3.1. Develop the core screen layouts (e.g., Home with Menu and Navigation, Trip, Itinerary, User Preference).
 - [ ] T3.3. Document the data model in design.md.
 - [x] T4.2. Generate a logo for you app
-- [x] T4.3. Create a Splash Screen with the app logo.
+- [ ] T4.3. Create a Splash Screen with the app logo.
 - [x] T4.5. Add a Terms & Conditions screen.
 - [ ] T4.6. Ensure the app supports multiple languages.
 
