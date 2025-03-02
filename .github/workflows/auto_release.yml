@@ -1,41 +1,24 @@
-name: Auto Tag on Merge
+name: Create release
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - "v*"
 
 permissions:
   contents: write
 
 jobs:
-  tag:
-    name: Auto Tag Version
+  release:
+    name: Release pushed tag
     runs-on: ubuntu-22.04
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Necesario para obtener todos los tags
-
-      - name: Get latest tag
-        id: get_latest_tag
-        run: |
-          latest_tag=$(git tag --sort=-v:refname | head -n 1 || echo "v0.1.0")
-          echo "LATEST_TAG=$latest_tag" >> $GITHUB_ENV
-
-      - name: Increment version
-        id: bump_version
-        run: |
-          IFS='.' read -r major minor patch <<< "${LATEST_TAG#v}"
-          new_version="$major.$minor.$((patch + 1))"
-          echo "NEW_VERSION=v$new_version" >> $GITHUB_ENV
-
-      - name: Create and push new tag
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git tag "${NEW_VERSION}"
-          git push origin "${NEW_VERSION}"
+      - name: Create release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release create "$tag" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="${tag#v}" \
+              --generate-notes
