@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.zeni"
-        minSdk = 29
+        minSdk = 27
         targetSdk = 35
         versionCode = 1
         versionName = "0.1.0"
@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.coil.compose)
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
