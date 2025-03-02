@@ -2,17 +2,22 @@ package com.zeni.core.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.zeni.home.presentation.HomeScreen
-import com.zeni.home.presentation.components.HomeViewModel
-import com.zeni.itinerary.presentation.ItineraryScreen
-import com.zeni.itinerary.presentation.components.ItineraryViewModel
+import com.zeni.InitialScreen
+import com.zeni.Screen
+import com.zeni.auth.presentation.login.LoginScreen
+import com.zeni.auth.presentation.login.components.LoginViewModel
+import com.zeni.auth.presentation.register.RegisterScreen
+import com.zeni.auth.presentation.register.components.RegisterViewModel
+import com.zeni.settings.presentation.ProfileScreen
+import com.zeni.settings.presentation.AboutScreen
 import com.zeni.settings.presentation.SettingsScreen
+import com.zeni.settings.presentation.TermsScreen
+import com.zeni.settings.presentation.components.ProfileViewModel
 import com.zeni.settings.presentation.components.SettingsViewModel
-import com.zeni.trip.presentation.TripScreen
-import com.zeni.trip.presentation.components.TripViewModel
 import kotlin.reflect.KClass
 
 @Composable
@@ -26,25 +31,74 @@ fun NavGraph(
         startDestination = screenInitial,
         modifier = modifier
     ) {
-        composable<ScreenHome> {
-            val homeViewModel = HomeViewModel()
+        composable<ScreenRegister> {
+            val viewModel = viewModel<RegisterViewModel>()
 
-            HomeScreen(viewModel = homeViewModel)
+            RegisterScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
+        }
+        composable<ScreenLogin> {
+            val viewModel = viewModel<LoginViewModel>()
+
+            LoginScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
+        }
+
+        composable<ScreenInitial> {
+            InitialScreen(
+                navController = navController
+            )
+        }
+
+        composable<ScreenHome> {
+            InitialScreen(
+                navController = navController,
+                initialScreen = Screen.Home.ordinal
+            )
         }
         composable<ScreenTrip> {
-            val tripViewModel = TripViewModel()
-
-            TripScreen(viewModel = tripViewModel)
+            InitialScreen(
+                navController = navController,
+                initialScreen = Screen.Trip.ordinal
+            )
         }
         composable<ScreenItinerary> {
-            val itineraryViewModel = ItineraryViewModel()
+            InitialScreen(
+                navController = navController,
+                initialScreen = Screen.Itinerary.ordinal
+            )
+        }
+        composable<ScreenMore> {
+            InitialScreen(
+                navController = navController,
+                initialScreen = Screen.More.ordinal
+            )
+        }
+        composable<ScreenProfile> {
+            val viewModel = viewModel<ProfileViewModel>()
 
-            ItineraryScreen(viewModel = itineraryViewModel)
+            ProfileScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
         }
         composable<ScreenSettings> {
-            val settingsViewModel = SettingsViewModel()
+            val viewModel = viewModel<SettingsViewModel>()
 
-            SettingsScreen(viewModel = settingsViewModel)
+            SettingsScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
+        }
+        composable<ScreenTerms>{
+            TermsScreen(navController = navController)
+        }
+        composable<ScreenAbout> {
+            AboutScreen(navController = navController)
         }
     }
 }
