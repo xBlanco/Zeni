@@ -1,4 +1,4 @@
-package com.zeni.profile.presentation
+package com.zeni.settings.presentation
 
 import android.annotation.SuppressLint
 import android.text.Layout
@@ -40,25 +40,28 @@ import com.zeni.core.presentation.navigation.ScreenHome
 fun TermsScreen(navController: NavHostController) {
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize(),
         topBar = { TopBar(navController) }
     ) { contentPadding ->
 
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
-                .padding(16.dp)
+                .padding(horizontal = 16.dp)
         ) {
-            Text(
-                text = stringResource(R.string.terms_txt_title),
-                modifier = Modifier,
-                color = MaterialTheme.colorScheme.onBackground,
-                style = MaterialTheme.typography.titleSmall,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Normal,
-                textAlign = TextAlign.Justify
-            )
+            item {
+                Text(
+                    text = stringResource(R.string.terms_txt_title),
+                    modifier = Modifier,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Normal,
+                    textAlign = TextAlign.Justify
+                )
+            }
         }
     }
 }

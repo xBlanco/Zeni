@@ -1,21 +1,21 @@
 package com.zeni.core.presentation.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.zeni.InitialScreen
 import com.zeni.Screen
-import com.zeni.login.presentation.LoginScreen
-import com.zeni.login.presentation.components.LoginViewModel
+import com.zeni.auth.presentation.login.LoginScreen
+import com.zeni.auth.presentation.login.components.LoginViewModel
+import com.zeni.auth.presentation.register.RegisterScreen
+import com.zeni.auth.presentation.register.components.RegisterViewModel
 import com.zeni.settings.presentation.ProfileScreen
-import com.zeni.profile.presentation.TermsScreen
 import com.zeni.settings.presentation.AboutScreen
 import com.zeni.settings.presentation.SettingsScreen
+import com.zeni.settings.presentation.TermsScreen
 import com.zeni.settings.presentation.components.ProfileViewModel
 import com.zeni.settings.presentation.components.SettingsViewModel
 import kotlin.reflect.KClass
@@ -31,6 +31,14 @@ fun NavGraph(
         startDestination = screenInitial,
         modifier = modifier
     ) {
+        composable<ScreenRegister> {
+            val viewModel = viewModel<RegisterViewModel>()
+
+            RegisterScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
+        }
         composable<ScreenLogin> {
             val viewModel = viewModel<LoginViewModel>()
 

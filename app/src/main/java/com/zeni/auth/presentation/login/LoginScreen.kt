@@ -1,26 +1,23 @@
-package com.zeni.login.presentation
+package com.zeni.auth.presentation.login
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.zeni.R
 import com.zeni.core.presentation.components.AppIcon
 import com.zeni.core.presentation.navigation.ScreenHome
-import com.zeni.login.domain.utils.LoginErrors
-import com.zeni.login.presentation.components.LoginViewModel
+import com.zeni.auth.domain.utils.LoginErrors
+import com.zeni.auth.presentation.login.components.LoginViewModel
 
 @Composable
 fun LoginScreen(

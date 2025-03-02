@@ -1,8 +1,8 @@
-package com.zeni.login.presentation.components
+package com.zeni.auth.presentation.login.components
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zeni.login.domain.utils.LoginErrors
+import com.zeni.auth.domain.utils.LoginErrors
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

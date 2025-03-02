@@ -1,4 +1,4 @@
-package com.zeni.login.domain.utils
+package com.zeni.auth.domain.utils
 
 /**
  * Enum class that represents the possible errors that can occur during the login process.
