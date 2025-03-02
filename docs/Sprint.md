@@ -21,7 +21,7 @@
 - [x] T2.2. Initialize a Git repository (local).
 - [x] T2.3. Add a LICENSE file.
 - [x] T2.6. Push the initial code to GitHub.
-- [ ] T3.1. Develop the core screen layouts (e.g., Home with Menu and Navigation, Trip, Itinerary, User Preference).
-- [ ] T3.2. Implement core classes and its functions, annotating pending logic with @TODO.
+- [x] T3.1. Develop the core screen layouts (e.g., Home with Menu and Navigation, Trip, Itinerary, User Preference).
+- [x] T3.2. Implement core classes and its functions, annotating pending logic with @TODO.
 - [x] T4.1. Create a Product Name.
 - [x] T4.4. Implement an About Page (team info, version, summary).

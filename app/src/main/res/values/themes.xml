@@ -2,4 +2,11 @@
 <resources>
 
     <style name="Theme.Zeni" parent="Theme.Material3.DayNight.NoActionBar" />
+
+    <style name="Theme.Zeni.SplashScreen" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimationDuration">50</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.Zeni</item>
+    </style>
 </resources>
