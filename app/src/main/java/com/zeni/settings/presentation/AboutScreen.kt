@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.zeni.R
 import com.zeni.core.domain.utils.extensions.navigateBack
+import com.zeni.core.presentation.components.AppIcon
 import com.zeni.settings.domain.model.DevsInfo
 import com.zeni.settings.presentation.components.DevInformation
 
@@ -78,6 +79,7 @@ fun AboutScreen(navController: NavHostController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AppIcon(
+                    size = 0.45f,
                     modifier = Modifier
                         .fillMaxWidth()
                 )
@@ -144,28 +146,8 @@ private fun TopBar(navController: NavHostController) {
     )
 }
 
-/**
- * The icon of the app.
- */
 @Composable
-fun AppIcon(modifier: Modifier = Modifier) {
-
-    BoxWithConstraints(
-        modifier = modifier,
-        contentAlignment = Alignment.Center
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.zeni_logo),
-            contentDescription = null,
-            modifier = Modifier
-                .width(this.maxWidth * 0.45f)
-                .aspectRatio(ratio = 1f)
-        )
-    }
-}
-
-@Composable
-fun DevsInformation(
+private fun DevsInformation(
     devs: List<DevsInfo>,
     modifier: Modifier = Modifier
 ) {

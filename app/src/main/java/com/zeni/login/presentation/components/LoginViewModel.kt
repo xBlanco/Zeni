@@ -2,6 +2,7 @@ package com.zeni.login.presentation.components
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zeni.login.domain.utils.LoginErrors
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -13,6 +14,7 @@ class LoginViewModel : ViewModel() {
     fun setUsername(value: String) {
         viewModelScope.launch {
             username.emit(value)
+            loginError.emit(null)
         }
     }
 
@@ -21,13 +23,25 @@ class LoginViewModel : ViewModel() {
     fun setPassword(value: String) {
         viewModelScope.launch {
             password.emit(value)
+            loginError.emit(null)
         }
     }
 
+    val loginError: StateFlow<LoginErrors?>
+        field = MutableStateFlow(value = null)
     fun verifyCredentials(): Boolean {
         // TODO: Implement a real authentication mechanism with backend
-        return username.value == DefaultCredentials.USERNAME &&
+        val isValidCredentials = username.value == DefaultCredentials.USERNAME &&
                 password.value == DefaultCredentials.PASSWORD
+
+        // TODO: Plan if needed to show exactly where is the error
+        if (!isValidCredentials) {
+            viewModelScope.launch {
+                loginError.emit(LoginErrors.INVALID_CREDENTIALS)
+            }
+        }
+
+        return isValidCredentials
     }
 
     private object DefaultCredentials {
