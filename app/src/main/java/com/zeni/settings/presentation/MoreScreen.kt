@@ -20,7 +20,6 @@ import com.zeni.settings.presentation.components.SettingsViewModel
 
 @Composable
 fun MoreScreen(
-    viewModel: SettingsViewModel = SettingsViewModel(),
     navController: NavHostController
 ) {
     Column(

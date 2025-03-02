@@ -31,9 +31,3 @@ object ScreenTerms
 
 @Serializable
 object ScreenAbout
-
-
-@Serializable
-data class ScreenExample(
-    val id: Int
-)

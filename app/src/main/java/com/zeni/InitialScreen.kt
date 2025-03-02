@@ -23,6 +23,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.zeni.home.presentation.HomeScreen
 import com.zeni.itinerary.presentation.ItineraryScreen
@@ -60,10 +61,27 @@ fun InitialScreen(
                 .padding(contentPadding)
         ) { currentIndex ->
             when (currentIndex) {
-                Screen.Home.ordinal -> HomeScreen(navController = navController)
-                Screen.Trip.ordinal -> TripScreen(navController = navController)
-                Screen.Itinerary.ordinal -> ItineraryScreen(navController = navController)
-                Screen.More.ordinal -> MoreScreen(navController = navController)
+                Screen.Home.ordinal -> {
+                    HomeScreen(
+                        viewModel = viewModel(),
+                        navController = navController
+                    )
+                }
+                Screen.Trip.ordinal -> {
+                    TripScreen(
+                        viewModel = viewModel(),
+                        navController = navController
+                    )
+                }
+                Screen.Itinerary.ordinal -> {
+                    ItineraryScreen(
+                        viewModel = viewModel(),
+                        navController = navController
+                    )
+                }
+                Screen.More.ordinal -> {
+                    MoreScreen(navController = navController)
+                }
             }
         }
     }
@@ -202,6 +220,5 @@ enum class Screen(val title: Int) {
     Home(R.string.home_title),
     Trip(R.string.trip_title),
     Itinerary(R.string.itinerary_title),
-    More(R.string.more_title),
-    Settings(R.string.settings_title)
+    More(R.string.more_title)
 }

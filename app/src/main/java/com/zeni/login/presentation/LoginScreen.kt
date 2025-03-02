@@ -11,56 +11,77 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.zeni.R
 import com.zeni.core.presentation.navigation.ScreenHome
+import com.zeni.login.presentation.components.LoginViewModel
 
 @Composable
-fun LoginScreen(navController: NavController) {
-
-    // States for username, password, and the alert dialog
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+fun LoginScreen(
+    viewModel: LoginViewModel,
+    navController: NavController
+) {
+    val username by viewModel.username.collectAsState()
+    val password by viewModel.password.collectAsState()
     var showAlert by remember { mutableStateOf(false) }
 
-    // Get default values from strings.xml
-    val defaultUser = stringResource(id = R.string.default_user)
-    val defaultPass = stringResource(id = R.string.default_pass)
-
-
-    Column(
+    Scaffold(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = stringResource(R.string.login_title), style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.onBackground)
-        Spacer(modifier = Modifier.height(20.dp))
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text(text = stringResource(R.string.login_user)) },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text(text = stringResource(R.string.login_pass)) },
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation()
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        Button(
-            onClick = {
-                if (username == defaultUser && password == defaultPass) {
-                    navController.navigate(ScreenHome) {
-                    }
-                } else {
-                    showAlert = true
-                }
-            },
-            modifier = Modifier.fillMaxWidth()
+            .fillMaxSize(),
+        containerColor = MaterialTheme.colorScheme.background
+    ) { contentPadding ->
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(
+                space = 8.dp,
+                alignment = Alignment.CenterVertically
+            ),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = stringResource(R.string.login_btn))
+            Text(
+                text = stringResource(R.string.login_title),
+                modifier = Modifier
+                    .padding(
+                        bottom = 6.dp
+                    ),
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+
+            OutlinedTextField(
+                value = username,
+                onValueChange = viewModel::setUsername,
+                label = { Text(text = stringResource(R.string.login_user)) },
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+
+            OutlinedTextField(
+                value = password,
+                onValueChange = viewModel::setPassword,
+                label = { Text(text = stringResource(R.string.login_pass)) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        bottom = 6.dp
+                    ),
+                visualTransformation = PasswordVisualTransformation()
+            )
+
+            Button(
+                onClick = {
+                    if (viewModel.verifyCredentials()) {
+                        navController.navigate(ScreenHome)
+                    } else {
+                        showAlert = true
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Text(text = stringResource(R.string.login_btn))
+            }
         }
     }
 

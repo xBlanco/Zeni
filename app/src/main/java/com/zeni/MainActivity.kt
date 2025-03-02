@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
             ZeniTheme {
                 NavGraph(
                     navController = rememberNavController(),
-                    screenInitial = ScreenLogin::class
+                    screenInitial = ScreenLogin::class // TODO: Conserve login state for future sessions
                 )
             }
         }

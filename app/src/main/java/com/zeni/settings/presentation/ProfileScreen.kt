@@ -23,45 +23,47 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.zeni.R
 import com.zeni.core.domain.utils.extensions.navigateBack
+import com.zeni.settings.presentation.components.ProfileViewModel
 import com.zeni.settings.presentation.components.SettingsViewModel
 
 @Composable
-fun ProfileScreen(viewModel: SettingsViewModel, navController: NavHostController) {
+fun ProfileScreen(
+    viewModel: ProfileViewModel,
+    navController: NavHostController
+) {
     Scaffold (
         modifier = Modifier.fillMaxSize(),
         topBar = { TopBar(navController) }
-    )
-    {
-
+    ) { contentPadding ->
 
         Column(
-            modifier = Modifier.padding(it).fillMaxSize().fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Button(
                     onClick = { /*todo*/ },
                     shape = RoundedCornerShape(25)
-                )
-                {
+                ) {
                     Text(text = "Config1")
                 }
                 Button(
                     onClick = { /*todo*/ },
                     shape = RoundedCornerShape(25)
-                )
-                {
+                ) {
                     Text(text = "Config2")
                 }
                 Button(
                     onClick = { /*todo*/ },
                     shape = RoundedCornerShape(25)
-                )
-                {
+                ) {
                     Text(text = "Config3")
                 }
             }
@@ -73,7 +75,9 @@ fun ProfileScreen(viewModel: SettingsViewModel, navController: NavHostController
 @Composable
 private fun TopBar(navController: NavHostController) {
     TopAppBar(
-        title = {Text(text = stringResource(R.string.profile_title))},
+        title = {
+            Text(text = stringResource(R.string.profile_title))
+        },
         navigationIcon = {
             IconButton(
                 onClick = navController::navigateBack

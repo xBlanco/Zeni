@@ -1,4 +1,4 @@
-package com.zeni.profile.presentation
+package com.zeni.settings.presentation
 
 import android.annotation.SuppressLint
 import android.text.Layout
@@ -30,18 +30,23 @@ import androidx.navigation.NavHostController
 import com.zeni.R
 import com.zeni.core.domain.utils.extensions.navigateBack
 import com.zeni.core.presentation.navigation.ScreenHome
+import com.zeni.settings.presentation.components.SettingsViewModel
 
 @Composable
-fun SettingsScreen(navController: NavHostController) {
+fun SettingsScreen(
+    viewModel: SettingsViewModel,
+    navController: NavHostController
+) {
     Scaffold (
         modifier = Modifier.fillMaxSize(),
-        topBar = { TopBar(navController) }
-    )
-    {
-
+        topBar = { TopBar(navController) },
+        containerColor = MaterialTheme.colorScheme.background
+    ) { contentPadding ->
 
         Column(
-            modifier = Modifier.padding(it).fillMaxSize().fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             Row(

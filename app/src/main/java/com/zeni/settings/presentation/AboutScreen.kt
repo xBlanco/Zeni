@@ -42,14 +42,14 @@ fun AboutScreen(navController: NavHostController) {
     val devs = remember {
         listOf(
             DevsInfo(
-                name = "Alberto Arias",
+                name = context.getString(R.string.developer1_name),
                 image = R.raw.berto_image,
-                github = "https://github.com/xBlanco"
+                github = context.getString(R.string.developer1_github)
             ),
             DevsInfo(
-                name = "Alex Castells",
+                name = context.getString(R.string.developer2_name),
                 image = R.raw.alex_image,
-                github = "https://github.com/Xertrec"
+                github = context.getString(R.string.developer2_github)
             )
         )
     }
@@ -110,16 +110,13 @@ fun AboutScreen(navController: NavHostController) {
                 }
             }
 
-            Column {
-                DevsInformation(
-                    devs = devs,
-                    modifier = Modifier
-                )
-
-                Text(
-                    ""
-                )
-            }
+            DevsInformation(
+                devs = devs,
+                modifier = Modifier
+                    .padding(
+                        bottom = 16.dp
+                    )
+            )
         }
     }
 }
@@ -179,6 +176,18 @@ fun DevsInformation(
             alignment = Alignment.Bottom
         )
     ) {
+        Text(
+            text = stringResource(R.string.developers_title),
+            modifier = Modifier
+                .padding(
+                    start = 4.dp,
+                    bottom = 8.dp
+                ),
+            color = MaterialTheme.colorScheme.onBackground,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
+        )
+
         devs.forEach { dev ->
             DevInformation(
                 dev = dev,

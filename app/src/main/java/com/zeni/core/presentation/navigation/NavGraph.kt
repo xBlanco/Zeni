@@ -3,6 +3,7 @@ package com.zeni.core.presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,10 +11,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.zeni.InitialScreen
 import com.zeni.Screen
 import com.zeni.login.presentation.LoginScreen
+import com.zeni.login.presentation.components.LoginViewModel
 import com.zeni.settings.presentation.ProfileScreen
-import com.zeni.profile.presentation.SettingsScreen
 import com.zeni.profile.presentation.TermsScreen
 import com.zeni.settings.presentation.AboutScreen
+import com.zeni.settings.presentation.SettingsScreen
+import com.zeni.settings.presentation.components.ProfileViewModel
 import com.zeni.settings.presentation.components.SettingsViewModel
 import kotlin.reflect.KClass
 
@@ -29,8 +32,11 @@ fun NavGraph(
         modifier = modifier
     ) {
         composable<ScreenLogin> {
+            val viewModel = viewModel<LoginViewModel>()
+
             LoginScreen(
-                navController=navController
+                viewModel = viewModel,
+                navController = navController
             )
         }
 
@@ -65,15 +71,20 @@ fun NavGraph(
             )
         }
         composable<ScreenProfile> {
-            val profileViewModel = SettingsViewModel()
+            val viewModel = viewModel<ProfileViewModel>()
 
             ProfileScreen(
-                viewModel = profileViewModel,
+                viewModel = viewModel,
                 navController = navController
             )
         }
         composable<ScreenSettings> {
-            SettingsScreen(navController = navController)
+            val viewModel = viewModel<SettingsViewModel>()
+
+            SettingsScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
         }
         composable<ScreenTerms>{
             TermsScreen(navController = navController)
@@ -82,10 +93,4 @@ fun NavGraph(
             AboutScreen(navController = navController)
         }
     }
-}
-
-@Composable
-fun NavHostController.currentRoute(): String? {
-    val navBackStackEntry by currentBackStackEntryAsState()
-    return navBackStackEntry?.destination?.route
 }

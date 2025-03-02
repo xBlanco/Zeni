@@ -17,8 +17,8 @@ import com.zeni.trip.presentation.components.TripViewModel
 
 @Composable
 fun TripScreen(
-    viewModel: TripViewModel = TripViewModel(),
-    navController: NavHostController,
+    viewModel: TripViewModel,
+    navController: NavHostController
 ) {
     Column(
         modifier = Modifier
@@ -27,6 +27,8 @@ fun TripScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Trip Screen")
+        Text(
+            text = stringResource(R.string.trip_sample)
+        )
     }
 }

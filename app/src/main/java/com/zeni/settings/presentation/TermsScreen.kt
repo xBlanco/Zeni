@@ -36,29 +36,29 @@ import com.zeni.R
 import com.zeni.core.domain.utils.extensions.navigateBack
 import com.zeni.core.presentation.navigation.ScreenHome
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun TermsScreen(navController: NavHostController) {
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { TopBar(navController) }
-    ) {
-        LazyColumn(
+    ) { contentPadding ->
+
+        Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(contentPadding)
                 .padding(16.dp)
         ) {
-            item {
-                Text(
-                    text = stringResource(R.string.terms_txt_title),
-                    modifier = Modifier,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.titleSmall,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Normal,
-                    textAlign = TextAlign.Justify
-                )
-            }
+            Text(
+                text = stringResource(R.string.terms_txt_title),
+                modifier = Modifier,
+                color = MaterialTheme.colorScheme.onBackground,
+                style = MaterialTheme.typography.titleSmall,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Justify
+            )
         }
     }
 }
@@ -67,7 +67,9 @@ fun TermsScreen(navController: NavHostController) {
 @Composable
 private fun TopBar(navController: NavHostController) {
     TopAppBar(
-        title = {Text(text = stringResource(R.string.terms_title))},
+        title = {
+            Text(text = stringResource(R.string.terms_title))
+        },
         navigationIcon = {
             IconButton(
                 onClick = navController::navigateBack
