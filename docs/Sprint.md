@@ -1,5 +1,6 @@
 # Task assignments
-### Alberto
+
+## Alberto
 - [x] T1.4. Create a README.md file including the project description and team information.
 - [x] T1.5. Add a documentation folder.
 - [x] T1.6. Include a design.md file explaining architectural choices.
@@ -13,7 +14,8 @@
 - [x] T4.5. Add a Terms & Conditions screen.
 - [x] T4.6. Ensure the app supports multiple languages.
 
-### Alex
+
+## Alex
 - [x] T1.1. Define the Android version to ensure compatibility with most devices.
 - [x] T1.2. Select and configure the Kotlin version.
 - [x] T1.3. Initialize the project using Android Studio.
