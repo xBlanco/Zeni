@@ -12,7 +12,9 @@ import com.zeni.core.presentation.navigation.ScreenInitial
 import com.zeni.core.presentation.navigation.ScreenLogin
 import com.zeni.core.presentation.navigation.ScreenTerms
 import com.zeni.core.presentation.theme.ZeniTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -2,6 +2,7 @@ package com.zeni.core.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -40,7 +41,7 @@ fun NavGraph(
             )
         }
         composable<ScreenLogin> {
-            val viewModel = viewModel<LoginViewModel>()
+            val viewModel = hiltViewModel<LoginViewModel>()
 
             LoginScreen(
                 viewModel = viewModel,
