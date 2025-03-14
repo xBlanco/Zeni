@@ -14,7 +14,6 @@
 - [x] T4.3. Create a Splash Screen with the app logo.
 - [x] T4.5. Add a Terms & Conditions screen.
 - [x] T4.6. Ensure the app supports multiple languages.
-
 ### Sprint 2
 
 
@@ -32,5 +31,24 @@
 - [x] T3.2. Implement core classes and its functions, annotating pending logic with @TODO.
 - [x] T4.1. Create a Product Name.
 - [x] T4.4. Implement an About Page (team info, version, summary).
-
 ### Sprint 2
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+# Sprint 2
+- [ ] T1.1 Implement CRUD operations for trips (addTrip, editTrip, deleteTrip).
+- [ ] T1.2 Implement CRUD operations for itinerary items (addActivity, updateActivity, deleteActivity).
+- [ ] T1.3 Ensure proper data validation (e.g., dates must be in the future, required fields).
+- [ ] T1.4 Implement user settings.
+- [ ] T1.5 Implement multi-language. (minimum 3 languages [en, ca, es]).
+- [ ] T2.1 Structure how users will interact with the itinerary.
+- [ ] T2.2 Implement a basic UI flow for adding and modifying trip details.
+- [ ] T2.3 Ensure updates reflect dynamically in the main trip list.
+- [ ] T3.1 Implement basic input validation (e.g., empty fields, incorrect dates).
+- [ ] T3.2 Write unit tests for trip and itinerary CRUD operations.
+- [ ] T3.3 Simulate user interactions and log errors or unexpected behaviors.
+- [ ] T3.4 Update documentation with test results and fixes applied.
+- [ ] T3.5 Add logs (to be seen in logcat) and commentaries applying good practices.
