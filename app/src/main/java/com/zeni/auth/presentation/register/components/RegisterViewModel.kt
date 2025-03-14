@@ -5,11 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.zeni.auth.domain.utils.LoginErrors
 import com.zeni.auth.domain.utils.RegisterErrors
 import com.zeni.auth.presentation.login.components.LoginViewModel.DefaultCredentials
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterViewModel : ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor() : ViewModel() {
 
     val username: StateFlow<String>
         field = MutableStateFlow(value = "")

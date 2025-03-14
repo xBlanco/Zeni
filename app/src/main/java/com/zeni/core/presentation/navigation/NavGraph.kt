@@ -33,7 +33,7 @@ fun NavGraph(
         modifier = modifier
     ) {
         composable<ScreenRegister> {
-            val viewModel = viewModel<RegisterViewModel>()
+            val viewModel = hiltViewModel<RegisterViewModel>()
 
             RegisterScreen(
                 viewModel = viewModel,
@@ -80,7 +80,7 @@ fun NavGraph(
             )
         }
         composable<ScreenProfile> {
-            val viewModel = viewModel<ProfileViewModel>()
+            val viewModel = hiltViewModel<ProfileViewModel>()
 
             ProfileScreen(
                 viewModel = viewModel,
@@ -88,7 +88,7 @@ fun NavGraph(
             )
         }
         composable<ScreenSettings> {
-            val viewModel = viewModel<SettingsViewModel>()
+            val viewModel = hiltViewModel<SettingsViewModel>()
 
             SettingsScreen(
                 viewModel = viewModel,

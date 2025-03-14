@@ -23,6 +23,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.zeni.home.presentation.HomeScreen
@@ -63,13 +64,13 @@ fun InitialScreen(
             when (currentIndex) {
                 Screen.Home.ordinal -> {
                     HomeScreen(
-                        viewModel = viewModel(),
+                        viewModel = hiltViewModel(),
                         navController = navController
                     )
                 }
                 Screen.Trip.ordinal -> {
                     TripScreen(
-                        viewModel = viewModel(),
+                        viewModel = hiltViewModel(),
                         navController = navController
                     )
                 }
