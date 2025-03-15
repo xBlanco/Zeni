@@ -16,6 +16,7 @@
 - [x] T4.6. Ensure the app supports multiple languages.
 ### Sprint 2
 - [ ] T1.5 Implement multi-language. (minimum 3 languages [es, en, fr]).
+- [ ] Correction T1.6 of sprint 1. Inspire the directory structure part in https://github.com/Razeeman/Android-SimpleTimeTracker
 
 ------------------------------------------------------------------------------------------------------------------------
 ## Alex
