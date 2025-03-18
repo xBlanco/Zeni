@@ -2,6 +2,7 @@ package com.zeni.auth.presentation.login.components
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zeni.auth.domain.use_cases.LoginUseCase
 import com.zeni.auth.domain.utils.LoginErrors
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,7 +11,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor() : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val loginUseCase: LoginUseCase
+) : ViewModel() {
 
     val username: StateFlow<String>
         field = MutableStateFlow(value = "")

@@ -1,6 +1,10 @@
 package com.zeni.auth.domain.use_cases
 
-class LoginUseCase {
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class LoginUseCase @Inject constructor() {
     operator fun invoke() {
         TODO("Implement login")
     }
