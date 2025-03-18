@@ -18,9 +18,55 @@
     <string name="home_title">Inicio</string>
     <string name="home_sample" translatable="false">Home Screen</string>
 
-    <!-- Strings for the trip screen -->
-    <string name="trip_title">Viaje</string>
-    <string name="trip_sample" translatable="false">Trip Screen</string>
+    <!--  TripsScreen  -->
+    <string name="trips_title">Viajes</string>
+    <string name="empty_trips">No tienes viajes pendientes</string>
+    <string name="trip_location">Viaje a %s</string>
+    <string name="trip_date">del %2$s al %2$s</string>
+    <!--  UpsertTripScreen  -->
+    <string name="add_trip_title">Añadir viaje</string>
+    <string name="editing_trip_title">Editando viaje</string>
+    <string name="destination_text_label">Destinación</string>
+    <string name="select_start_date_text_label">Fecha de inicio</string>
+    <string name="select_start_date_text">Fecha de inicio: %s</string>
+    <string name="select_end_date_text_label">Fecha de fin</string>
+    <string name="select_end_date_text">Fecha de fin: %s</string>
+    <string name="add_trip_button">Crear viaje</string>
+    <string name="save_trip_button">Actualizar viaje</string>
+    <string name="delete_trip_button">Borrar viaje</string>
+    <string name="error_creating_trip_destination_empty">
+        El campo de destinación no puede estar vacío.
+    </string>
+    <string name="error_creating_trip_start_empty">
+        El campo de fecha de inicio no puede estar vacío.
+    </string>
+    <string name="error_creating_trip_end_empty">
+        El campo de fecha de fin no puede estar vacío.
+    </string>
+    <string name="error_creating_trip_start_and_end_empty">
+        La fecha de inicio no puede ser posterior o igual a la fecha de fin.
+    </string>
+    <string name="error_creating_trip_fields_empty">
+        Todos los campos son obligatorios.
+    </string>
+    <string name="error_creating_trip_end_before_start">
+        La fecha de fin no puede ser anterior o igual a la fecha de inicio.
+    </string>
+    <string name="error_creating_trip_start_before_today">
+        La fecha de inicio no puede ser anterior o igual a la fecha de hoy.
+    </string>
+    <string name="advert_title_deleting_trip">
+        ¿Estás seguro de que quieres borrar este viaje?
+    </string>
+    <string name="advert_text_deleting_trip">
+        Una vez borrado, no podrás recuperarlo.
+    </string>
+    <string name="confirm_delete">Estoy seguro</string>
+    <!--  TripScreen  -->
+    <string name="trip_title">Viaje a %s</string>
+    <string name="edit_trip">Editar viaje</string>
+    <string name="add_activity">Añadir actividad</string>
+    <string name="trip_sample" translatable="false">Trip %s</string>
 
     <!-- Strings for the itinerary screen -->
     <string name="itinerary_title">Itinerario</string>
@@ -44,4 +90,8 @@
     <string name="developer1_github" translatable="false">https://github.com/xBlanco</string>
     <string name="developer2_name" translatable="false">Alex Lillo</string>
     <string name="developer2_github" translatable="false">https://github.com/Xertrec</string>
+
+    <!--  Others  -->
+    <string name="accept_button">Aceptar</string>
+    <string name="cancel_button">Cancelar</string>
 </resources>

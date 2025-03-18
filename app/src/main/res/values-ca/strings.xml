@@ -9,7 +9,7 @@
     <string name="alert_message">Usuari o contrasenya incorrectes</string>
     <string name="alert_btn">D\'acord</string>
     <string name="home_title">Inici</string>
-    <string name="trip_title">Viatge</string>
+    <string name="trips_title">Viatges</string>
     <string name="itinerary_title">Itinerari</string>
     <string name="more_title">Més</string>
     <string name="profile_title">Perfil</string>

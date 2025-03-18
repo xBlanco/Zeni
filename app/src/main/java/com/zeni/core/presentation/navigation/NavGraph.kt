@@ -3,10 +3,10 @@ package com.zeni.core.presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.zeni.InitialScreen
 import com.zeni.Screen
 import com.zeni.auth.presentation.login.LoginScreen
@@ -19,6 +19,10 @@ import com.zeni.settings.presentation.SettingsScreen
 import com.zeni.settings.presentation.TermsScreen
 import com.zeni.settings.presentation.components.ProfileViewModel
 import com.zeni.settings.presentation.components.SettingsViewModel
+import com.zeni.trip.presentation.UpsertTripScreen
+import com.zeni.trip.presentation.TripScreen
+import com.zeni.trip.presentation.components.UpsertTripViewModel
+import com.zeni.trip.presentation.components.TripViewModel
 import kotlin.reflect.KClass
 
 @Composable
@@ -61,24 +65,50 @@ fun NavGraph(
                 initialScreen = Screen.Home.ordinal
             )
         }
-        composable<ScreenTrip> {
+
+        composable<ScreenTrips> {
             InitialScreen(
                 navController = navController,
-                initialScreen = Screen.Trip.ordinal
+                initialScreen = Screen.Trips.ordinal
             )
         }
+        composable<ScreenUpsertTrip> {
+            val args = it.toRoute<ScreenUpsertTrip>()
+            val viewModel = hiltViewModel<UpsertTripViewModel, UpsertTripViewModel.UpsertTripViewModelFactory> { factory ->
+                factory.create(args.tripId)
+            }
+
+            UpsertTripScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
+        }
+        composable<ScreenTrip> {
+            val args = it.toRoute<ScreenTrip>()
+            val viewModel = hiltViewModel<TripViewModel, TripViewModel.TripViewModelFactory> { factory ->
+                factory.create(args.tripId)
+            }
+
+            TripScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
+        }
+
         composable<ScreenItinerary> {
             InitialScreen(
                 navController = navController,
                 initialScreen = Screen.Itinerary.ordinal
             )
         }
+
         composable<ScreenMore> {
             InitialScreen(
                 navController = navController,
                 initialScreen = Screen.More.ordinal
             )
         }
+
         composable<ScreenProfile> {
             val viewModel = hiltViewModel<ProfileViewModel>()
 
@@ -87,6 +117,7 @@ fun NavGraph(
                 navController = navController
             )
         }
+
         composable<ScreenSettings> {
             val viewModel = hiltViewModel<SettingsViewModel>()
 

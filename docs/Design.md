@@ -19,7 +19,7 @@ The Model represents the data and business logic of the application. It is respo
 
 - **Trip**
   - `id`: `Int` - Unique identifier for the trip.
-  - `userId`: `Int` - Identifier of the user who created the trip.
+  - `creatorUserId`: `Int` - Identifier of the user who created the trip.
   - `destination`: `String` - Destination of the trip.
   - `startDate`: `Date` - Start date of the trip.
   - `endDate`: `Date` - End date of the trip.

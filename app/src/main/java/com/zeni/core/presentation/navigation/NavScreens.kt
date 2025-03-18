@@ -14,7 +14,15 @@ object ScreenInitial
 object ScreenHome
 
 @Serializable
-object ScreenTrip
+object ScreenTrips
+@Serializable
+data class ScreenUpsertTrip(
+    val tripId: Int? = null
+)
+@Serializable
+data class ScreenTrip(
+    val tripId: Int
+)
 
 @Serializable
 object ScreenItinerary

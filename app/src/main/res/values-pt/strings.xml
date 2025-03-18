@@ -9,7 +9,7 @@
     <string name="alert_message">Usuário ou senha incorretos</string>
     <string name="alert_btn">OK</string>
     <string name="home_title">Início</string>
-    <string name="trip_title">Viagem</string>
+    <string name="trips_title">Viagens</string>
     <string name="itinerary_title">Itinerário</string>
     <string name="more_title">Mais</string>
     <string name="profile_title">Perfil</string>
