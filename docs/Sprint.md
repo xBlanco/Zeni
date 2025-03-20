@@ -15,8 +15,13 @@
 - [x] T4.5. Add a Terms & Conditions screen.
 - [x] T4.6. Ensure the app supports multiple languages.
 ### Sprint 2
+- [ ] T1.2 Implement CRUD operations for itinerary items (addActivity, updateActivity, deleteActivity).
+- [ ] T1.4 Implement user settings.
 - [ ] T1.5 Implement multi-language with user changing. (minimum 3 languages [es, en, fr]).
-- [ ] Correction T1.6 of sprint 1. Inspire the directory structure part in https://github.com/Razeeman/Android-SimpleTimeTracker
+- [ ] T2.1 Structure how users will interact with the itinerary.
+- [ ] T3.2 Write unit tests for trip and itinerary CRUD operations.
+- [ ] T3.4 Update documentation with test results and fixes applied.
+- [ ] T3.5 Add logs (to be seen in logcat) and commentaries applying good practices.
 
 ------------------------------------------------------------------------------------------------------------------------
 ## Alex
@@ -33,23 +38,12 @@
 - [x] T4.1. Create a Product Name.
 - [x] T4.4. Implement an About Page (team info, version, summary).
 ### Sprint 2
+- [ ] Correction T1.6 of sprint 1. Inspire the directory structure part in https://github.com/Razeeman/Android-SimpleTimeTracker
+- [ ] Correction T2.4 of sprint 1. Fix CONTRIBUTING.md so that teams strategy reflect real use.
 - [x] T1.1 Implement CRUD operations for trips (addTrip, editTrip, deleteTrip).
-- [ ] T1.2 Implement CRUD operations for itinerary items (addActivity, updateActivity, deleteActivity).
 - [ ] T1.3 Ensure proper data validation (e.g., dates must be in the future, required fields).
 - [ ] T1.5 Implement multi-language with user changing. (minimum 3 languages [es, ca, pt]).
 - [x] T2.2 Implement a basic UI flow for adding and modifying trip details.
 - [x] T2.3 Ensure updates reflect dynamically in the main trip list.
-
-
-
-------------------------------------------------------------------------------------------------------------------------
-# Sprint 2
-- [ ] T1.4 Implement user settings.
-
-- [ ] T2.1 Structure how users will interact with the itinerary.
-
 - [ ] T3.1 Implement basic input validation (e.g., empty fields, incorrect dates).
-- [ ] T3.2 Write unit tests for trip and itinerary CRUD operations.
 - [ ] T3.3 Simulate user interactions and log errors or unexpected behaviors.
-- [ ] T3.4 Update documentation with test results and fixes applied.
-- [ ] T3.5 Add logs (to be seen in logcat) and commentaries applying good practices.
