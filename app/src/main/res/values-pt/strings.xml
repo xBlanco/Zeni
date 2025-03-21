@@ -116,17 +116,30 @@
     <!-- ActivityInformation -->
     <plurals name="time_remaining_hours">
         <item quantity="one">%d hora restante</item>
+        <item quantity="many">%d horas restantes</item>
         <item quantity="other">%d horas restantes</item>
     </plurals>
     <plurals name="time_remaining_minutes">
         <item quantity="one">%d minuto restante</item>
+        <item quantity="many">%d minutos restantes</item>
         <item quantity="other">%d minutos restantes</item>
     </plurals>
+
+    <string name="settings_title">Configurações</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_selected">Idioma: %s</string>
+    <string name="select_language">Escolher idioma:</string>
+    <string name="spanish_language">Espanhol</string>
+    <string name="catalan_language">Catalão</string>
+    <string name="english_language">Inglês</string>
+    <string name="french_language">Francês</string>
+    <string name="portuguese_language">Português</string>
+    <string name="auto_dark_mode">Modo escuro automático</string>
+    <string name="dark_mode">Modo escuro</string>
 
     <!-- Strings for the more -->
     <string name="more_title">Mais</string>
     <string name="profile_title">Perfil</string>
-    <string name="settings_title">Configurações</string>
     <string name="terms_title">Termos e Condições</string>
     <string name="terms_txt_title">
         <![CDATA[
@@ -135,4 +148,8 @@
     </string>
     <string name="about_zeni">Sobre o Zeni</string>
     <string name="developers_title">Desenvolvedores:</string>
+
+    <!--  Outros  -->
+    <string name="accept_button">Aceitar</string>
+    <string name="cancel_button">Cancelar</string>
 </resources>

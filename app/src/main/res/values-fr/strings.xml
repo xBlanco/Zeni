@@ -3,27 +3,28 @@
     <string name="app_name" translatable="false">Zeni</string>
     <string name="app_version_prefix">"Version "</string>
 
-    <!--    Login Screen-->
-    <string name="login_title">Connexion</string>
+    <!--    Écran de connexion -->
+    <string name="login_title">Se connecter</string>
     <string name="login_user">Utilisateur</string>
     <string name="login_pass">Mot de passe</string>
-    <string name="login_btn">Se connecter</string>
+    <string name="login_btn">Connexion</string>
 
-    <!--    Alert Dialog-->
+    <!--    Boîte de dialogue d\'alerte -->
     <string name="alert_title">Alerte</string>
-    <string name="alert_message">Nom d\'utilisateur ou mot de passe incorrect</string>
-    <string name="alert_btn">OK</string>
+    <string name="alert_message">Identifiant ou mot de passe incorrect</string>
+    <string name="alert_btn">D\'accord</string>
 
-    <!-- Strings for the home screen -->
+    <!-- Chaînes pour l\'écran d\'accueil -->
     <string name="home_title">Accueil</string>
     <string name="home_sample" translatable="false">Home Screen</string>
 
-    <!--  TripsScreen  -->
+    <!--  Écran des voyages  -->
     <string name="trips_title">Voyages</string>
-    <string name="empty_trips">Vous n\'avez pas de voyages en attente</string>
+    <string name="empty_trips">Aucun voyage en attente</string>
     <string name="trip_location">Voyage à %s</string>
     <string name="trip_date">du %1$s au %2$s</string>
-    <!--  UpsertTripScreen  -->
+
+    <!--  Écran d\'ajout/modification de voyage  -->
     <string name="add_trip_title">Ajouter un voyage</string>
     <string name="editing_trip_title">Modifier le voyage</string>
     <string name="destination_text_label">Destination</string>
@@ -31,17 +32,17 @@
     <string name="select_start_date_text">Date de début: %s</string>
     <string name="select_end_date_text_label">Date de fin</string>
     <string name="select_end_date_text">Date de fin: %s</string>
-    <string name="add_trip_button">Créer un voyage</string>
-    <string name="save_trip_button">Mettre à jour le voyage</string>
-    <string name="delete_trip_button">Supprimer le voyage</string>
+    <string name="add_trip_button">Créer voyage</string>
+    <string name="save_trip_button">Mettre à jour</string>
+    <string name="delete_trip_button">Supprimer</string>
     <string name="error_creating_trip_destination_empty">
         Le champ de destination ne peut pas être vide
     </string>
     <string name="error_creating_trip_start_empty">
-        Le champ de date de début ne peut pas être vide
+        La date de début ne peut pas être vide
     </string>
     <string name="error_creating_trip_end_empty">
-        Le champ de date de fin ne peut pas être vide
+        La date de fin ne peut pas être vide
     </string>
     <string name="error_creating_trip_start_and_end_empty">
         La date de début ne peut pas être postérieure à la date de fin
@@ -53,26 +54,27 @@
         La date de fin ne peut pas être antérieure à la date de début
     </string>
     <string name="error_creating_trip_start_before_today">
-        La date de début ne peut pas être antérieure à aujourd'hui
+        La date de début ne peut pas être antérieure à aujourd\'hui
     </string>
     <string name="advert_title_deleting_trip">
-        Êtes-vous sûr de vouloir supprimer ce voyage?
+        Voulez-vous vraiment supprimer ce voyage?
     </string>
     <string name="advert_text_deleting_trip">
-        Une fois supprimé, vous ne pourrez pas le récupérer
+        Une fois supprimé, il ne pourra pas être récupéré
     </string>
-    <string name="confirm_delete">Je suis sûr</string>
-    <!--  TripScreen  -->
+    <string name="confirm_delete">Confirmer</string>
+
+    <!--  Écran de voyage  -->
     <string name="trip_title">Voyage à %s</string>
-    <string name="edit_trip">Modifier le voyage</string>
-    <string name="add_activity">Ajouter une activité</string>
+    <string name="edit_trip">Modifier</string>
+    <string name="add_activity">Ajouter activité</string>
     <string name="trip_destiny">Destination: %s</string>
     <string name="trip_start_date">Date de début: %s</string>
     <string name="trip_end_date">Date de fin: %s</string>
     <string name="trip_activities_header_text">Itinéraire</string>
-    <string name="trip_activities_empty_title">Vous n\'avez pas d\'activités pour ce voyage</string>
+    <string name="trip_activities_empty_title">Aucune activité planifiée</string>
     <string name="trip_activities_empty_text">
-        Créez une activité pour faire quelque chose pendant votre voyage à %s
+        Créez une activité pour votre voyage à %s
     </string>
     <string name="trip_activity_name">Nom: %s</string>
     <string name="trip_activity_description">Description: %s</string>
@@ -80,59 +82,83 @@
     <string name="trip_activity_time">Heure: %s</string>
     <string name="trip_sample" translatable="false">Trip %s</string>
 
-    <!-- ItineraryScreen -->
-    <string name="itinerary_title">Itinéraire d\'aujourd'hui</string>
+    <!-- Écran d\'itinéraire -->
+    <string name="itinerary_title">Itinéraire du jour</string>
     <string name="itinerary_tab_text">Itinéraire</string>
     <string name="itinerary_sample" translatable="false">Itinerary %s</string>
-    <string name="edit_itinerary">Modifier l\'itinéraire</string>
+    <string name="edit_itinerary">Modifier</string>
     <string name="itinerary_activity_name">Nom</string>
     <string name="itinerary_activity_description">Description</string>
     <string name="itinerary_activity_date">Date: %s</string>
-    <string name="empty_itinerary">Vous n\'avez aucune activité pour aujourd'hui</string>
+    <string name="empty_itinerary">Aucune activité aujourd\'hui</string>
 
-    <!-- UpsertActivityScreen -->
-    <string name="add_activity_title">Ajouter une activité</string>
+    <!-- Écran d\'ajout/modification d\'activité -->
+    <string name="add_activity_title">Ajouter activité</string>
     <string name="add_itinerary_select_start_date_text_label">Date de début</string>
     <string name="add_itinerary_select_start_date_text">Date de début: %s</string>
     <string name="add_itinerary_select_start_time_text_label">Heure de début</string>
     <string name="add_itinerary_select_start_time_text">Heure de début: %s</string>
-    <string name="add_activity_button">Ajouter une activité</string>
+    <string name="add_activity_button">Ajouter</string>
     <string name="error_creating_title_itinerary_activity">
-        Le champ du nom de l\'activité est obligatoire
+        Le nom de l\'activité est obligatoire
     </string>
     <string name="error_creating_description_itinerary_activity">
-        Le champ de la description est obligatoire
+        La description est obligatoire
     </string>
     <string name="error_creating_datetime_itinerary_activity">
-        Le champ de la date est obligatoire
+        La date est obligatoire
     </string>
     <string name="error_creating_date_not_in_trip_itinerary_activity_title">
-        L\'activité doit se dérouler pendant le voyage
+        L\'activité doit être pendant le voyage
     </string>
     <string name="error_creating_date_not_in_trip_itinerary_activity_text">
-        Le voyage est du %1$s au %2$s
+        Le voyage a lieu du %1$s au %2$s
     </string>
 
-    <!-- ActivityInformation -->
+    <!-- Informations d\'activité -->
     <plurals name="time_remaining_hours">
         <item quantity="one">%d heure restante</item>
+        <item quantity="many">%d heures restantes</item>
         <item quantity="other">%d heures restantes</item>
     </plurals>
     <plurals name="time_remaining_minutes">
         <item quantity="one">%d minute restante</item>
+        <item quantity="many">%d minutes restantes</item>
         <item quantity="other">%d minutes restantes</item>
     </plurals>
 
-    <!-- Strings for the more -->
+    <!-- Écran Plus -->
     <string name="more_title">Plus</string>
     <string name="profile_title">Profil</string>
-    <string name="settings_title">Paramètres</string>
     <string name="terms_title">Conditions générales</string>
+    <string name="about_zeni">À propos</string>
     <string name="terms_txt_title">
         <![CDATA[
         \nPolitique de confidentialité\nDernière mise à jour : 28 février 2025\n\nCette Politique de confidentialité décrit nos politiques et procédures concernant la collecte, l\'utilisation et la divulgation de vos informations lorsque vous utilisez le Service et vous informe sur vos droits en matière de confidentialité et sur la manière dont la loi vous protège.\n\nNous utilisons vos données personnelles pour fournir et améliorer le Service. En utilisant le Service, vous acceptez la collecte et l\'utilisation des informations conformément à cette Politique de confidentialité. Cette Politique de confidentialité a été créée à l\'aide du Générateur de politique de confidentialité.\n\nInterprétation et définitions\nInterprétation\nLes mots dont la première lettre est en majuscule ont des significations définies dans les conditions suivantes. Les définitions suivantes auront la même signification qu\'elles apparaissent au singulier ou au pluriel.\n\nDéfinitions\nAux fins de cette Politique de confidentialité :\n\nCompte désigne un compte unique créé pour vous permettre d\'accéder à notre Service ou à des parties de notre Service.\n\nAffilié désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec une partie, où « contrôle » signifie la possession de 50 % ou plus des actions, des parts ou d\'autres titres avec droit de vote pour l\'élection des administrateurs ou d\'une autre autorité de gestion.\n\nApplication désigne Zeni, le logiciel fourni par la Société.\n\nSociété (désignée par « la Société », « Nous », « Notre » ou « Nos » dans cet Accord) désigne Zeni.\n\nPays désigne l\'Espagne.\n\nAppareil désigne tout appareil permettant d\'accéder au Service, tel qu\'un ordinateur, un téléphone mobile ou une tablette numérique.\n\nDonnées personnelles désigne toute information relative à une personne identifiée ou identifiable.\n\nService désigne l\'Application.\n\nPrestataire de services désigne toute personne physique ou morale qui traite les données pour le compte de la Société. Il fait référence à des sociétés tierces ou à des personnes employées par la Société pour faciliter le Service, fournir le Service au nom de la Société, exécuter des services liés au Service ou aider la Société à analyser l\'utilisation du Service.\n\nService de médias sociaux tiers désigne tout site Web ou réseau social via lequel un utilisateur peut se connecter ou créer un compte pour utiliser le Service.\n\nDonnées d\'utilisation désigne les données collectées automatiquement, générées par l\'utilisation du Service ou par l\'infrastructure du Service elle-même (par exemple, la durée de visite d\'une page).\n\nVous désigne la personne qui accède ou utilise le Service, ou la société ou autre entité juridique au nom de laquelle cette personne accède ou utilise le Service, selon le cas.\n\nCollecte et utilisation de vos données personnelles\nTypes de données collectées\nDonnées personnelles\nLors de l\'utilisation de notre Service, nous pouvons vous demander de nous fournir certaines informations personnellement identifiables pouvant être utilisées pour vous contacter ou vous identifier. Les informations personnellement identifiables peuvent inclure, sans s\'y limiter :\n\nAdresse e-mail\n\nPrénom et nom\n\nNuméro de téléphone\n\nAdresse, État, Province, Code postal, Ville\n\nDonnées d\'utilisation\n\nDonnées d\'utilisation\nLes données d\'utilisation sont collectées automatiquement lors de l\'utilisation du Service.\n\nLes données d\'utilisation peuvent inclure des informations telles que l\'adresse de protocole Internet de votre appareil (par exemple, adresse IP), le type de navigateur, la version du navigateur, les pages de notre Service que vous visitez, l\'heure et la date de votre visite, le temps passé sur ces pages, les identifiants uniques de l\'appareil et d\'autres données de diagnostic.\n\nLorsque vous accédez au Service via un appareil mobile, nous pouvons collecter automatiquement certaines informations, y compris, sans s\'y limiter, le type d\'appareil mobile que vous utilisez, l\'ID unique de votre appareil mobile, l\'adresse IP de votre appareil mobile, votre système d\'exploitation mobile, le type de navigateur Internet mobile que vous utilisez, les identifiants uniques de l\'appareil et d\'autres données de diagnostic.\n\nNous pouvons également collecter les informations que votre navigateur envoie chaque fois que vous visitez notre Service ou lorsque vous accédez au Service via un appareil mobile.\n\nInformations des services de médias sociaux tiers\nLa Société vous permet de créer un compte et de vous connecter pour utiliser le Service via les services de médias sociaux tiers suivants :\n\nGoogle\n\nFacebook\n\nInstagram\n\nTwitter\n\nLinkedIn\n\nSi vous décidez de vous inscrire via ou de nous donner accès à un service de médias sociaux tiers, nous pouvons collecter les données personnelles déjà associées à votre compte de service de médias sociaux tiers, telles que votre nom, votre adresse e-mail, vos activités ou votre liste de contacts associée à ce compte.\n\nVous pouvez également choisir de partager des informations supplémentaires avec la Société via votre compte de service de médias sociaux tiers. Si vous choisissez de fournir de telles informations et données personnelles lors de l\'inscription ou autrement, vous autorisez la Société à les utiliser, les partager et les stocker conformément à cette Politique de confidentialité.\n\nInformations collectées lors de l\'utilisation de l\'application\nLors de l\'utilisation de notre application, afin de fournir les fonctionnalités de notre application, nous pouvons collecter, avec votre permission préalable :\n\nInformations sur votre position\n\nPhotos et autres données de l\'appareil photo et de la bibliothèque de photos de votre appareil\n\nNous utilisons ces informations pour fournir les fonctionnalités de notre Service, améliorer et personnaliser notre Service. Les informations peuvent être téléchargées sur les serveurs de la Société et/ou d\'un prestataire de services ou simplement stockées sur votre appareil.\n\nVous pouvez activer ou désactiver l\'accès à ces informations à tout moment via les paramètres de votre appareil.\n\nUtilisation de vos données personnelles\nLa Société peut utiliser les données personnelles aux fins suivantes :\n\nFournir et maintenir notre Service, y compris surveiller l\'utilisation de notre Service.\n\nGérer votre compte : gérer votre inscription en tant qu\'utilisateur du Service. Les données personnelles que vous fournissez peuvent vous donner accès à différentes fonctionnalités du Service disponibles pour vous en tant qu\'utilisateur enregistré.\n\nExécution d\'un contrat : développement, conformité et exécution du contrat d\'achat de produits, articles ou services que vous avez achetés ou de tout autre contrat avec nous via le Service.\n\nVous contacter : Par e-mail, appels téléphoniques, SMS ou autres formes de communication électronique équivalentes, telles que les notifications push d\'une application mobile, concernant des mises à jour ou des communications informatives liées aux fonctionnalités, produits ou services sous contrat, y compris les mises à jour de sécurité, lorsque cela est nécessaire ou raisonnable pour leur mise en œuvre.\n\nVous fournir des actualités, des offres spéciales et des informations générales sur d\'autres biens, services et événements que nous proposons et qui sont similaires à ceux que vous avez déjà achetés ou consultés, sauf si vous avez choisi de ne pas recevoir ces informations.\n\nGérer vos demandes : Répondre à vos demandes.\n\nTransferts commerciaux : Nous pouvons utiliser vos informations pour évaluer ou réaliser une fusion, une cession, une restructuration, une réorganisation, une dissolution ou autre vente ou transfert de tout ou partie de nos actifs, que ce soit dans le cadre d\'une activité en cours ou dans le cadre d\'une faillite, d\'une liquidation ou d\'une procédure similaire, dans laquelle les données personnelles que nous détenons sur les utilisateurs de notre Service font partie des actifs transférés.\n\nAutres finalités : Nous pouvons utiliser vos informations à d\'autres fins, telles que l\'analyse de données, l\'identification des tendances d\'utilisation, la détermination de l\'efficacité de nos campagnes promotionnelles et pour évaluer et améliorer notre Service, produits, services, marketing et votre expérience.\n\nConservation de vos données personnelles\nLa Société conservera vos données personnelles uniquement aussi longtemps que nécessaire pour les finalités énoncées dans cette Politique de confidentialité. Nous conserverons et utiliserons vos données personnelles dans la mesure nécessaire pour respecter nos obligations légales (par exemple, si nous sommes tenus de conserver vos données pour nous conformer aux lois applicables), résoudre les litiges et appliquer nos accords et politiques juridiques.\n\nLa Société conservera également les données d\'utilisation à des fins d\'analyse interne. Les données d\'utilisation sont généralement conservées pour une période plus courte, sauf si ces données sont utilisées pour renforcer la sécurité ou améliorer la fonctionnalité de notre Service, ou si nous sommes légalement tenus de conserver ces données plus longtemps.\n\nTransfert de vos données personnelles\nVos informations, y compris les données personnelles, sont traitées dans les bureaux opérationnels de la Société et dans tout autre endroit où se trouvent les parties impliquées dans le traitement. Cela signifie que ces informations peuvent être transférées vers — et conservées sur — des ordinateurs situés en dehors de votre État, province, pays ou autre juridiction gouvernementale où les lois sur la protection des données peuvent différer de celles de votre juridiction.\n\nEn acceptant cette Politique de confidentialité et en soumettant ces informations, vous consentez à ce transfert.\n\nLa Société prendra toutes les mesures raisonnablement nécessaires pour garantir que vos données soient traitées de manière sécurisée et conformément à cette Politique de confidentialité, et aucun transfert de vos données personnelles n\'aura lieu vers une organisation ou un pays à moins que des contrôles adéquats ne soient en place, y compris la sécurité de vos données et autres informations personnelles.\n\nDivulgation de vos données personnelles\nTransactions commerciales\nSi la Société est impliquée dans une fusion, une acquisition ou une vente d\'actifs, vos données personnelles peuvent être transférées. Nous vous informerons avant que vos données personnelles ne soient transférées et ne soient soumises à une autre Politique de confidentialité.\n\nApplication de la loi\nDans certaines circonstances, la Société peut être tenue de divulguer vos données personnelles si la loi l\'exige ou en réponse à des demandes valides d\'autorités publiques (par exemple, un tribunal ou une agence gouvernementale).\n\nAutres obligations légales\nLa Société peut divulguer vos données personnelles de bonne foi lorsque cela est nécessaire pour :\n\nSe conformer à une obligation légale\n\nProtéger et défendre les droits ou les biens de la Société\n\nPrévenir ou enquêter sur d\'éventuels actes répréhensibles liés au Service\n\nProtéger la sécurité personnelle des utilisateurs du Service ou du public\n\nSe protéger contre la responsabilité légale\n\nSécurité de vos données personnelles\nLa sécurité de vos données personnelles est importante pour nous, mais rappelez-vous qu\'aucune méthode de transmission sur Internet ou méthode de stockage électronique n\'est 100% sécurisée. Bien que nous nous efforcions d\'utiliser des moyens commercialement acceptables pour protéger vos données personnelles, nous ne pouvons pas garantir leur sécurité absolue.\n\nInformations détaillées sur le traitement de vos données personnelles\nLes prestataires de services que nous utilisons peuvent avoir accès à vos données personnelles. Ces tiers collectent, stockent, utilisent, traitent et transfèrent des informations sur votre activité sur notre Service conformément à leurs politiques de confidentialité.\n\nAnalytique\nNous pouvons utiliser des prestataires de services tiers pour surveiller et analyser l\'utilisation de notre Service.\n\nGoogle Analytics\nGoogle Analytics est un service d\'analyse Web proposé par Google qui suit et rapporte le trafic du site Web. Google utilise les données collectées pour suivre et surveiller l\'utilisation de notre Service. Ces données sont partagées avec d\'autres services Google. Google peut utiliser les données collectées pour contextualiser et personnaliser les annonces de son propre réseau publicitaire.\n\nVous pouvez refuser que votre activité sur le Service soit disponible pour Google Analytics en installant le module complémentaire de désactivation de Google Analytics. Le module complémentaire empêche le JavaScript Google Analytics (ga.js, analytics.js et dc.js) de partager des informations avec Google Analytics sur les activités de visite.\n\nPour plus d\'informations sur les pratiques de confidentialité de Google, consultez la page Politique de confidentialité de Google : https://policies.google.com/privacy\n\nRemarketing comportemental\nLa Société utilise des services de remarketing pour vous proposer des publicités sur des sites Web tiers après que vous ayez visité notre Service. Nous et nos prestataires tiers utilisons des cookies pour informer, optimiser et diffuser des publicités basées sur vos visites passées sur notre Service.\n\nGoogle Ads (AdWords)\nGoogle Ads (AdWords) est un service de remarketing fourni par Google Inc.\n\nVous pouvez désactiver Google Analytics pour la publicité display et personnaliser les annonces du Réseau Display de Google en visitant la page des paramètres des annonces Google : https://adssettings.google.com/authenticated\n\nGoogle recommande également d\'installer le module complémentaire de désactivation de Google Analytics : https://tools.google.com/dlpage/gaoptout. Ce module complémentaire permet aux visiteurs d\'empêcher la collecte et l\'utilisation de leurs données par Google Analytics.\n\nPour plus d\'informations sur les pratiques de confidentialité de Google, consultez la page Politique de confidentialité de Google : https://policies.google.com/privacy\n\nFacebook\nLe service de remarketing de Facebook est fourni par Facebook Inc.\n\nVous pouvez en savoir plus sur les publicités basées sur les centres d\'intérêt de Facebook en visitant cette page : https://www.facebook.com/help/164968693837950\n\nPour vous désinscrire des publicités basées sur les centres d\'intérêt de Facebook, suivez les instructions de Facebook : https://www.facebook.com/help/568137493302217\n\nFacebook adhère aux principes d\'autorégulation de la publicité comportementale en ligne établis par la Digital Advertising Alliance. Vous pouvez également vous désinscrire de Facebook et d\'autres entreprises participantes via l\'Alliance de la publicité numérique aux États-Unis https://www.aboutads.info/choices/, l\'Alliance de la publicité numérique du Canada au Canada https://youradchoices.ca/ ou l\'Alliance européenne pour la publicité interactive numérique en Europe https://www.youronlinechoices.eu/, ou en utilisant les paramètres de votre appareil mobile.\n\nPour plus d\'informations sur les pratiques de confidentialité de Facebook, consultez la Politique de données de Facebook : https://www.facebook.com/privacy/explanation\n\nUtilisation, performances et divers\nNous pouvons utiliser des prestataires de services tiers pour améliorer notre Service.\n\nreCAPTCHA invisible\nNous utilisons un service de captcha invisible appelé reCAPTCHA. reCAPTCHA est exploité par Google.\n\nLe service reCAPTCHA peut collecter des informations vous concernant et concernant votre appareil à des fins de sécurité.\n\nLes informations collectées par reCAPTCHA sont conservées conformément à la Politique de confidentialité de Google : https://policies.google.com/privacy\n\nConfidentialité des enfants\nNotre Service ne s\'adresse pas aux personnes de moins de 13 ans. Nous ne collectons pas sciemment de données personnelles identifiables auprès de personnes de moins de 13 ans. Si vous êtes un parent ou un tuteur et que vous savez que votre enfant nous a fourni des données personnelles, veuillez nous contacter. Si nous apprenons que nous avons collecté des données personnelles auprès d\'une personne de moins de 13 ans sans vérification du consentement parental, nous prenons des mesures pour supprimer ces informations de nos serveurs.\n\nSi nous devons nous appuyer sur le consentement comme base légale pour traiter vos informations et que votre pays nécessite le consentement d\'un parent, nous pouvons exiger le consentement de votre parent avant de collecter et d\'utiliser ces informations.\n\nLiens vers d\'autres sites Web\nNotre Service peut contenir des liens vers d\'autres sites Web non exploités par nous. Si vous cliquez sur un lien tiers, vous serez redirigé vers le site de ce tiers. Nous vous conseillons vivement de consulter la Politique de confidentialité de chaque site que vous visitez.\n\nNous n\'avons aucun contrôle sur et n\'assumons aucune responsabilité quant au contenu, aux politiques de confidentialité ou aux pratiques des sites ou services tiers.\n\nModifications de cette Politique de confidentialité\nNous pouvons mettre à jour notre Politique de confidentialité de temps à autre. Nous vous informerons de toute modification en publiant la nouvelle Politique de confidentialité sur cette page.\n\nNous vous informerons par e-mail et/ou par un avis bien visible sur notre Service avant que la modification ne prenne effet et mettrons à jour la date de « Dernière mise à jour » en haut de cette Politique de confidentialité.\n\nIl vous est conseillé de consulter cette Politique de confidentialité périodiquement pour prendre connaissance de toute modification. Les modifications apportées à cette Politique de confidentialité sont effectives lorsqu\'elles sont publiées sur cette page.\n\nNous contacter\nSi vous avez des questions concernant cette Politique de confidentialité, vous pouvez nous contacter :\n\nPar e-mail : help@zeni.com\n\n\n
         ]]>
     </string>
-    <string name="about_zeni">À propos de Zeni</string>
-    <string name="developers_title">Développeurs :</string>
+
+    <!-- Écran Paramètres -->
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_language_selected">Langue: %s</string>
+    <string name="select_language">Choisir langue:</string>
+    <string name="spanish_language">Espagnol</string>
+    <string name="catalan_language">Catalan</string>
+    <string name="english_language">Anglais</string>
+    <string name="french_language">Français</string>
+    <string name="portuguese_language">Portugais</string>
+    <string name="auto_dark_mode">Mode sombre auto</string>
+    <string name="dark_mode">Mode sombre</string>
+
+    <!-- Informations développeurs -->
+    <string name="developers_title">Développeurs:</string>
+    <string name="developer1_name" translatable="false">Alberto Martino</string>
+    <string name="developer1_github" translatable="false">https://github.com/xBlanco</string>
+    <string name="developer2_name" translatable="false">Alex Lillo</string>
+    <string name="developer2_github" translatable="false">https://github.com/Xertrec</string>
+
+    <!-- Autres -->
+    <string name="accept_button">Accepter</string>
+    <string name="cancel_button">Annuler</string>
 </resources>

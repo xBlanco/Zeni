@@ -16,7 +16,7 @@ class ThemeChangeUtil {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-        (context as? Activity)?.recreate()
+//        (context as? Activity)?.recreate()
     }
 
     fun getDarkMode(): Boolean {

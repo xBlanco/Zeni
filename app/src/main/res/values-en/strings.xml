@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Zeni</string>
     <string name="app_version_prefix">"Version "</string>
 
     <!--    Login Screen-->
@@ -16,7 +15,6 @@
 
     <!-- Strings for the home screen -->
     <string name="home_title">Home</string>
-    <string name="home_sample" translatable="false">Home Screen</string>
 
     <!--  TripsScreen  -->
     <string name="trips_title">Trips</string>
@@ -35,32 +33,32 @@
     <string name="save_trip_button">Update Trip</string>
     <string name="delete_trip_button">Delete Trip</string>
     <string name="error_creating_trip_destination_empty">
-    The destination field cannot be empty
-</string>
+        The destination field cannot be empty
+    </string>
     <string name="error_creating_trip_start_empty">
-    The start date field cannot be empty
-</string>
+        The start date field cannot be empty
+    </string>
     <string name="error_creating_trip_end_empty">
-    The end date field cannot be empty
-</string>
+        The end date field cannot be empty
+    </string>
     <string name="error_creating_trip_start_and_end_empty">
-    The start date cannot be later than the end date
-</string>
+        The start date cannot be later than the end date
+    </string>
     <string name="error_creating_trip_fields_empty">
-    All fields are required
-</string>
+        All fields are required
+    </string>
     <string name="error_creating_trip_end_before_start">
-    The end date cannot be earlier than the start date
-</string>
+        The end date cannot be earlier than the start date
+    </string>
     <string name="error_creating_trip_start_before_today">
-    The start date cannot be earlier than today
-</string>
+        The start date cannot be earlier than today
+    </string>
     <string name="advert_title_deleting_trip">
-    Are you sure you want to delete this trip?
-</string>
+        Are you sure you want to delete this trip?
+    </string>
     <string name="advert_text_deleting_trip">
-    Once deleted, you will not be able to recover it
-</string>
+        Once deleted, you will not be able to recover it
+    </string>
     <string name="confirm_delete">I am sure</string>
     <!--  TripScreen  -->
     <string name="trip_title">Trip to %s</string>
@@ -72,18 +70,16 @@
     <string name="trip_activities_header_text">Itinerary</string>
     <string name="trip_activities_empty_title">You have no activities for this trip</string>
     <string name="trip_activities_empty_text">
-    Create an activity to do something during your trip to %s
-</string>
+        Create an activity to do something during your trip to %s
+    </string>
     <string name="trip_activity_name">Name: %s</string>
     <string name="trip_activity_description">Description: %s</string>
     <string name="trip_activity_date">Date: %s</string>
     <string name="trip_activity_time">Time: %s</string>
-    <string name="trip_sample" translatable="false">Trip %s</string>
 
     <!-- ItineraryScreen -->
     <string name="itinerary_title">Today\'s Itinerary</string>
     <string name="itinerary_tab_text">Itinerary</string>
-    <string name="itinerary_sample" translatable="false">Itinerary %s</string>
     <string name="edit_itinerary">Edit Itinerary</string>
     <string name="itinerary_activity_name">Name</string>
     <string name="itinerary_activity_description">Description</string>
@@ -98,20 +94,20 @@
     <string name="add_itinerary_select_start_time_text">Start Time: %s</string>
     <string name="add_activity_button">Add Activity</string>
     <string name="error_creating_title_itinerary_activity">
-    The activity name field is required
-</string>
+        The activity name field is required
+    </string>
     <string name="error_creating_description_itinerary_activity">
-    The description field is required
-</string>
+        The description field is required
+    </string>
     <string name="error_creating_datetime_itinerary_activity">
-    The date field is required
-</string>
+        The date field is required
+    </string>
     <string name="error_creating_date_not_in_trip_itinerary_activity_title">
-    The activity must occur during the trip
-</string>
+        The activity must occur during the trip
+    </string>
     <string name="error_creating_date_not_in_trip_itinerary_activity_text">
-    The trip is from %1$s to %2$s
-</string>
+        The trip is from %1$s to %2$s
+    </string>
 
     <!-- ActivityInformation -->
     <plurals name="time_remaining_hours">
@@ -123,10 +119,21 @@
         <item quantity="other">%d minutes remaining</item>
     </plurals>
 
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_selected">Language: %s</string>
+    <string name="select_language">Select language:</string>
+    <string name="spanish_language">Spanish</string>
+    <string name="catalan_language">Catalan</string>
+    <string name="english_language">English</string>
+    <string name="french_language">French</string>
+    <string name="portuguese_language">Portuguese</string>
+    <string name="auto_dark_mode">Automatic dark mode</string>
+    <string name="dark_mode">Dark mode</string>
+
     <!-- Strings for the more -->
     <string name="more_title">More</string>
     <string name="profile_title">User</string>
-    <string name="settings_title">Settings</string>
     <string name="terms_title">Terms and Conditions</string>
     <string name="terms_txt_title">
         <![CDATA[
@@ -135,4 +142,8 @@
     </string>
     <string name="about_zeni">About Zeni</string>
     <string name="developers_title">Developers:</string>
+
+    <!--  Others  -->
+    <string name="accept_button">Accept</string>
+    <string name="cancel_button">Cancel</string>
 </resources>
