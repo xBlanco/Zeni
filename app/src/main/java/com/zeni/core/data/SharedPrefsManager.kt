@@ -20,12 +20,16 @@ class SharedPrefsManager @Inject constructor(
         LanguageChangeUtil()
     }
 
-    var language: String?
-        get() = preferences.getString(LANGUAGE, Languages.SPANISH.name)
+    var language: Languages?
+        get() = preferences.getString(LANGUAGE, Languages.SPANISH.name)?.let { Languages.valueOf(it) }
         set(value) {
-            preferences.edit { putString(LANGUAGE, value) }
-            languageChangeUtil.changeLanguage(appContext, value ?: Languages.SPANISH.name)
+            preferences.edit { putString(LANGUAGE, value?.name) }
+            languageChangeUtil.changeLanguage(appContext, value?.code ?: Languages.SPANISH.code)
         }
+
+    var autoDarkTheme: Boolean
+        get() = preferences.getBoolean(PrefsKeys.AUTO_DARK_THEME, true)
+        set(value) = preferences.edit { putBoolean(PrefsKeys.AUTO_DARK_THEME, value) }
 
     var darkTheme: Boolean
         get() = preferences.getBoolean(DARK_THEME, false)
@@ -33,6 +37,7 @@ class SharedPrefsManager @Inject constructor(
 
     private object PrefsKeys {
         const val LANGUAGE = "language"
+        const val AUTO_DARK_THEME = "manual_dark_theme"
         const val DARK_THEME = "dark_theme"
     }
 }

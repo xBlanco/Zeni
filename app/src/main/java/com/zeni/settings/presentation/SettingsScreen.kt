@@ -10,20 +10,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -35,14 +29,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.zeni.R
 import com.zeni.core.domain.utils.extensions.navigateBack
 import com.zeni.settings.domain.utils.Languages
 import com.zeni.settings.presentation.components.SettingsViewModel
-import org.intellij.lang.annotations.Language
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,11 +60,16 @@ fun SettingsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(contentPadding),
+                .padding(contentPadding)
+                .padding(
+                    horizontal = 16.dp
+                ),
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
+        ) {
             OutlinedButton(
-                onClick = { languageSelectorExpanded = true }
+                onClick = { languageSelectorExpanded = true },
+                modifier = Modifier
+                    .fillMaxWidth()
             ) {
                 Text(
                     text = stringResource(
@@ -78,49 +79,36 @@ fun SettingsScreen(
                 )
             }
 
-//            LanguageDropdown(
-//                selectedLanguage = language,
-//                onLanguageSelected = { newLang -> viewModel.updateLanguage(newLang) },
-//                availableLanguages = listOf("en", "es", "ca")
-//            )
-
             Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Tema oscuro")
+                Text(
+                    text = stringResource(R.string.auto_dark_mode)
+                )
+
                 Switch(
                     checked = isDarkTheme,
-                    onCheckedChange = { viewModel.updateDarkTheme(it) }
+                    onCheckedChange = viewModel::updateAutoDarkTheme
                 )
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Button(
-                    onClick = { /*todo*/ },
-                    shape = RoundedCornerShape(25)
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = stringResource(R.string.dark_mode)
                 )
-                {
-                    Text(text = "Config1")
-                }
-                Button(
-                    onClick = { /*todo*/ },
-                    shape = RoundedCornerShape(25)
+
+                Switch(
+                    checked = isDarkTheme,
+                    onCheckedChange = viewModel::updateDarkTheme
                 )
-                {
-                    Text(text = "Config2")
-                }
-                Button(
-                        onClick = { /*todo*/ },
-                shape = RoundedCornerShape(25)
-                )
-                {
-                    Text(text = "Config3")
-                }
             }
         }
     }
@@ -163,7 +151,26 @@ private fun LanguageSelector(
         onDismissRequest = onDismiss,
         modifier = modifier
     ) {
-        LazyColumn {
+        Text(
+            text = stringResource(R.string.select_language),
+            modifier = Modifier
+                .padding(bottom = 16.dp)
+                .padding(
+                    horizontal = 16.dp
+                ),
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleLarge
+        )
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(
+                space = 8.dp,
+                alignment = Alignment.Top
+            )
+        ) {
             items(
                 items = Languages.entries.toTypedArray(),
                 key = { language -> language.code }
@@ -190,60 +197,20 @@ private fun LanguageItem(
 ) {
     Column(
         modifier = modifier
-            .background(MaterialTheme.colorScheme.primary)
+            .clip(MaterialTheme.shapes.large)
+            .clipToBounds()
+            .background(MaterialTheme.colorScheme.primaryContainer)
     ) {
         Text(
-            text = stringResource(language.resId)
+            text = stringResource(language.resId),
+            modifier = Modifier
+                .padding(
+                    horizontal = 16.dp,
+                    vertical = 8.dp
+                ),
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.bodyLarge
         )
-    }
-}
-
-@Composable
-fun LanguageDropdown(
-    selectedLanguage: String,
-    onLanguageSelected: (String) -> Unit,
-    availableLanguages: List<String>
-) {
-    var expanded by remember { mutableStateOf(false) }
-    val languageDisplay = when (selectedLanguage) {
-        "es" -> "Español"
-        "en" -> "English"
-        "ca" -> "Catalan"
-        else -> selectedLanguage
-    }
-
-    OutlinedTextField(
-        value = languageDisplay,
-        onValueChange = {},
-        label = { Text("Idioma") },
-        readOnly = true,
-        trailingIcon = {
-            IconButton(onClick = { expanded = true }) {
-                Icon(Icons.Default.ArrowDropDown, contentDescription = "Mostrar idiomas")
-            }
-        },
-        modifier = Modifier.fillMaxWidth()
-    )
-
-    DropdownMenu(
-        expanded = expanded,
-        onDismissRequest = { expanded = false },
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        availableLanguages.forEach { lang ->
-            val langName = when (lang) {
-                "es" -> "Español"
-                "en" -> "English"
-                "ca" -> "Catalan"
-                else -> lang
-            }
-            DropdownMenuItem(
-                text = { Text(langName) },
-                onClick = {
-                    onLanguageSelected(lang)
-                    expanded = false
-                }
-            )
-        }
     }
 }

@@ -38,8 +38,8 @@
 - [x] Improvements T1.6 of sprint 1.
 - [x] T1.1 Implement CRUD operations for trips (addTrip, editTrip, deleteTrip).
 - [x] T1.3 Ensure proper data validation (e.g., dates must be in the future, required fields).
-- [ ] T1.4 Implement user settings.
-- [ ] T1.5 Implement multi-language with user changing.
+- [x] T1.4 Implement user settings.
+- [x] T1.5 Implement multi-language with user changing.
 - [x] T2.1 Structure how users will interact with the itinerary.
 - [x] T2.2 Implement a basic UI flow for adding and modifying trip details.
 - [x] T2.3 Ensure updates reflect dynamically in the main trip list.

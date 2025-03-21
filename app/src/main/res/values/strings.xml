@@ -138,11 +138,14 @@
     <string name="settings_title">Configuración</string>
     <string name="settings_language">Idioma</string>
     <string name="settings_language_selected">Idioma: %s</string>
+    <string name="select_language">Elegir idioma:</string>
     <string name="spanish_language">Español</string>
     <string name="catalan_language">Catalán</string>
     <string name="english_language">Inglés</string>
     <string name="french_language">Francés</string>
     <string name="portuguese_language">Portugués</string>
+    <string name="auto_dark_mode">Modo oscuro automático</string>
+    <string name="dark_mode">Modo oscuro</string>
 
 
     <!-- Developers info -->

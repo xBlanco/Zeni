@@ -23,7 +23,7 @@ class LanguageChangeUtil {
         }
     }
 
-    fun getLanguageCode(context: Context,): String {
+    fun getLanguageCode(context: Context): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             context.getSystemService(LocaleManager::class.java).applicationLocales[0]?.toLanguageTag()?.split("-")?.first() ?: "en"
         } else {

@@ -14,15 +14,23 @@ class SettingsViewModel @Inject constructor(
     private val sharedPrefsManager: SharedPrefsManager
 ) : ViewModel() {
 
-    var language by mutableStateOf(sharedPrefsManager.language?.let { Languages.valueOf(it) } ?: Languages.SPANISH)
+    var language by mutableStateOf(sharedPrefsManager.language ?: Languages.SPANISH)
+        private set
+
+    var autoDarkTheme by mutableStateOf(sharedPrefsManager.autoDarkTheme)
         private set
 
     var isDarkTheme by mutableStateOf(sharedPrefsManager.darkTheme)
         private set
 
     fun updateLanguage(newLanguage: Languages) {
-        sharedPrefsManager.language = newLanguage.name
+        sharedPrefsManager.language = newLanguage
         language = newLanguage
+    }
+
+    fun updateAutoDarkTheme(isManualDark: Boolean) {
+        sharedPrefsManager.autoDarkTheme = isManualDark
+        autoDarkTheme = isManualDark
     }
 
     fun updateDarkTheme(isDark: Boolean) {
