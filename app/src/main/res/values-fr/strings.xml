@@ -1,16 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">Zeni</string>
     <string name="app_version_prefix">"Version "</string>
+
+    <!--    Login Screen-->
     <string name="login_title">Connexion</string>
     <string name="login_user">Utilisateur</string>
     <string name="login_pass">Mot de passe</string>
     <string name="login_btn">Se connecter</string>
+
+    <!--    Alert Dialog-->
     <string name="alert_title">Alerte</string>
     <string name="alert_message">Nom d\'utilisateur ou mot de passe incorrect</string>
     <string name="alert_btn">OK</string>
+
+    <!-- Strings for the home screen -->
     <string name="home_title">Accueil</string>
+    <string name="home_sample" translatable="false">Home Screen</string>
+
+    <!--  TripsScreen  -->
     <string name="trips_title">Voyages</string>
-    <string name="itinerary_title">Itinéraire</string>
+    <string name="empty_trips">Vous n\'avez pas de voyages en attente</string>
+    <string name="trip_location">Voyage à %s</string>
+    <string name="trip_date">du %1$s au %2$s</string>
+    <!--  UpsertTripScreen  -->
+    <string name="add_trip_title">Ajouter un voyage</string>
+    <string name="editing_trip_title">Modifier le voyage</string>
+    <string name="destination_text_label">Destination</string>
+    <string name="select_start_date_text_label">Date de début</string>
+    <string name="select_start_date_text">Date de début: %s</string>
+    <string name="select_end_date_text_label">Date de fin</string>
+    <string name="select_end_date_text">Date de fin: %s</string>
+    <string name="add_trip_button">Créer un voyage</string>
+    <string name="save_trip_button">Mettre à jour le voyage</string>
+    <string name="delete_trip_button">Supprimer le voyage</string>
+    <string name="error_creating_trip_destination_empty">
+        Le champ de destination ne peut pas être vide
+    </string>
+    <string name="error_creating_trip_start_empty">
+        Le champ de date de début ne peut pas être vide
+    </string>
+    <string name="error_creating_trip_end_empty">
+        Le champ de date de fin ne peut pas être vide
+    </string>
+    <string name="error_creating_trip_start_and_end_empty">
+        La date de début ne peut pas être postérieure à la date de fin
+    </string>
+    <string name="error_creating_trip_fields_empty">
+        Tous les champs sont obligatoires
+    </string>
+    <string name="error_creating_trip_end_before_start">
+        La date de fin ne peut pas être antérieure à la date de début
+    </string>
+    <string name="error_creating_trip_start_before_today">
+        La date de début ne peut pas être antérieure à aujourd'hui
+    </string>
+    <string name="advert_title_deleting_trip">
+        Êtes-vous sûr de vouloir supprimer ce voyage?
+    </string>
+    <string name="advert_text_deleting_trip">
+        Une fois supprimé, vous ne pourrez pas le récupérer
+    </string>
+    <string name="confirm_delete">Je suis sûr</string>
+    <!--  TripScreen  -->
+    <string name="trip_title">Voyage à %s</string>
+    <string name="edit_trip">Modifier le voyage</string>
+    <string name="add_activity">Ajouter une activité</string>
+    <string name="trip_destiny">Destination: %s</string>
+    <string name="trip_start_date">Date de début: %s</string>
+    <string name="trip_end_date">Date de fin: %s</string>
+    <string name="trip_activities_header_text">Itinéraire</string>
+    <string name="trip_activities_empty_title">Vous n\'avez pas d\'activités pour ce voyage</string>
+    <string name="trip_activities_empty_text">
+        Créez une activité pour faire quelque chose pendant votre voyage à %s
+    </string>
+    <string name="trip_activity_name">Nom: %s</string>
+    <string name="trip_activity_description">Description: %s</string>
+    <string name="trip_activity_date">Date: %s</string>
+    <string name="trip_activity_time">Heure: %s</string>
+    <string name="trip_sample" translatable="false">Trip %s</string>
+
+    <!-- ItineraryScreen -->
+    <string name="itinerary_title">Itinéraire d\'aujourd'hui</string>
+    <string name="itinerary_tab_text">Itinéraire</string>
+    <string name="itinerary_sample" translatable="false">Itinerary %s</string>
+    <string name="edit_itinerary">Modifier l\'itinéraire</string>
+    <string name="itinerary_activity_name">Nom</string>
+    <string name="itinerary_activity_description">Description</string>
+    <string name="itinerary_activity_date">Date: %s</string>
+    <string name="empty_itinerary">Vous n\'avez aucune activité pour aujourd'hui</string>
+
+    <!-- UpsertActivityScreen -->
+    <string name="add_activity_title">Ajouter une activité</string>
+    <string name="add_itinerary_select_start_date_text_label">Date de début</string>
+    <string name="add_itinerary_select_start_date_text">Date de début: %s</string>
+    <string name="add_itinerary_select_start_time_text_label">Heure de début</string>
+    <string name="add_itinerary_select_start_time_text">Heure de début: %s</string>
+    <string name="add_activity_button">Ajouter une activité</string>
+    <string name="error_creating_title_itinerary_activity">
+        Le champ du nom de l\'activité est obligatoire
+    </string>
+    <string name="error_creating_description_itinerary_activity">
+        Le champ de la description est obligatoire
+    </string>
+    <string name="error_creating_datetime_itinerary_activity">
+        Le champ de la date est obligatoire
+    </string>
+    <string name="error_creating_date_not_in_trip_itinerary_activity_title">
+        L\'activité doit se dérouler pendant le voyage
+    </string>
+    <string name="error_creating_date_not_in_trip_itinerary_activity_text">
+        Le voyage est du %1$s au %2$s
+    </string>
+
+    <!-- ActivityInformation -->
+    <plurals name="time_remaining_hours">
+        <item quantity="one">%d heure restante</item>
+        <item quantity="other">%d heures restantes</item>
+    </plurals>
+    <plurals name="time_remaining_minutes">
+        <item quantity="one">%d minute restante</item>
+        <item quantity="other">%d minutes restantes</item>
+    </plurals>
+
+    <!-- Strings for the more -->
     <string name="more_title">Plus</string>
     <string name="profile_title">Profil</string>
     <string name="settings_title">Paramètres</string>
