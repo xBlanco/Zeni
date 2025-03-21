@@ -19,6 +19,8 @@
 - [x] T1.2 Implement CRUD operations for itinerary items (addActivity, updateActivity, deleteActivity).
 - [ ] T1.4 Implement user settings.
 - [ ] T1.5 Implement multi-language with user changing.
+- [ ] T3.3 Simulate user interactions and log errors or unexpected behaviors.
+- [ ] T3.4 Update documentation with test results and fixes applied.
 
 ------------------------------------------------------------------------------------------------------------------------
 ## Alex
@@ -43,6 +45,4 @@
 - [x] T2.3 Ensure updates reflect dynamically in the main trip list.
 - [x] T3.1 Implement basic input validation (e.g., empty fields, incorrect dates).
 - [x] T3.2 Write unit tests for trip and itinerary CRUD operations.
-- [ ] T3.3 Simulate user interactions and log errors or unexpected behaviors.
-- [ ] T3.4 Update documentation with test results and fixes applied.
 - [x] T3.5 Add logs (to be seen in logcat) and commentaries applying good practices.

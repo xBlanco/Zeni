@@ -1,10 +1,12 @@
+import org.gradle.kotlin.dsl.invoke
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     id("kotlin-kapt")
-    alias(libs.plugins.android.hilt)
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -18,7 +20,7 @@ android {
         versionCode = 1
         versionName = "0.2.0"
 
-        testInstrumentationRunner = "com.zeni.HiltTestRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -79,9 +81,6 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
-//    implementation(libs.hilt.android)
-    androidTestImplementation(libs.hilt.android.testing)
-    kaptAndroidTest(libs.hilt.compiler)
 }
 
 // Allow references to generated code
