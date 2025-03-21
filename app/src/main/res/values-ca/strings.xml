@@ -1,18 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">Zeni</string>
     <string name="app_version_prefix">"Versió "</string>
+
+    <!--    Login Screen-->
     <string name="login_title">Iniciar Sessió</string>
     <string name="login_user">Usuari</string>
     <string name="login_pass">Contrasenya</string>
     <string name="login_btn">Accedir</string>
+
+    <!--    Alert Dialog-->
     <string name="alert_title">Alerta</string>
     <string name="alert_message">Usuari o contrasenya incorrectes</string>
     <string name="alert_btn">D\'acord</string>
+
+    <!-- Strings for the home screen -->
     <string name="home_title">Inici</string>
+    <string name="home_sample" translatable="false">Home Screen</string>
+
+    <!--  TripsScreen  -->
     <string name="trips_title">Viatges</string>
+    <string name="empty_trips">No tens viatges pendents</string>
+    <string name="trip_location">Viatge a %s</string>
+    <string name="trip_date">del %1$s al %2$s</string>
+    <!--  UpsertTripScreen  -->
+    <string name="add_trip_title">Afegir viatge</string>
+    <string name="editing_trip_title">Editant viatge</string>
+    <string name="destination_text_label">Destinació</string>
+    <string name="select_start_date_text_label">Data d\'inici</string>
+    <string name="select_start_date_text">Data d\'inici: %s</string>
+    <string name="select_end_date_text_label">Data de finalització</string>
+    <string name="select_end_date_text">Data de finalització: %s</string>
+    <string name="add_trip_button">Crear viatge</string>
+    <string name="save_trip_button">Actualitzar viatge</string>
+    <string name="delete_trip_button">Esborrar viatge</string>
+    <string name="error_creating_trip_destination_empty">
+    El camp de destinació no pot estar buit
+</string>
+    <string name="error_creating_trip_start_empty">
+    El camp de data d\'inici no pot estar buit
+</string>
+    <string name="error_creating_trip_end_empty">
+    El camp de data de finalització no pot estar buit
+</string>
+    <string name="error_creating_trip_start_and_end_empty">
+    La data d\'inici no pot ser posterior a la data de finalització
+</string>
+    <string name="error_creating_trip_fields_empty">
+    Tots els camps són obligatoris
+</string>
+    <string name="error_creating_trip_end_before_start">
+    La data de finalització no pot ser anterior a la data d\'inici
+</string>
+    <string name="error_creating_trip_start_before_today">
+    La data d\'inici no pot ser anterior a la data d'avui
+</string>
+    <string name="advert_title_deleting_trip">
+    Estàs segur que vols esborrar aquest viatge?
+</string>
+    <string name="advert_text_deleting_trip">
+    Un cop esborrat, no podràs recuperar-lo
+</string>
+    <string name="confirm_delete">Estic segur</string>
+    <!--  TripScreen  -->
+    <string name="trip_title">Viatge a %s</string>
+    <string name="edit_trip">Editar viatge</string>
+    <string name="add_activity">Afegir activitat</string>
+    <string name="trip_destiny">Destinació: %s</string>
+    <string name="trip_start_date">Data d\'inici: %s</string>
+    <string name="trip_end_date">Data de finalització: %s</string>
+    <string name="trip_activities_header_text">Itinerari</string>
+    <string name="trip_activities_empty_title">No tens activitats per aquest viatge</string>
+    <string name="trip_activities_empty_text">
+    Crea una activitat per fer alguna cosa durant el teu viatge a %s
+</string>
+    <string name="trip_activity_name">Nom: %s</string>
+    <string name="trip_activity_description">Descripció: %s</string>
+    <string name="trip_activity_date">Data: %s</string>
+    <string name="trip_activity_time">Hora: %s</string>
+    <string name="trip_sample" translatable="false">Trip %s</string>
+
+    <!-- ItineraryScreen -->
     <string name="itinerary_title">Itinerari d\'avui</string>
+    <string name="itinerary_tab_text">Itinerari</string>
+    <string name="itinerary_sample" translatable="false">Itinerary %s</string>
+    <string name="edit_itinerary">Editar itinerari</string>
+    <string name="itinerary_activity_name">Nom</string>
+    <string name="itinerary_activity_description">Descripció</string>
+    <string name="itinerary_activity_date">Data: %s</string>
+    <string name="empty_itinerary">No tens cap activitat per avui</string>
+
+    <!-- UpsertActivityScreen -->
+    <string name="add_activity_title">Afegir activitat</string>
+    <string name="add_itinerary_select_start_date_text_label">Data d\'inici</string>
+    <string name="add_itinerary_select_start_date_text">Data d\'inici: %s</string>
+    <string name="add_itinerary_select_start_time_text_label">Hora d\'inici</string>
+    <string name="add_itinerary_select_start_time_text">Hora d\'inici: %s</string>
+    <string name="add_activity_button">Afegir activitat</string>
+    <string name="error_creating_title_itinerary_activity">
+    El camp de nom de l\'activitat és obligatori
+</string>
+    <string name="error_creating_description_itinerary_activity">
+    El camp de descripció és obligatori
+</string>
+    <string name="error_creating_datetime_itinerary_activity">
+    El camp de data és obligatori
+</string>
+    <string name="error_creating_date_not_in_trip_itinerary_activity_title">
+    L\'activitat ha de tenir lloc durant el viatge
+</string>
+    <string name="error_creating_date_not_in_trip_itinerary_activity_text">
+    El viatge és del %1$s al %2$s
+</string>
+
+    <!-- ActivityInformation -->
+    <plurals name="time_remaining_hours">
+        <item quantity="one">%d hora restant</item>
+        <item quantity="other">%d hores restants</item>
+    </plurals>
+    <plurals name="time_remaining_minutes">
+        <item quantity="one">%d minut restant</item>
+        <item quantity="other">%d minuts restants</item>
+    </plurals>
+
+    <!-- Strings for the more -->
     <string name="more_title">Més</string>
-    <string name="profile_title">Perfil</string>
+    <string name="profile_title">Usuari</string>
     <string name="settings_title">Configuració</string>
     <string name="terms_title">Termes i Condicions</string>
     <string name="terms_txt_title">
