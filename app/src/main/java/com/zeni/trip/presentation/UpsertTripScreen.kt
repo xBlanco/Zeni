@@ -206,7 +206,7 @@ fun UpsertTripScreen(
                     },
                     modifier = Modifier
                         .weight(weight = 1f),
-                    enabled = destinationName.isNotBlank()
+                    enabled = destinationName.isNotBlank() && startDate != null && endDate != null
                 ) {
                     Text(
                         text = if (viewModel.isEditing) stringResource(R.string.save_trip_button)

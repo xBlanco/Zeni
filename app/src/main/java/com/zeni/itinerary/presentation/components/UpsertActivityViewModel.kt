@@ -1,5 +1,6 @@
 package com.zeni.itinerary.presentation.components
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zeni.core.data.repository.ItineraryRepositoryImpl
@@ -136,6 +137,7 @@ class UpsertActivityViewModel @AssistedInject constructor(
         viewModelScope.launch {
             if (isEditing) {
                 // Edit the activity
+                Log.d(UpsertActivityViewModel::class.java.simpleName, "Editing activity $activityId")
                 val editingActivity = itineraryRepository.getActivity(tripId, activityId!!).firstOrNull() ?: return@launch
                 title.emit(editingActivity.title)
                 description.emit(editingActivity.description)
@@ -190,9 +192,7 @@ class UpsertActivityViewModel @AssistedInject constructor(
         return itineraryId
     }
 
-    suspend fun deleteItinerary() {
-        deleteItineraryUseCase(itineraryRepository.getActivity(tripId, activityId!!).first())
-    }
+    suspend fun deleteItinerary() = deleteItineraryUseCase(tripId, activityId!!)
 
     @AssistedFactory
     interface UpsertItineraryViewModelFactory {

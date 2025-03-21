@@ -1,5 +1,6 @@
 package com.zeni.auth.presentation.login.components
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zeni.auth.domain.use_cases.LoginUseCase
@@ -35,6 +36,11 @@ class LoginViewModel @Inject constructor(
 
     val loginError: StateFlow<LoginErrors?>
         field = MutableStateFlow(value = null)
+    fun login(): Boolean {
+        // TODO: Move to a use case
+        Log.i(LoginViewModel::class.java.simpleName, "Login attempt with username: ${username.value}")
+        return verifyCredentials()
+    }
     fun verifyCredentials(): Boolean {
         // TODO: Implement a real authentication mechanism with backend
         val isValidCredentials = username.value == DefaultCredentials.USERNAME &&

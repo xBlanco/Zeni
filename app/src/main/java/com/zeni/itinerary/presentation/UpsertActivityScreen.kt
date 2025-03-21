@@ -224,7 +224,7 @@ fun UpsertItineraryScreen(
                         }
                     },
                     modifier = Modifier.weight(weight = 1f),
-                    enabled = title.isNotBlank() && description.isNotBlank()
+                    enabled = title.isNotBlank() && description.isNotBlank() && date != null && time != null
                 ) {
                     Text(text = stringResource(R.string.add_activity_button))
                 }
