@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,7 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -45,10 +42,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.zeni.R
-import com.zeni.core.domain.model.Activity
 import com.zeni.core.domain.model.Trip
 import com.zeni.core.domain.utils.extensions.navigateBack
-import com.zeni.core.presentation.navigation.ScreenUpsertItinerary
+import com.zeni.core.presentation.navigation.ScreenUpsertActivity
 import com.zeni.core.presentation.navigation.ScreenUpsertTrip
 import com.zeni.itinerary.presentation.components.ActivityInformation
 import com.zeni.trip.presentation.components.TripViewModel
@@ -120,7 +116,7 @@ fun TripScreen(
 
                 IconButton(
                     onClick = {
-                        navController.navigate(ScreenUpsertItinerary(trip!!.id))
+                        navController.navigate(ScreenUpsertActivity(trip!!.id))
                     },
                     colors = IconButtonDefaults.iconButtonColors(
                         contentColor = LocalContentColor.current.copy(alpha = 0.65f)
@@ -150,7 +146,12 @@ fun TripScreen(
                         ActivityInformation(
                             activity = activity,
                             modifier = Modifier
-                                .fillMaxWidth()
+                                .fillMaxWidth(),
+                            onEditClick = {
+                                navController.navigate(
+                                    ScreenUpsertActivity(trip!!.id, activity.id)
+                                )
+                            }
                         )
                     }
                 }

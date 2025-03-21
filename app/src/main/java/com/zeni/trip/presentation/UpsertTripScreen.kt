@@ -48,6 +48,7 @@ import com.zeni.core.presentation.navigation.ScreenTrips
 import com.zeni.trip.domain.utils.UpsertTripError
 import com.zeni.trip.presentation.components.UpsertTripViewModel
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
@@ -198,11 +199,8 @@ fun UpsertTripScreen(
                         scope.launch {
                             val tripId = viewModel.addTrip()
                             if (tripId != null) {
-                                navController.navigate(ScreenTrip(tripId = tripId)) {
-                                    popUpTo<ScreenTrip> {
-                                        inclusive = true
-                                    }
-                                }
+                                navController.popBackStack()
+                                navController.navigate(ScreenTrip(tripId = tripId))
                             }
                         }
                     },
@@ -222,13 +220,21 @@ fun UpsertTripScreen(
     if (isStartDatePickerOpen) {
         DatePickers(
             onClose = { isStartDatePickerOpen = false },
-            onSelectedDate = viewModel::setStartDate
+            onSelectedDate = viewModel::setStartDate,
+            initialSelectedDateMillis = startDate?.toLocalDate()
+                ?.atStartOfDay(ZoneOffset.UTC)
+                ?.toInstant()
+                ?.toEpochMilli()
         )
     }
     if (isEndDatePickerOpen) {
         DatePickers(
             onClose = { isEndDatePickerOpen = false },
-            onSelectedDate = viewModel::setEndDate
+            onSelectedDate = viewModel::setEndDate,
+            initialSelectedDateMillis = endDate?.toLocalDate()
+                ?.atStartOfDay(ZoneOffset.UTC)
+                ?.toInstant()
+                ?.toEpochMilli()
         )
     }
 
@@ -349,11 +355,14 @@ private fun TopBar(
 @Composable
 private fun DatePickers(
     onClose: () -> Unit,
-    onSelectedDate: (ZonedDateTime) -> Unit
+    onSelectedDate: (ZonedDateTime) -> Unit,
+    initialSelectedDateMillis: Long? = null,
 ) {
     val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = ZonedDateTime.now().plusDays(1).toLocalDate().atStartOfDay()
-            .toInstant(ZoneOffset.UTC).toEpochMilli(),
+        initialSelectedDateMillis = initialSelectedDateMillis ?: LocalDate.now()
+            .plusDays(1).atStartOfDay()
+            .toInstant(ZoneOffset.UTC)
+            .toEpochMilli(),
         selectableDates = SelectableDatesNotPast
     )
 

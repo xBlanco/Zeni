@@ -5,6 +5,8 @@ import com.zeni.core.domain.repository.ItineraryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
+import java.time.LocalDate
+import java.time.ZonedDateTime
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,6 +21,14 @@ class ItineraryRepositoryImpl @Inject constructor(): ItineraryRepository {
         return activities.map { items ->
             items
                 .filter { it.tripId == tripId }
+                .sortedBy { it.dateTime }
+        }
+    }
+
+    override fun getActivitiesByDate(date: LocalDate): Flow<List<Activity>> {
+        return activities.map { items ->
+            items
+                .filter { it.dateTime.toLocalDate().atStartOfDay() == date.atStartOfDay() }
                 .sortedBy { it.dateTime }
         }
     }

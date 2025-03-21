@@ -91,11 +91,6 @@ fun UpsertItineraryScreen(
 
     var isDatePickerOpen by remember { mutableStateOf(value = false) }
     var isTimePickerOpen by remember { mutableStateOf(value = false) }
-    var dateTimeIsFuture by remember { mutableStateOf(value = true) }
-    val timePickerState = rememberTimePickerState(
-        initialHour = 12,
-        is24Hour = true
-    )
 
     val addingError by viewModel.addingError.collectAsStateWithLifecycle()
     var validationToDelete by remember { mutableStateOf(value = false) }
@@ -224,9 +219,7 @@ fun UpsertItineraryScreen(
                         scope.launch {
                             val itineraryId = viewModel.addItinerary()
                             if (itineraryId != null) {
-                                navController.navigate(ScreenTrip(tripId = trip!!.id)) {
-                                    popUpTo<ScreenTrip> { inclusive = true }
-                                }
+                                navController.navigateBack()
                             }
                         }
                     },
@@ -241,18 +234,19 @@ fun UpsertItineraryScreen(
 
     if (isDatePickerOpen) {
         DatePickers(
-            onDismiss = {
-                isDatePickerOpen = false
-            },
-            onSelectedDate = viewModel::setDate
+            onDismiss = { isDatePickerOpen = false },
+            onSelectedDate = viewModel::setDate,
+            initialSelectedDateMillis = date?.atStartOfDay(ZoneOffset.UTC)
+                ?.toInstant()
+                ?.toEpochMilli()
         )
     }
     if (isTimePickerOpen) {
         TimePicker(
-            onDismiss = {
-                isTimePickerOpen = false
-            },
-            onSelectedTime = viewModel::setTime
+            onDismiss = { isTimePickerOpen = false },
+            onSelectedTime = viewModel::setTime,
+            initialHour = time?.hour,
+            initialMinute = time?.minute
         )
     }
 
@@ -374,10 +368,12 @@ private fun TopBar(navController: NavController) {
 @Composable
 private fun DatePickers(
     onDismiss: () -> Unit,
-    onSelectedDate: (LocalDate) -> Unit
+    onSelectedDate: (LocalDate) -> Unit,
+    initialSelectedDateMillis: Long? = null,
 ) {
     val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = LocalDate.now().plusDays(1).atStartOfDay()
+        initialSelectedDateMillis = initialSelectedDateMillis ?: LocalDate.now()
+            .plusDays(1).atStartOfDay()
             .toInstant(ZoneOffset.UTC)
             .toEpochMilli(),
         selectableDates = SelectableDatesNotPast
@@ -412,10 +408,13 @@ private fun DatePickers(
 @Composable
 private fun TimePicker(
     onDismiss: () -> Unit,
-    onSelectedTime: (LocalTime) -> Unit
+    onSelectedTime: (LocalTime) -> Unit,
+    initialHour: Int? = null,
+    initialMinute: Int? = null,
 ) {
     val timePickerState = rememberTimePickerState(
-        initialHour = 12,
+        initialHour = initialHour ?: 12,
+        initialMinute = initialMinute ?: 0,
         is24Hour = true
     )
 

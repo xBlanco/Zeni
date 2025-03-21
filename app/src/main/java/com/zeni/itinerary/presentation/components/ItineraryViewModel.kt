@@ -9,6 +9,8 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
+import java.time.LocalDate
+import java.time.ZonedDateTime
 
 @HiltViewModel(assistedFactory = ItineraryViewModel.ItineraryViewModelFactory::class)
 class ItineraryViewModel @AssistedInject constructor(
@@ -16,7 +18,7 @@ class ItineraryViewModel @AssistedInject constructor(
     private val itineraryRepository: ItineraryRepositoryImpl
 ) : ViewModel() {
 
-    val itinerary = itineraryRepository.getActivitiesByTrip(itineraryId)
+    fun getItineraries(todayDate: LocalDate) = itineraryRepository.getActivitiesByDate(todayDate)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),

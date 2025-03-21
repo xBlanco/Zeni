@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.zeni.core.presentation.navigation.ScreenUpsertTrip
@@ -112,7 +111,7 @@ private fun TopBar(pagerState: PagerState) {
 
     TopAppBar(
         title = {
-            Text(text = stringResource(currentScreen.title))
+            Text(text = stringResource(currentScreen.top))
         },
         actions = {
             // Search icon
@@ -156,7 +155,7 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(Screen.Home.title))
+                Text(text = stringResource(Screen.Home.bottom))
             }
         )
 
@@ -178,7 +177,7 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(Screen.Trips.title))
+                Text(text = stringResource(Screen.Trips.bottom))
             }
         )
 
@@ -200,7 +199,7 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(Screen.Itinerary.title))
+                Text(text = stringResource(Screen.Itinerary.bottom))
             }
         )
 
@@ -221,7 +220,7 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(Screen.More.title))
+                Text(text = stringResource(Screen.More.bottom))
             }
         )
     }
@@ -253,9 +252,12 @@ private fun FloatingButton(
 /**
  * Screens represented in the initial screen.
  */
-enum class Screen(val title: Int) {
+enum class Screen(val top: Int, val bottom: Int = top) {
     Home(R.string.home_title),
     Trips(R.string.trips_title),
-    Itinerary(R.string.itinerary_tab_text),
+    Itinerary(
+        top = R.string.itinerary_title,
+        bottom = R.string.itinerary_tab_text
+    ),
     More(R.string.more_title)
 }

@@ -103,8 +103,8 @@ fun NavGraph(
                 initialScreen = Screen.Itinerary.ordinal
             )
         }
-        composable<ScreenUpsertItinerary> {
-            val args = it.toRoute<ScreenUpsertItinerary>()
+        composable<ScreenUpsertActivity> {
+            val args = it.toRoute<ScreenUpsertActivity>()
             val viewModel = hiltViewModel<UpsertActivityViewModel, UpsertActivityViewModel.UpsertItineraryViewModelFactory> { factory ->
                 factory.create(args.tripId, args.activityId)
             }

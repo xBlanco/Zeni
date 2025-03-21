@@ -88,7 +88,7 @@
     <string name="itinerary_activity_name">Nombre</string>
     <string name="itinerary_activity_description">Descripción</string>
     <string name="itinerary_activity_date">Fecha: %s</string>
-    <string name="empty_itinerary">No tienes itinerarios pendientes</string>
+    <string name="empty_itinerary">No tienes ninguna actividad para el día de hoy</string>
 
     <!-- UpsertActivityScreen -->
     <string name="add_activity_title">Añadir actividad</string>
@@ -112,6 +112,16 @@
     <string name="error_creating_date_not_in_trip_itinerary_activity_text">
         El viaje es del %1$s al %2$s
     </string>
+
+    <!-- ActivityInformation -->
+    <plurals name="time_remaining_hours">
+        <item quantity="one">%d hora restante</item>
+        <item quantity="other">%d horas restantes</item>
+    </plurals>
+    <plurals name="time_remaining_minutes">
+        <item quantity="one">%d minuto restante</item>
+        <item quantity="other">%d minutos restantes</item>
+    </plurals>
 
     <!-- Strings for the more -->
     <string name="more_title">Más</string>
