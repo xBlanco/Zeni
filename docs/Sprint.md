@@ -19,7 +19,6 @@
 - [x] T1.2 Implement CRUD operations for itinerary items (addActivity, updateActivity, deleteActivity).
 - [ ] T1.4 Implement user settings.
 - [ ] T1.5 Implement multi-language with user changing.
-- [ ] T3.4 Update documentation with test results and fixes applied.
 
 ------------------------------------------------------------------------------------------------------------------------
 ## Alex
@@ -36,13 +35,14 @@
 - [x] T4.1. Create a Product Name.
 - [x] T4.4. Implement an About Page (team info, version, summary).
 ### Sprint 2
-- [x] Correction T1.6 of sprint 1. Inspire the directory structure part in https://github.com/Razeeman/Android-SimpleTimeTracker
+- [x] Improvements T1.6 of sprint 1.
 - [x] T1.1 Implement CRUD operations for trips (addTrip, editTrip, deleteTrip).
 - [x] T1.3 Ensure proper data validation (e.g., dates must be in the future, required fields).
 - [x] T2.1 Structure how users will interact with the itinerary.
 - [x] T2.2 Implement a basic UI flow for adding and modifying trip details.
 - [x] T2.3 Ensure updates reflect dynamically in the main trip list.
 - [x] T3.1 Implement basic input validation (e.g., empty fields, incorrect dates).
-- [ ] T3.2 Write unit tests for trip and itinerary CRUD operations.
+- [x] T3.2 Write unit tests for trip and itinerary CRUD operations.
 - [ ] T3.3 Simulate user interactions and log errors or unexpected behaviors.
+- [ ] T3.4 Update documentation with test results and fixes applied.
 - [x] T3.5 Add logs (to be seen in logcat) and commentaries applying good practices.

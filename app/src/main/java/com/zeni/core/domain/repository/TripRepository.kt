@@ -11,5 +11,7 @@ interface TripRepository {
 
     suspend fun addTrip(trip: Trip): Int
 
+    suspend fun existsTrip(tripId: Int): Boolean
+
     suspend fun deleteTrip(trip: Trip)
 }

@@ -54,6 +54,10 @@ class ItineraryRepositoryImpl @Inject constructor(): ItineraryRepository {
         return activities.value.last().id
     }
 
+    override suspend fun existsActivity(tripId: Int, activityId: Int): Boolean {
+        return activities.value.any { it.id == activityId }
+    }
+
     override suspend fun deleteActivity(activity: Activity) {
         Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Deleting activity with id ${activity.id}")
         activities.emit(activities.value - activity)

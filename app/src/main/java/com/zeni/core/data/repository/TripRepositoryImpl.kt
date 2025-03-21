@@ -46,6 +46,10 @@ class TripRepositoryImpl @Inject constructor(): TripRepository {
         return trips.value.last().id
     }
 
+    override suspend fun existsTrip(tripId: Int): Boolean {
+        return trips.value.any { it.id == tripId }
+    }
+
     override suspend fun deleteTrip(trip: Trip) {
         Log.i(TripRepositoryImpl::class.java.simpleName, "Deleting trip with id ${trip.id}")
         trips.emit(trips.value - trip)

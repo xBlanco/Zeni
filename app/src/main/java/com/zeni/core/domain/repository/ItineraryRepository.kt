@@ -3,7 +3,6 @@ package com.zeni.core.domain.repository
 import com.zeni.core.domain.model.Activity
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
-import java.time.ZonedDateTime
 
 interface ItineraryRepository {
 
@@ -13,7 +12,9 @@ interface ItineraryRepository {
 
     fun getActivity(tripId: Int, activityId: Int): Flow<Activity>
 
-    suspend fun addActivity(itineraryItem: Activity): Int
+    suspend fun addActivity(activity: Activity): Int
 
-    suspend fun deleteActivity(itineraryItem: Activity)
+    suspend fun existsActivity(tripId: Int, activityId: Int): Boolean
+
+    suspend fun deleteActivity(activity: Activity)
 }
