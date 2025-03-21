@@ -13,6 +13,7 @@ import com.zeni.auth.presentation.login.LoginScreen
 import com.zeni.auth.presentation.login.components.LoginViewModel
 import com.zeni.auth.presentation.register.RegisterScreen
 import com.zeni.auth.presentation.register.components.RegisterViewModel
+import com.zeni.itinerary.presentation.UpsertItineraryScreen
 import com.zeni.itinerary.presentation.components.UpsertItineraryViewModel
 import com.zeni.settings.presentation.ProfileScreen
 import com.zeni.settings.presentation.AboutScreen
@@ -28,7 +29,7 @@ import kotlin.reflect.KClass
 
 @Composable
 fun NavGraph(
-    screenInitial: KClass<*> = ScreenHome::class,
+    screenInitial: KClass<*>,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -100,6 +101,16 @@ fun NavGraph(
             InitialScreen(
                 navController = navController,
                 initialScreen = Screen.Itinerary.ordinal
+            )
+        }
+        composable<ScreenUpsertItinerary> {
+            val args = it.toRoute<ScreenUpsertItinerary>()
+            val viewModel = hiltViewModel<UpsertItineraryViewModel, UpsertItineraryViewModel.UpsertItineraryViewModelFactory> { factory ->
+                factory.create(args.tripId, args.activityId)
+            }
+            UpsertItineraryScreen(
+                viewModel = viewModel,
+                navController = navController
             )
         }
 

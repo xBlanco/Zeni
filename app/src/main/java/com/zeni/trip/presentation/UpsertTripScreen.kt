@@ -98,7 +98,7 @@ fun UpsertTripScreen(
             horizontalAlignment = Alignment.Start
         ) {
             OutlinedTextField(
-                value = destinationName ?: "",
+                value = destinationName,
                 onValueChange = viewModel::setDestination,
                 modifier = Modifier
                     .fillMaxWidth(),

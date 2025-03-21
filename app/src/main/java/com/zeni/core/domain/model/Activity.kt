@@ -2,7 +2,7 @@ package com.zeni.core.domain.model
 
 import java.time.ZonedDateTime
 
-data class ItineraryItem(
+data class Activity(
     val id: Int,
     val tripId: Int,
     val title: String,

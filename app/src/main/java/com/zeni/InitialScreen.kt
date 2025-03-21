@@ -32,6 +32,7 @@ import androidx.navigation.NavHostController
 import com.zeni.core.presentation.navigation.ScreenUpsertTrip
 import com.zeni.home.presentation.HomeScreen
 import com.zeni.itinerary.presentation.ItineraryScreen
+import com.zeni.itinerary.presentation.components.ItineraryViewModel
 import com.zeni.settings.presentation.MoreScreen
 import com.zeni.trip.presentation.TripsScreen
 import kotlinx.coroutines.launch
@@ -86,7 +87,9 @@ fun InitialScreen(
                 }
                 Screen.Itinerary.ordinal -> {
                     ItineraryScreen(
-                        viewModel = viewModel(),
+                        viewModel = hiltViewModel<ItineraryViewModel, ItineraryViewModel.ItineraryViewModelFactory> { factory ->
+                            factory.create()
+                        },
                         navController = navController
                     )
                 }

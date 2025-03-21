@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
+import java.time.temporal.ChronoUnit
 
 @HiltViewModel(assistedFactory = UpsertTripViewModel.UpsertTripViewModelFactory::class)
 class UpsertTripViewModel @AssistedInject constructor(
@@ -28,8 +29,8 @@ class UpsertTripViewModel @AssistedInject constructor(
     val isEditing: Boolean
         get() = tripId != null
 
-    val destination: StateFlow<String?>
-        field = MutableStateFlow(null)
+    val destination: StateFlow<String>
+        field = MutableStateFlow("")
     val isDestinationCorrect: StateFlow<Boolean>
         field = MutableStateFlow(true)
     fun setDestination(value: String) {
@@ -42,7 +43,7 @@ class UpsertTripViewModel @AssistedInject constructor(
         }
     }
     suspend fun verifyDestination(): Boolean {
-        val isCorrect = destination.value?.isNotBlank() == true
+        val isCorrect = destination.value.isNotBlank()
         isDestinationCorrect.emit(value = isCorrect)
 
         return isCorrect
@@ -62,7 +63,9 @@ class UpsertTripViewModel @AssistedInject constructor(
         }
     }
     suspend fun verifyStartDate(): Boolean {
-        val isCorrect = startDate.value != null && startDate.value?.isAfter(ZonedDateTime.now()) == true
+        val today = ZonedDateTime.now().truncatedTo(ChronoUnit.DAYS)
+        val isCorrect = startDate.value != null && (startDate.value == today ||
+                startDate.value?.isAfter(today) == true)
         isStartDateCorrect.emit(value = isCorrect)
 
         return isCorrect
@@ -82,18 +85,18 @@ class UpsertTripViewModel @AssistedInject constructor(
         }
     }
     suspend fun verifyEndDate(): Boolean {
-        val isCorrect = endDate.value != null && endDate.value?.isAfter(ZonedDateTime.now()) == true &&
-                endDate.value?.isAfter(startDate.value) == true
+        val isCorrect = endDate.value != null && (endDate.value == startDate.value ||
+                endDate.value?.isAfter(startDate.value?.truncatedTo(ChronoUnit.DAYS)) == true)
         isEndDateCorrect.emit(value = isCorrect)
 
         return isCorrect
     }
 
     init {
-        if (tripId != null) {
+        if (isEditing) {
             // Edit a trip
             viewModelScope.launch {
-                val editingTrip = tripRepository.getTrip(tripId).first()
+                val editingTrip = tripRepository.getTrip(tripId!!).first()
                 destination.emit(editingTrip.destination)
                 startDate.emit(editingTrip.startDate)
                 endDate.emit(editingTrip.endDate)
@@ -120,9 +123,9 @@ class UpsertTripViewModel @AssistedInject constructor(
         val endDateCorrect = verifyEndDate()
         if (!destinationCorrect || !startDateCorrect || !endDateCorrect) {
             when {
-                destination.value.isNullOrBlank() && startDate.value == null && endDate.value == null -> addingError.emit(UpsertTripError.EMPTY_FIELDS)
+                destination.value.isBlank() && startDate.value == null && endDate.value == null -> addingError.emit(UpsertTripError.EMPTY_FIELDS)
                 startDate.value == null && endDate.value == null -> addingError.emit(UpsertTripError.START_AND_END_DATE_EMPTY)
-                destination.value.isNullOrBlank() -> addingError.emit(UpsertTripError.DESTINATION_EMPTY)
+                destination.value.isBlank() -> addingError.emit(UpsertTripError.DESTINATION_EMPTY)
                 startDate.value == null -> addingError.emit(UpsertTripError.START_DATE_EMPTY)
                 endDate.value == null -> addingError.emit(UpsertTripError.END_DATE_EMPTY)
                 !startDateCorrect -> addingError.emit(UpsertTripError.START_DATE_BEFORE_TODAY)
@@ -133,8 +136,8 @@ class UpsertTripViewModel @AssistedInject constructor(
 
         val tripId = upsertTripUseCase(
             Trip(
-                id = tripId ?: 0,
-                destination = destination.value!!,
+                id = tripId ?: -1,
+                destination = destination.value,
                 startDate = startDate.value!!,
                 endDate = endDate.value!!,
             )

@@ -7,9 +7,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
 @HiltViewModel(assistedFactory = ItineraryViewModel.ItineraryViewModelFactory::class)
@@ -18,15 +16,15 @@ class ItineraryViewModel @AssistedInject constructor(
     private val itineraryRepository: ItineraryRepositoryImpl
 ) : ViewModel() {
 
-    val itinerary = itineraryRepository.getItineraryItems(itineraryId)
+    val itinerary = itineraryRepository.getActivitiesByTrip(itineraryId)
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = null
+            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
+            initialValue = emptyList()
         )
 
     @AssistedFactory
     interface ItineraryViewModelFactory {
-        fun create(itineraryId: Int): ItineraryViewModel
+        fun create(itineraryId: Int = 0): ItineraryViewModel
     }
 }

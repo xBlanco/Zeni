@@ -129,7 +129,7 @@ private fun BottomBar(
         }
 
         Button(
-            onClick = { navController.navigate(ScreenUpsertItinerary()) },
+            onClick = { navController.navigate(ScreenUpsertItinerary(trip.id)) },
             modifier = Modifier
                 .weight(weight = 1f)
         ) {

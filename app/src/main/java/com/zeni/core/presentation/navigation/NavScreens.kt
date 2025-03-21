@@ -26,7 +26,8 @@ data class ScreenTrip(
 
 @Serializable
 data class ScreenUpsertItinerary(
-    val itineraryId: Int? = null
+    val tripId: Int,
+    val activityId: Int? = null
 )
 @Serializable
 data class ScreenItinerary(
