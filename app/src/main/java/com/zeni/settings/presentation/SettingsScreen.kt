@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -46,8 +47,8 @@ fun SettingsScreen(
     viewModel: SettingsViewModel,
     navController: NavHostController
 ) {
+    val context = LocalContext.current
     val language = viewModel.language
-    val isDarkTheme = viewModel.isDarkTheme
 
     var languageSelectorExpanded by remember { mutableStateOf(false) }
 
@@ -90,7 +91,7 @@ fun SettingsScreen(
                 )
 
                 Switch(
-                    checked = isDarkTheme,
+                    checked = viewModel.isAutoDarkTheme,
                     onCheckedChange = viewModel::updateAutoDarkTheme
                 )
             }
@@ -106,8 +107,10 @@ fun SettingsScreen(
                 )
 
                 Switch(
-                    checked = isDarkTheme,
-                    onCheckedChange = viewModel::updateDarkTheme
+                    checked = viewModel.isDarkTheme,
+                    onCheckedChange = {
+                        viewModel.updateDarkTheme(context, it)
+                    }
                 )
             }
         }

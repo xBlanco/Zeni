@@ -22,12 +22,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            val mainViewModel = hiltViewModel<MainViewModel>()
-
-            ZeniTheme(
-                darkTheme = if (mainViewModel.isManualDarkTheme) mainViewModel.isDarkTheme
-                else isSystemInDarkTheme()
-            ) {
+            ZeniTheme {
                 NavGraph(
                     navController = rememberNavController(),
                     screenInitial = ScreenInitial::class // TODO: Conserve login state for future sessions

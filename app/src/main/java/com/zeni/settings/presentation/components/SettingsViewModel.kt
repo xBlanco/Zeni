@@ -1,5 +1,6 @@
 package com.zeni.settings.presentation.components
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -17,7 +18,7 @@ class SettingsViewModel @Inject constructor(
     var language by mutableStateOf(sharedPrefsManager.language ?: Languages.SPANISH)
         private set
 
-    var autoDarkTheme by mutableStateOf(sharedPrefsManager.autoDarkTheme)
+    var isAutoDarkTheme by mutableStateOf(sharedPrefsManager.autoDarkTheme)
         private set
 
     var isDarkTheme by mutableStateOf(sharedPrefsManager.darkTheme)
@@ -30,11 +31,11 @@ class SettingsViewModel @Inject constructor(
 
     fun updateAutoDarkTheme(isManualDark: Boolean) {
         sharedPrefsManager.autoDarkTheme = isManualDark
-        autoDarkTheme = isManualDark
+        isAutoDarkTheme = isManualDark
     }
 
-    fun updateDarkTheme(isDark: Boolean) {
-        sharedPrefsManager.darkTheme = isDark
+    fun updateDarkTheme(context: Context, isDark: Boolean) {
+        sharedPrefsManager.setDarkTheme(context, isDark)
         isDarkTheme = isDark
     }
 }

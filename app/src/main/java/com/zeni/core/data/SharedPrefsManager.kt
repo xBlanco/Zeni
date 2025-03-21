@@ -9,6 +9,7 @@ import javax.inject.Singleton
 import androidx.core.content.edit
 import com.zeni.core.data.SharedPrefsManager.PrefsKeys.DARK_THEME
 import com.zeni.core.data.SharedPrefsManager.PrefsKeys.LANGUAGE
+import com.zeni.core.domain.utils.ThemeChangeUtil
 import com.zeni.settings.domain.utils.Languages
 
 @Singleton
@@ -18,6 +19,9 @@ class SharedPrefsManager @Inject constructor(
 ) {
     val languageChangeUtil by lazy {
         LanguageChangeUtil()
+    }
+    val themeChangeUtil by lazy {
+        ThemeChangeUtil()
     }
 
     var language: Languages?
@@ -32,8 +36,13 @@ class SharedPrefsManager @Inject constructor(
         set(value) = preferences.edit { putBoolean(PrefsKeys.AUTO_DARK_THEME, value) }
 
     var darkTheme: Boolean
-        get() = preferences.getBoolean(DARK_THEME, false)
+        get() = preferences.getBoolean(DARK_THEME, themeChangeUtil.getDarkMode())
         set(value) = preferences.edit { putBoolean(DARK_THEME, value) }
+
+    fun setDarkTheme(context: Context, value: Boolean) {
+        themeChangeUtil.changeDarkMode(context, value)
+        darkTheme = value
+    }
 
     private object PrefsKeys {
         const val LANGUAGE = "language"
