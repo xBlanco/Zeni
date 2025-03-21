@@ -1,12 +1,15 @@
 package com.zeni.itinerary.presentation
 
+import android.widget.TimePicker
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Delete
@@ -32,23 +35,28 @@ import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.zeni.R
 import com.zeni.core.domain.utils.SelectableDatesNotPast
 import com.zeni.core.domain.utils.extensions.navigateBack
 import com.zeni.core.presentation.composables.TimePickerDialog
 import com.zeni.core.presentation.navigation.ScreenInitial
-import com.zeni.itinerary.presentation.components.UpsertItineraryViewModel
+import com.zeni.core.presentation.navigation.ScreenTrip
+import com.zeni.itinerary.presentation.components.UpsertActivityViewModel
 import com.zeni.itinerary.domain.use_cases.utils.UpsertItineraryError
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
@@ -58,10 +66,18 @@ import java.time.temporal.ChronoUnit
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UpsertItineraryScreen(
-    viewModel: UpsertItineraryViewModel,
+    viewModel: UpsertActivityViewModel,
     navController: NavController
 ) {
     val scope = rememberCoroutineScope()
+
+    val trip by viewModel.trip.collectAsStateWithLifecycle()
+    val locale = LocalConfiguration.current.locale
+    val dateFormater = remember {
+        DateTimeFormatter
+            .ofPattern("d MMMM yyyy", locale)
+            .withLocale(locale)
+    }
 
     val title by viewModel.title.collectAsStateWithLifecycle()
     val isTitleCorrect by viewModel.isTitleCorrect.collectAsStateWithLifecycle()
@@ -69,11 +85,11 @@ fun UpsertItineraryScreen(
     val description by viewModel.description.collectAsStateWithLifecycle()
     val isDescriptionCorrect by viewModel.isDescriptionCorrect.collectAsStateWithLifecycle()
 
-    val dateTime by viewModel.dateTime.collectAsStateWithLifecycle()
+    val date by viewModel.date.collectAsStateWithLifecycle()
+    val time by viewModel.time.collectAsStateWithLifecycle()
     val isDateTimeCorrect by viewModel.isDateTimeCorrect.collectAsStateWithLifecycle()
 
     var isDatePickerOpen by remember { mutableStateOf(value = false) }
-
     var isTimePickerOpen by remember { mutableStateOf(value = false) }
     var dateTimeIsFuture by remember { mutableStateOf(value = true) }
     val timePickerState = rememberTimePickerState(
@@ -85,11 +101,14 @@ fun UpsertItineraryScreen(
     var validationToDelete by remember { mutableStateOf(value = false) }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize(),
         topBar = {
             TopBar(navController = navController)
-        }
+        },
+        contentWindowInsets = WindowInsets.safeDrawing
     ) { contentPadding ->
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -101,7 +120,8 @@ fun UpsertItineraryScreen(
             OutlinedTextField(
                 value = title,
                 onValueChange = viewModel::setTitle,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth(),
                 label = { Text(text = stringResource(R.string.itinerary_activity_name)) },
                 isError = !isTitleCorrect,
                 singleLine = true,
@@ -111,7 +131,8 @@ fun UpsertItineraryScreen(
             OutlinedTextField(
                 value = description,
                 onValueChange = viewModel::setDescription,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth(),
                 label = { Text(text = stringResource(R.string.itinerary_activity_description)) },
                 isError = !isDescriptionCorrect,
                 singleLine = true,
@@ -130,12 +151,45 @@ fun UpsertItineraryScreen(
                     else MaterialTheme.colorScheme.error
                 )
             ) {
-                if (dateTime != null) {
-                    val formatter = DateTimeFormatter.ofPattern("dd/M/yy HH:mm")
-                    Text(text = dateTime!!.format(formatter))
+                if (date != null) {
+                    val formatter = DateTimeFormatter.ofPattern("dd/M/yy")
+                    Text(
+                        text = stringResource(
+                            id = R.string.add_itinerary_select_start_date_text,
+                            date!!.format(formatter)
+                        )
+                    )
                 } else {
                     Text(
                         text = stringResource(R.string.add_itinerary_select_start_date_text_label),
+                        fontSize = 14.sp
+                    )
+                }
+            }
+
+            OutlinedButton(
+                onClick = { isTimePickerOpen = true },
+                modifier = Modifier
+                    .fillMaxWidth(),
+                shape = MaterialTheme.shapes.large,
+                colors = ButtonDefaults.outlinedButtonColors(
+                    containerColor = if (isDateTimeCorrect) ButtonDefaults.outlinedButtonColors().containerColor
+                    else MaterialTheme.colorScheme.errorContainer,
+                    contentColor = if (isDateTimeCorrect) ButtonDefaults.outlinedButtonColors().contentColor
+                    else MaterialTheme.colorScheme.error
+                )
+            ) {
+                if (time != null) {
+                    val formatter = DateTimeFormatter.ofPattern("HH:mm")
+                    Text(
+                        text = stringResource(
+                            id = R.string.add_itinerary_select_start_time_text,
+                            time!!.format(formatter)
+                        )
+                    )
+                } else {
+                    Text(
+                        text = stringResource(R.string.add_itinerary_select_start_time_text_label),
                         fontSize = 14.sp
                     )
                 }
@@ -145,7 +199,10 @@ fun UpsertItineraryScreen(
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+                horizontalArrangement = Arrangement.spacedBy(
+                    space = 8.dp,
+                    alignment = Alignment.CenterHorizontally
+                )
             ) {
                 if (viewModel.isEditing) {
                     FilledIconButton(
@@ -167,8 +224,8 @@ fun UpsertItineraryScreen(
                         scope.launch {
                             val itineraryId = viewModel.addItinerary()
                             if (itineraryId != null) {
-                                navController.navigate(ScreenInitial) {
-                                    popUpTo(ScreenInitial) { inclusive = true }
+                                navController.navigate(ScreenTrip(tripId = trip!!.id)) {
+                                    popUpTo<ScreenTrip> { inclusive = true }
                                 }
                             }
                         }
@@ -176,7 +233,7 @@ fun UpsertItineraryScreen(
                     modifier = Modifier.weight(weight = 1f),
                     enabled = title.isNotBlank() && description.isNotBlank()
                 ) {
-                    Text(text = stringResource(R.string.add_trip_button))
+                    Text(text = stringResource(R.string.add_activity_button))
                 }
             }
         }
@@ -187,48 +244,16 @@ fun UpsertItineraryScreen(
             onDismiss = {
                 isDatePickerOpen = false
             },
-            onSelectedDate = { selectedDate ->
-                isTimePickerOpen = true
-                viewModel.setDateTime(value = selectedDate)
-            }
+            onSelectedDate = viewModel::setDate
         )
     }
     if (isTimePickerOpen) {
-        TimePickerDialog(
-            onDismissRequest = {
+        TimePicker(
+            onDismiss = {
                 isTimePickerOpen = false
-                viewModel.setDateTime(value = null)
             },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        isTimePickerOpen = false
-                        viewModel.setDateTime(
-                            value = dateTime!!
-                                .plusHours(timePickerState.hour.toLong())
-                                .plusMinutes(timePickerState.minute.toLong())
-                        )
-                    },
-                    enabled = dateTimeIsFuture
-                ) {
-                    Text(text = stringResource(id = R.string.accept_button))
-                }
-            },
-            dismissButton = {
-                OutlinedButton(
-                    onClick = {
-                        isTimePickerOpen = false
-                        viewModel.setDateTime(value = null)
-                    }
-                ) {
-                    Text(text = stringResource(id = R.string.cancel_button))
-                }
-            }
-        ) {
-            TimePicker(
-                state = timePickerState
-            )
-        }
+            onSelectedTime = viewModel::setTime
+        )
     }
 
     if (addingError != UpsertItineraryError.NONE) {
@@ -245,7 +270,7 @@ fun UpsertItineraryScreen(
                     contentDescription = null
                 )
             },
-            text = {
+            title = {
                 Text(
                     text = when (addingError) {
                         UpsertItineraryError.EMPTY_FIELDS -> stringResource(R.string.error_creating_trip_fields_empty)
@@ -253,12 +278,25 @@ fun UpsertItineraryScreen(
                         UpsertItineraryError.DESCRIPTION_EMPTY -> stringResource(R.string.error_creating_description_itinerary_activity)
                         UpsertItineraryError.DATE_TIME_EMPTY -> stringResource(R.string.error_creating_datetime_itinerary_activity)
                         UpsertItineraryError.DATE_TIME_BEFORE_NOW -> stringResource(R.string.error_creating_trip_start_before_today)
-                        UpsertItineraryError.DATE_TIME_NOT_IN_TRIP_PERIOD -> stringResource(R.string.error_creating_date_not_in_trip_itinerary_activity)
+                        UpsertItineraryError.DATE_TIME_NOT_IN_TRIP_PERIOD -> stringResource(R.string.error_creating_date_not_in_trip_itinerary_activity_title)
                         UpsertItineraryError.NONE -> ""
                     },
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
+            },
+            text = {
+                if (addingError == UpsertItineraryError.DATE_TIME_NOT_IN_TRIP_PERIOD) {
+                    Text(
+                        text = stringResource(
+                            id = R.string.error_creating_date_not_in_trip_itinerary_activity_text,
+                            trip!!.startDate.format(dateFormater),
+                            trip!!.endDate.format(dateFormater)
+                        ),
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
+                } else null
             }
         )
     }
@@ -314,20 +352,13 @@ fun UpsertItineraryScreen(
             }
         )
     }
-
-    LaunchedEffect(dateTime) {
-        while (true) {
-            dateTimeIsFuture = dateTime?.isAfter(ZonedDateTime.now().truncatedTo(ChronoUnit.DAYS)) == true
-            delay(timeMillis = 1000)
-        }
-    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TopBar(navController: NavController) {
     TopAppBar(
-        title = { Text(text = stringResource(R.string.add_itinerary_title)) },
+        title = { Text(text = stringResource(R.string.add_activity_title)) },
         navigationIcon = {
             IconButton(onClick = navController::navigateBack) {
                 Icon(
@@ -343,11 +374,12 @@ private fun TopBar(navController: NavController) {
 @Composable
 private fun DatePickers(
     onDismiss: () -> Unit,
-    onSelectedDate: (ZonedDateTime) -> Unit
+    onSelectedDate: (LocalDate) -> Unit
 ) {
     val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = ZonedDateTime.now().plusDays(1).toLocalDate().atStartOfDay()
-            .toInstant(ZoneOffset.UTC).toEpochMilli(),
+        initialSelectedDateMillis = LocalDate.now().plusDays(1).atStartOfDay()
+            .toInstant(ZoneOffset.UTC)
+            .toEpochMilli(),
         selectableDates = SelectableDatesNotPast
     )
 
@@ -357,16 +389,9 @@ private fun DatePickers(
             Button(
                 onClick = {
                     onDismiss()
-                    onSelectedDate(
-                        ZonedDateTime.of(
-                            LocalDateTime.ofEpochSecond(
-                                datePickerState.selectedDateMillis!! / 1000,
-                                0,
-                                ZoneOffset.UTC
-                            ),
-                            ZoneId.systemDefault()
-                        )
-                    )
+                    LocalDate.ofEpochDay(
+                        datePickerState.selectedDateMillis!! / ChronoUnit.DAYS.duration.toMillis()
+                    ).let(onSelectedDate)
                 },
                 enabled = datePickerState.selectedDateMillis != null
             ) {
@@ -380,5 +405,42 @@ private fun DatePickers(
         },
     ) {
         DatePicker(state = datePickerState)
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun TimePicker(
+    onDismiss: () -> Unit,
+    onSelectedTime: (LocalTime) -> Unit
+) {
+    val timePickerState = rememberTimePickerState(
+        initialHour = 12,
+        is24Hour = true
+    )
+
+    TimePickerDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            Button(
+                onClick = {
+                    onDismiss()
+                    onSelectedTime(LocalTime.of(timePickerState.hour, timePickerState.minute))
+                }
+            ) {
+                Text(text = stringResource(id = R.string.accept_button))
+            }
+        },
+        dismissButton = {
+            OutlinedButton(
+                onClick = onDismiss
+            ) {
+                Text(text = stringResource(id = R.string.cancel_button))
+            }
+        }
+    ) {
+        TimePicker(
+            state = timePickerState
+        )
     }
 }

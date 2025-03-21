@@ -2,6 +2,7 @@ package com.zeni.trip.presentation.components
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zeni.core.data.repository.ItineraryRepositoryImpl
 import com.zeni.core.data.repository.TripRepositoryImpl
 import com.zeni.trip.domain.use_cases.DeleteTripUseCase
 import dagger.assisted.Assisted
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel(assistedFactory = TripViewModel.TripViewModelFactory::class)
 class TripViewModel @AssistedInject constructor(
     @Assisted private val tripId: Int,
-    private val tripRepository: TripRepositoryImpl
+    private val tripRepository: TripRepositoryImpl,
+    private val itineraryRepository: ItineraryRepositoryImpl,
 ) : ViewModel() {
 
     val trip = tripRepository.getTrip(tripId)
@@ -25,6 +27,13 @@ class TripViewModel @AssistedInject constructor(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
             initialValue = null
+        )
+
+    val activities = itineraryRepository.getActivitiesByTrip(tripId)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = emptyList()
         )
 
     @AssistedFactory

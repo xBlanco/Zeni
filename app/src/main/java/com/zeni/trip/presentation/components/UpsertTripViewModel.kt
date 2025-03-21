@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.time.LocalTime
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 
@@ -55,7 +56,12 @@ class UpsertTripViewModel @AssistedInject constructor(
         field = MutableStateFlow(true)
     fun setStartDate(value: ZonedDateTime) {
         viewModelScope.launch {
-            startDate.emit(value)
+            val localDate = value.toLocalDate()
+            val selectedStartDate = localDate
+                .atTime(LocalTime.MIN)
+                .atZone(value.zone)
+
+            startDate.emit(selectedStartDate)
 
             if (!isStartDateCorrect.value) {
                 isStartDateCorrect.emit(value = true)
@@ -77,7 +83,12 @@ class UpsertTripViewModel @AssistedInject constructor(
         field = MutableStateFlow(true)
     fun setEndDate(value: ZonedDateTime) {
         viewModelScope.launch {
-            endDate.emit(value)
+            val localDate = value.toLocalDate()
+            val selectedEndDate = localDate
+                .atTime(LocalTime.MAX)
+                .atZone(value.zone)
+
+            endDate.emit(selectedEndDate)
 
             if (!isEndDateCorrect.value) {
                 isEndDateCorrect.emit(value = true)

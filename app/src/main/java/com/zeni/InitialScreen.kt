@@ -156,7 +156,7 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(R.string.home_title))
+                Text(text = stringResource(Screen.Home.title))
             }
         )
 
@@ -178,7 +178,7 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(R.string.trips_title))
+                Text(text = stringResource(Screen.Trips.title))
             }
         )
 
@@ -200,7 +200,7 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(R.string.itinerary_title))
+                Text(text = stringResource(Screen.Itinerary.title))
             }
         )
 
@@ -221,7 +221,7 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(R.string.more_title))
+                Text(text = stringResource(Screen.More.title))
             }
         )
     }
@@ -256,6 +256,6 @@ private fun FloatingButton(
 enum class Screen(val title: Int) {
     Home(R.string.home_title),
     Trips(R.string.trips_title),
-    Itinerary(R.string.itinerary_title),
+    Itinerary(R.string.itinerary_tab_text),
     More(R.string.more_title)
 }

@@ -14,7 +14,7 @@ import com.zeni.auth.presentation.login.components.LoginViewModel
 import com.zeni.auth.presentation.register.RegisterScreen
 import com.zeni.auth.presentation.register.components.RegisterViewModel
 import com.zeni.itinerary.presentation.UpsertItineraryScreen
-import com.zeni.itinerary.presentation.components.UpsertItineraryViewModel
+import com.zeni.itinerary.presentation.components.UpsertActivityViewModel
 import com.zeni.settings.presentation.ProfileScreen
 import com.zeni.settings.presentation.AboutScreen
 import com.zeni.settings.presentation.SettingsScreen
@@ -105,7 +105,7 @@ fun NavGraph(
         }
         composable<ScreenUpsertItinerary> {
             val args = it.toRoute<ScreenUpsertItinerary>()
-            val viewModel = hiltViewModel<UpsertItineraryViewModel, UpsertItineraryViewModel.UpsertItineraryViewModelFactory> { factory ->
+            val viewModel = hiltViewModel<UpsertActivityViewModel, UpsertActivityViewModel.UpsertItineraryViewModelFactory> { factory ->
                 factory.create(args.tripId, args.activityId)
             }
             UpsertItineraryScreen(

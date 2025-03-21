@@ -14,15 +14,22 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 
-@HiltViewModel(assistedFactory = UpsertItineraryViewModel.UpsertItineraryViewModelFactory::class)
-class UpsertItineraryViewModel @AssistedInject constructor(
+@HiltViewModel(assistedFactory = UpsertActivityViewModel.UpsertItineraryViewModelFactory::class)
+class UpsertActivityViewModel @AssistedInject constructor(
     @Assisted private val tripId: Int,
     @Assisted private val activityId: Int? = null,
     private val tripRepository: TripRepositoryImpl,
@@ -77,27 +84,53 @@ class UpsertItineraryViewModel @AssistedInject constructor(
         return isCorrect
     }
 
-    val dateTime: StateFlow<ZonedDateTime?>
-        field = MutableStateFlow(value = null)
     val isDateTimeCorrect: StateFlow<Boolean>
         field = MutableStateFlow(true)
-    fun setDateTime(value: ZonedDateTime?) {
+    suspend fun verifyDateTime(): Boolean {
+        val isCorrect = dateTime.value != null && dateTime.value!!.isAfter(ZonedDateTime.now()) &&
+                (dateTime.value!! == trip.value!!.startDate || dateTime.value!!.isAfter(trip.value!!.startDate)) &&
+                (dateTime.value!! == trip.value!!.endDate || dateTime.value!!.isBefore(trip.value!!.endDate))
+        isDateTimeCorrect.emit(value = isCorrect)
+
+        return isCorrect
+    }
+
+    val date: StateFlow<LocalDate?>
+        field = MutableStateFlow(value = null)
+    fun setDate(value: LocalDate) {
         viewModelScope.launch {
-            dateTime.emit(value)
+            date.emit(value)
 
             if (!isDateTimeCorrect.value) {
                 isDateTimeCorrect.emit(value = true)
             }
         }
     }
-    suspend fun verifyDateTime(): Boolean {
-        val isCorrect = dateTime.value != null && dateTime.value!!.isAfter(ZonedDateTime.now()) &&
-                dateTime.value!!.isAfter(trip.value!!.startDate) &&
-                dateTime.value!!.isBefore(trip.value!!.endDate)
-        isDateTimeCorrect.emit(value = isCorrect)
 
-        return isCorrect
+    val time: StateFlow<LocalTime?>
+        field = MutableStateFlow(value = null)
+    fun setTime(value: LocalTime) {
+        viewModelScope.launch {
+            time.emit(value)
+
+            if (!isDateTimeCorrect.value) {
+                isDateTimeCorrect.emit(value = true)
+            }
+        }
     }
+
+    val dateTime = date.combine(time) { date, time ->
+        if (date == null || time == null) {
+            null
+        } else {
+            ZonedDateTime.of(date, time, ZoneId.systemDefault())
+        }
+    }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = null
+        )
 
     init {
         viewModelScope.launch {
@@ -106,7 +139,10 @@ class UpsertItineraryViewModel @AssistedInject constructor(
                 val editingActivity = itineraryRepository.getActivity(tripId, activityId!!).firstOrNull() ?: return@launch
                 title.emit(editingActivity.title)
                 description.emit(editingActivity.description)
-                dateTime.emit(editingActivity.dateTime)
+
+                val savedDate = editingActivity.dateTime
+                date.emit(savedDate.toLocalDate())
+                time.emit(savedDate.toLocalTime())
             }
             trip.emit(tripRepository.getTrip(tripId).first())
         }
@@ -127,11 +163,11 @@ class UpsertItineraryViewModel @AssistedInject constructor(
 
         if (!titleCorrect || !descriptionCorrect || !dateTimeCorrect) {
             when {
-                title.value.isEmpty() && description.value.isEmpty() && description.value.isEmpty() -> {
+                title.value.isBlank() && description.value.isBlank() && description.value.isBlank() -> {
                     addingError.emit(value = UpsertItineraryError.EMPTY_FIELDS)
                 }
-                title.value.isEmpty() -> addingError.emit(value = UpsertItineraryError.TITLE_EMPTY)
-                description.value.isEmpty() -> addingError.emit(value = UpsertItineraryError.DESCRIPTION_EMPTY)
+                title.value.isBlank() -> addingError.emit(value = UpsertItineraryError.TITLE_EMPTY)
+                description.value.isBlank() -> addingError.emit(value = UpsertItineraryError.DESCRIPTION_EMPTY)
                 dateTime.value == null -> addingError.emit(value = UpsertItineraryError.DATE_TIME_EMPTY)
                 dateTime.value!!.isBefore(ZonedDateTime.now()) -> addingError.emit(value = UpsertItineraryError.DATE_TIME_BEFORE_NOW)
                 !dateTimeCorrect -> addingError.emit(value = UpsertItineraryError.DATE_TIME_NOT_IN_TRIP_PERIOD)
@@ -160,6 +196,6 @@ class UpsertItineraryViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface UpsertItineraryViewModelFactory {
-        fun create(tripId: Int, activityId: Int?): UpsertItineraryViewModel
+        fun create(tripId: Int, activityId: Int?): UpsertActivityViewModel
     }
 }

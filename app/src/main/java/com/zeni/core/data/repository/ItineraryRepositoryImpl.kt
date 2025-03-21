@@ -16,7 +16,11 @@ class ItineraryRepositoryImpl @Inject constructor(): ItineraryRepository {
     private val activities = MutableStateFlow(emptyList<Activity>())
 
     override fun getActivitiesByTrip(tripId: Int): Flow<List<Activity>> {
-        return activities.map { items -> items.filter { it.tripId == tripId } }
+        return activities.map { items ->
+            items
+                .filter { it.tripId == tripId }
+                .sortedBy { it.dateTime }
+        }
     }
 
     override fun getActivity(tripId: Int, activityId: Int): Flow<Activity> {

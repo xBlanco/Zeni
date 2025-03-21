@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Delete
@@ -83,7 +85,8 @@ fun UpsertTripScreen(
                 navController = navController,
                 isEditing = viewModel.isEditing
             )
-        }
+        },
+        contentWindowInsets = WindowInsets.safeDrawing
     ) { contentPadding ->
 
         Column(
@@ -196,8 +199,8 @@ fun UpsertTripScreen(
                             val tripId = viewModel.addTrip()
                             if (tripId != null) {
                                 navController.navigate(ScreenTrip(tripId = tripId)) {
-                                    popUpTo(ScreenInitial) {
-                                        inclusive = false
+                                    popUpTo<ScreenTrip> {
+                                        inclusive = true
                                     }
                                 }
                             }
@@ -205,7 +208,7 @@ fun UpsertTripScreen(
                     },
                     modifier = Modifier
                         .weight(weight = 1f),
-                    enabled = destinationName?.isNotBlank() == true
+                    enabled = destinationName.isNotBlank()
                 ) {
                     Text(
                         text = if (viewModel.isEditing) stringResource(R.string.save_trip_button)
