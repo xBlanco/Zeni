@@ -1,6 +1,5 @@
 package com.zeni.itinerary.presentation.components
 
-import android.R.attr.description
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zeni.core.data.repository.ItineraryRepositoryImpl
@@ -21,7 +20,6 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
-import javax.inject.Inject
 
 @HiltViewModel(assistedFactory = UpsertItineraryViewModel.UpsertItineraryViewModelFactory::class)
 class UpsertItineraryViewModel @AssistedInject constructor(
@@ -93,9 +91,9 @@ class UpsertItineraryViewModel @AssistedInject constructor(
         }
     }
     suspend fun verifyDateTime(): Boolean {
-        val today = ZonedDateTime.now().truncatedTo(ChronoUnit.DAYS)
-        val isCorrect = dateTime.value != null && dateTime.value!!.isAfter(trip.value!!.startDate) &&
-                dateTime.value!!.isBefore(trip.value!!.endDate) && (dateTime.value!! >= today)
+        val isCorrect = dateTime.value != null && dateTime.value!!.isAfter(ZonedDateTime.now()) &&
+                dateTime.value!!.isAfter(trip.value!!.startDate) &&
+                dateTime.value!!.isBefore(trip.value!!.endDate)
         isDateTimeCorrect.emit(value = isCorrect)
 
         return isCorrect
@@ -135,7 +133,7 @@ class UpsertItineraryViewModel @AssistedInject constructor(
                 title.value.isEmpty() -> addingError.emit(value = UpsertItineraryError.TITLE_EMPTY)
                 description.value.isEmpty() -> addingError.emit(value = UpsertItineraryError.DESCRIPTION_EMPTY)
                 dateTime.value == null -> addingError.emit(value = UpsertItineraryError.DATE_TIME_EMPTY)
-                dateTime.value!! < ZonedDateTime.now().truncatedTo(ChronoUnit.DAYS) -> addingError.emit(value = UpsertItineraryError.DATE_TIME_BEFORE_TODAY)
+                dateTime.value!!.isBefore(ZonedDateTime.now()) -> addingError.emit(value = UpsertItineraryError.DATE_TIME_BEFORE_NOW)
                 !dateTimeCorrect -> addingError.emit(value = UpsertItineraryError.DATE_TIME_NOT_IN_TRIP_PERIOD)
                 else -> addingError.emit(value = UpsertItineraryError.NONE)
             }

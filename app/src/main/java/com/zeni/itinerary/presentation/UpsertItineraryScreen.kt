@@ -252,7 +252,7 @@ fun UpsertItineraryScreen(
                         UpsertItineraryError.TITLE_EMPTY -> stringResource(R.string.error_creating_title_itinerary_activity)
                         UpsertItineraryError.DESCRIPTION_EMPTY -> stringResource(R.string.error_creating_description_itinerary_activity)
                         UpsertItineraryError.DATE_TIME_EMPTY -> stringResource(R.string.error_creating_datetime_itinerary_activity)
-                        UpsertItineraryError.DATE_TIME_BEFORE_TODAY -> stringResource(R.string.error_creating_trip_start_before_today)
+                        UpsertItineraryError.DATE_TIME_BEFORE_NOW -> stringResource(R.string.error_creating_trip_start_before_today)
                         UpsertItineraryError.DATE_TIME_NOT_IN_TRIP_PERIOD -> stringResource(R.string.error_creating_date_not_in_trip_itinerary_activity)
                         UpsertItineraryError.NONE -> ""
                     },

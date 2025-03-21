@@ -44,16 +44,16 @@
         El campo de fecha de fin no puede estar vacío.
     </string>
     <string name="error_creating_trip_start_and_end_empty">
-        La fecha de inicio no puede ser posterior o igual a la fecha de fin.
+        La fecha de inicio no puede ser posterior a la fecha de fin.
     </string>
     <string name="error_creating_trip_fields_empty">
         Todos los campos son obligatorios.
     </string>
     <string name="error_creating_trip_end_before_start">
-        La fecha de fin no puede ser anterior o igual a la fecha de inicio.
+        La fecha de fin no puede ser anterior a la fecha de inicio.
     </string>
     <string name="error_creating_trip_start_before_today">
-        La fecha de inicio no puede ser anterior o igual a la fecha de hoy.
+        La fecha de inicio no puede ser anterior a la fecha de hoy.
     </string>
     <string name="advert_title_deleting_trip">
         ¿Estás seguro de que quieres borrar este viaje?

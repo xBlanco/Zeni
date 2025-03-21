@@ -41,9 +41,9 @@
 - [ ] Correction T1.6 of sprint 1. Inspire the directory structure part in https://github.com/Razeeman/Android-SimpleTimeTracker
 - [ ] Correction T2.4 of sprint 1. Fix CONTRIBUTING.md so that teams strategy reflect real use.
 - [x] T1.1 Implement CRUD operations for trips (addTrip, editTrip, deleteTrip).
-- [ ] T1.3 Ensure proper data validation (e.g., dates must be in the future, required fields).
+- [x] T1.3 Ensure proper data validation (e.g., dates must be in the future, required fields).
 - [ ] T1.5 Implement multi-language with user changing. (minimum 3 languages [es, ca, pt]).
 - [x] T2.2 Implement a basic UI flow for adding and modifying trip details.
 - [x] T2.3 Ensure updates reflect dynamically in the main trip list.
-- [ ] T3.1 Implement basic input validation (e.g., empty fields, incorrect dates).
+- [x] T3.1 Implement basic input validation (e.g., empty fields, incorrect dates).
 - [ ] T3.3 Simulate user interactions and log errors or unexpected behaviors.
