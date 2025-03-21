@@ -1,4 +1,4 @@
-package com.zeni.settings.presentation.components
+package com.zeni.core.domain.utils
 
 import android.app.LocaleManager
 import android.content.Context

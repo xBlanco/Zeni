@@ -17,8 +17,6 @@
 ### Sprint 2
 - [x] Correction T2.4 of sprint 1. Fix CONTRIBUTING.md so that teams branching strategy reflect real use.
 - [x] T1.2 Implement CRUD operations for itinerary items (addActivity, updateActivity, deleteActivity).
-- [ ] T1.4 Implement user settings.
-- [ ] T1.5 Implement multi-language with user changing.
 - [ ] T3.3 Simulate user interactions and log errors or unexpected behaviors.
 - [ ] T3.4 Update documentation with test results and fixes applied.
 
@@ -40,6 +38,8 @@
 - [x] Improvements T1.6 of sprint 1.
 - [x] T1.1 Implement CRUD operations for trips (addTrip, editTrip, deleteTrip).
 - [x] T1.3 Ensure proper data validation (e.g., dates must be in the future, required fields).
+- [ ] T1.4 Implement user settings.
+- [ ] T1.5 Implement multi-language with user changing.
 - [x] T2.1 Structure how users will interact with the itinerary.
 - [x] T2.2 Implement a basic UI flow for adding and modifying trip details.
 - [x] T2.3 Ensure updates reflect dynamically in the main trip list.

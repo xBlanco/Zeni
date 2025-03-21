@@ -4,7 +4,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.localpreferences.data.SharedPrefsManager
+import com.zeni.core.data.SharedPrefsManager
+import com.zeni.settings.domain.utils.Languages
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -13,15 +14,14 @@ class SettingsViewModel @Inject constructor(
     private val sharedPrefsManager: SharedPrefsManager
 ) : ViewModel() {
 
-    // Variables de estado inicializadas con los valores guardados.
-    var language by mutableStateOf(sharedPrefsManager.userLanguage ?: "es")
+    var language by mutableStateOf(sharedPrefsManager.language?.let { Languages.valueOf(it) } ?: Languages.SPANISH)
         private set
 
     var isDarkTheme by mutableStateOf(sharedPrefsManager.darkTheme)
         private set
 
-    fun updateLanguage(newLanguage: String) {
-        sharedPrefsManager.userLanguage = newLanguage
+    fun updateLanguage(newLanguage: Languages) {
+        sharedPrefsManager.language = newLanguage.name
         language = newLanguage
     }
 
