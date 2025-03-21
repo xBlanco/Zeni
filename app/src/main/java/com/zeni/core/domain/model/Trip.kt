@@ -4,11 +4,9 @@ import androidx.compose.runtime.Immutable
 import java.time.ZonedDateTime
 import java.util.Date
 
-@Immutable
 data class Trip(
     val id: Int = -1, // If 0, autogenerate a new id
     val destination: String,
     val startDate: ZonedDateTime,
     val endDate: ZonedDateTime,
-    val itinerary: List<ItineraryItem>
 )

@@ -1,13 +1,32 @@
 package com.zeni.itinerary.presentation.components
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.zeni.core.data.repository.ItineraryRepositoryImpl
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 
-@HiltViewModel
-class ItineraryViewModel @Inject constructor() : ViewModel() {
+@HiltViewModel(assistedFactory = ItineraryViewModel.ItineraryViewModelFactory::class)
+class ItineraryViewModel @AssistedInject constructor(
+    @Assisted private val itineraryId: Int,
+    private val itineraryRepository: ItineraryRepositoryImpl
+) : ViewModel() {
 
-    fun createItinerary() {
-        TODO("Create itinerary")
+    val itinerary = itineraryRepository.getItineraryItems(itineraryId)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = null
+        )
+
+    @AssistedFactory
+    interface ItineraryViewModelFactory {
+        fun create(itineraryId: Int): ItineraryViewModel
     }
 }

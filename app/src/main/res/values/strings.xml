@@ -69,8 +69,12 @@
     <string name="trip_sample" translatable="false">Trip %s</string>
 
     <!-- Strings for the itinerary screen -->
-    <string name="itinerary_title">Itinerario</string>
-    <string name="itinerary_sample" translatable="false">Itinerary Screen</string>
+    <string name="itinerary_title">Itinerario %s</string>
+    <string name="itinerary_sample" translatable="false">Itinerary %s</string>
+    <string name="edit_itinerary">Editar itinerario</string>
+    <string name="itinerary_date">Fecha: %s</string>
+    <string name="itinerary_description">Descripción: %s</string>
+    <string name="empty_itinerary">No tienes itinerarios pendientes</string>
 
     <!-- Strings for the more -->
     <string name="more_title">Más</string>

@@ -13,6 +13,7 @@ import com.zeni.auth.presentation.login.LoginScreen
 import com.zeni.auth.presentation.login.components.LoginViewModel
 import com.zeni.auth.presentation.register.RegisterScreen
 import com.zeni.auth.presentation.register.components.RegisterViewModel
+import com.zeni.itinerary.presentation.components.UpsertItineraryViewModel
 import com.zeni.settings.presentation.ProfileScreen
 import com.zeni.settings.presentation.AboutScreen
 import com.zeni.settings.presentation.SettingsScreen

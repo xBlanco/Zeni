@@ -137,7 +137,6 @@ class UpsertTripViewModel @AssistedInject constructor(
                 destination = destination.value!!,
                 startDate = startDate.value!!,
                 endDate = endDate.value!!,
-                itinerary = emptyList()
             )
         )
 

@@ -30,6 +30,7 @@ import androidx.navigation.NavHostController
 import com.zeni.R
 import com.zeni.core.domain.model.Trip
 import com.zeni.core.domain.utils.extensions.navigateBack
+import com.zeni.core.presentation.navigation.ScreenUpsertItinerary
 import com.zeni.core.presentation.navigation.ScreenUpsertTrip
 import com.zeni.trip.presentation.components.TripViewModel
 
@@ -128,7 +129,7 @@ private fun BottomBar(
         }
 
         Button(
-            onClick = { TODO("Navegar pantalla para añadir una actividad") },
+            onClick = { navController.navigate(ScreenUpsertItinerary()) },
             modifier = Modifier
                 .weight(weight = 1f)
         ) {
