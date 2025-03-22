@@ -7,8 +7,10 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -23,12 +25,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.zeni.core.presentation.navigation.ScreenUpsertTrip
 import com.zeni.home.presentation.HomeScreen
 import com.zeni.itinerary.presentation.ItineraryScreen
+import com.zeni.itinerary.presentation.components.ItineraryViewModel
 import com.zeni.settings.presentation.MoreScreen
-import com.zeni.trip.presentation.TripScreen
+import com.zeni.trip.presentation.TripsScreen
 import kotlinx.coroutines.launch
 
 @Composable
@@ -52,6 +57,12 @@ fun InitialScreen(
                 pagerState = pagerState
             )
         },
+        floatingActionButton = {
+            FloatingButton(
+                navController = navController,
+                pagerState = pagerState
+            )
+        },
         containerColor = MaterialTheme.colorScheme.background
     ) { contentPadding ->
 
@@ -63,19 +74,21 @@ fun InitialScreen(
             when (currentIndex) {
                 Screen.Home.ordinal -> {
                     HomeScreen(
-                        viewModel = viewModel(),
+                        viewModel = hiltViewModel(),
                         navController = navController
                     )
                 }
-                Screen.Trip.ordinal -> {
-                    TripScreen(
-                        viewModel = viewModel(),
+                Screen.Trips.ordinal -> {
+                    TripsScreen(
+                        viewModel = hiltViewModel(),
                         navController = navController
                     )
                 }
                 Screen.Itinerary.ordinal -> {
                     ItineraryScreen(
-                        viewModel = viewModel(),
+                        viewModel = hiltViewModel<ItineraryViewModel, ItineraryViewModel.ItineraryViewModelFactory> { factory ->
+                            factory.create()
+                        },
                         navController = navController
                     )
                 }
@@ -98,7 +111,7 @@ private fun TopBar(pagerState: PagerState) {
 
     TopAppBar(
         title = {
-            Text(text = stringResource(currentScreen.title))
+            Text(text = stringResource(currentScreen.top))
         },
         actions = {
             // Search icon
@@ -142,29 +155,29 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(R.string.home_title))
+                Text(text = stringResource(Screen.Home.bottom))
             }
         )
 
-        val isTripSelected = currentScreen == Screen.Trip
+        val isTripsSelected = currentScreen == Screen.Trips
         NavigationBarItem(
-            selected = isTripSelected,
+            selected = isTripsSelected,
             onClick = {
-                if (!isTripSelected) {
+                if (!isTripsSelected) {
                     scope.launch {
-                        pagerState.scrollToPage(Screen.Trip.ordinal)
+                        pagerState.scrollToPage(Screen.Trips.ordinal)
                     }
                 }
             },
             icon = {
                 Icon(
-                    painter = if (isTripSelected) painterResource(R.drawable.icon_trip_fill)
+                    painter = if (isTripsSelected) painterResource(R.drawable.icon_trip_fill)
                     else painterResource(R.drawable.icon_trip_empty),
                     contentDescription = null
                 )
             },
             label = {
-                Text(text = stringResource(R.string.trip_title))
+                Text(text = stringResource(Screen.Trips.bottom))
             }
         )
 
@@ -186,7 +199,7 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(R.string.itinerary_title))
+                Text(text = stringResource(Screen.Itinerary.bottom))
             }
         )
 
@@ -207,18 +220,44 @@ private fun BottomBar(pagerState: PagerState) {
                 )
             },
             label = {
-                Text(text = stringResource(R.string.more_title))
+                Text(text = stringResource(Screen.More.bottom))
             }
         )
+    }
+}
+
+@Composable
+private fun FloatingButton(
+    navController: NavController,
+    pagerState: PagerState
+) {
+    val currentScreen by remember {
+        derivedStateOf {
+            Screen.entries[pagerState.targetPage]
+        }
+    }
+
+    if (currentScreen == Screen.Trips) {
+        FloatingActionButton(
+            onClick = { navController.navigate(ScreenUpsertTrip()) }
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.Add,
+                contentDescription = null
+            )
+        }
     }
 }
 
 /**
  * Screens represented in the initial screen.
  */
-enum class Screen(val title: Int) {
+enum class Screen(val top: Int, val bottom: Int = top) {
     Home(R.string.home_title),
-    Trip(R.string.trip_title),
-    Itinerary(R.string.itinerary_title),
+    Trips(R.string.trips_title),
+    Itinerary(
+        top = R.string.itinerary_title,
+        bottom = R.string.itinerary_tab_text
+    ),
     More(R.string.more_title)
 }

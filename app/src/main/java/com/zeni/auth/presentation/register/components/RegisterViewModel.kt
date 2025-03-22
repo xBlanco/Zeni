@@ -2,14 +2,20 @@ package com.zeni.auth.presentation.register.components
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zeni.auth.domain.use_cases.RegisterUseCase
 import com.zeni.auth.domain.utils.LoginErrors
 import com.zeni.auth.domain.utils.RegisterErrors
 import com.zeni.auth.presentation.login.components.LoginViewModel.DefaultCredentials
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterViewModel : ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(
+    private val registerUseCase: RegisterUseCase
+) : ViewModel() {
 
     val username: StateFlow<String>
         field = MutableStateFlow(value = "")

@@ -42,7 +42,7 @@ fun LoginScreen(
             BottomBar(
                 enabled = loginButtonEnabled,
                 onClick = {
-                    if (viewModel.verifyCredentials()) {
+                    if (viewModel.login()) {
                         navController.navigate(ScreenHome)
                     } else {
                         showAlert = true
@@ -117,7 +117,7 @@ fun LoginScreen(
                         imeAction = ImeAction.Done
                     ),
                     keyboardActions = KeyboardActions {
-                        if (viewModel.verifyCredentials()) {
+                        if (viewModel.login()) {
                             navController.navigate(ScreenHome)
                         } else {
                             showAlert = true

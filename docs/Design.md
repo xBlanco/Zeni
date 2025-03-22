@@ -2,7 +2,8 @@
 
 ### MVVM Architecture
 
-The MVVM (Model-View-ViewModel) architecture is used to separate the development of the graphical user interface from the business logic or back-end logic. This helps in organizing the code and making it more maintainable.
+The MVVM (Model-View-ViewModel) architecture is used to separate the development of the graphical user interface from the business logic (The domain layer). 
+This helps in organizing the code and making it more maintainable and reusable.
 
 ### Components
 
@@ -19,35 +20,32 @@ The Model represents the data and business logic of the application. It is respo
 
 - **Trip**
   - `id`: `Int` - Unique identifier for the trip.
-  - `userId`: `Int` - Identifier of the user who created the trip.
   - `destination`: `String` - Destination of the trip.
-  - `startDate`: `Date` - Start date of the trip.
-  - `endDate`: `Date` - End date of the trip.
-  - `itinerary`: `List<ItineraryItem>` - List of itinerary items for the trip.
-  - `images`: `List<Image>` - List of images for the trip.
-  - `recommendations`: `List<AIRecommendations>` - List of AI recommendations for the trip.
+  - `startDate`: `ZonedDateTime` - Start date of the trip.
+  - `endDate`: `ZonedDateTime` - End date of the trip.
+  - `itinerary`: `List<Activity>` - List of activities that form a Itinerary for the trip. In the relation with ROOMdb
+  - `images`: `List<Image>` - List of images for the trip. Add when ROOMdb
 
-- **ItineraryItem**
-  - `id`: `Int` - Unique identifier for the itinerary item.
+- **Activity**
+  - `id`: `Int` - Unique identifier for the activity.
   - `tripId`: `Int` - Identifier of the trip to which the item belongs.
-  - `title`: `String` - Title of the itinerary item.
-  - `description`: `String` - Description of the itinerary item.
-  - `dateTime`: `DateTime` - Date and time of the itinerary item.
+  - `title`: `String` - Title of the activity.
+  - `description`: `String` - Description of the activity.
+  - `dateTime`: `ZonedDateTime` - Date and time when the activity starts.
 
-- **Image**
+- **Image** (when ROOMdb)
   - `id`: `Int` - Unique identifier for the image.
   - `tripId`: `Int` - Identifier of the trip to which the image belongs.
   - `url`: `String` - URL of the image.
   - `description`: `String` - Description of the image.
 
-- **AIRecommendations**
-  - `id`: `Int` - Unique identifier for the AI recommendation.
-  - `tripId`: `Int` - Identifier of the trip to which the recommendation belongs.
-  - `recommendation`: `String` - Recommendation text.
-  - `details`: `String` - Details of the recommendation.
+##### Mermaid visualization of the Model
+![img.png](mermaid.png)
+
 
 #### View
-![img.png](mermaid.png)
+The View is responsible for displaying the data to the user and handling user interactions.
+It is the UI of the application (all the composable functions).
 
 
 #### ViewModel
@@ -60,16 +58,14 @@ The ViewModel acts as a bridge between the Model and the View. It holds the data
 
 ### Relationships
 - A `User` can have multiple `Trip`s.
-- A `Trip` can have multiple `ItineraryItem`s.
+- A `Trip` can have multiple `Activity`s.
 - A `Trip` can have multiple `Image`s.
-- A `Trip` can have multiple `AIRecommendations`.
-
 
 
 ```mermaid
 classDiagram
 User --> Trip
-Trip --> ItineraryItem
+Trip --> Activity
 Trip --> Image
 Trip --> AIRecommendations
 
@@ -83,21 +79,19 @@ class User {
 
 class Trip {
     Int id
-    Int userId
     String destination
     Date startDate
     Date endDate
     List~ItineraryItem~ itinerary
     List~Image~ images
-    List~AIRecommendations~ recommendations
 }
 
-class ItineraryItem {
+class Activity {
     Int id
     Int tripId
     String title
     String description
-    DateTime dateTime
+    ZonedDateTime dateTime
 }
 
 class Image {
@@ -105,11 +99,4 @@ class Image {
     Int tripId
     String url
     String description
-}
-
-class AIRecommendations {
-    Int id
-    Int tripId
-    String recommendation
-    String details
 }
