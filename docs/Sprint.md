@@ -17,8 +17,10 @@
 ### Sprint 2
 - [x] Correction T2.4 of sprint 1. Fix CONTRIBUTING.md so that teams branching strategy reflect real use.
 - [x] T1.2 Implement CRUD operations for itinerary items (addActivity, updateActivity, deleteActivity).
-- [ ] T3.3 Simulate user interactions and log errors or unexpected behaviors.
-- [ ] T3.4 Update documentation with test results and fixes applied.
+- [x] T1.4 Implement user settings.
+- [x] T1.5 Implement multi-language with user changing.
+- [x] T3.3 Simulate user interactions and log errors or unexpected behaviors.
+- [x] T3.4 Update documentation with test results and fixes applied.
 
 ------------------------------------------------------------------------------------------------------------------------
 ## Alex
