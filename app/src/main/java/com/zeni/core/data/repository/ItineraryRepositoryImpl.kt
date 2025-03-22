@@ -1,6 +1,9 @@
 package com.zeni.core.data.repository
 
 import android.util.Log
+import com.zeni.core.data.database.dao.ItineraryDao
+import com.zeni.core.data.mappers.toDomain
+import com.zeni.core.data.mappers.toEntity
 import com.zeni.core.domain.model.Activity
 import com.zeni.core.domain.repository.ItineraryRepository
 import kotlinx.coroutines.flow.Flow
@@ -12,54 +15,41 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ItineraryRepositoryImpl @Inject constructor(): ItineraryRepository {
-    /**
-     * List of itinerary items,
-     */
-    private val activities = MutableStateFlow(emptyList<Activity>())
+class ItineraryRepositoryImpl @Inject constructor(
+    private val itineraryDao: ItineraryDao
+): ItineraryRepository {
 
-    override fun getActivitiesByTrip(tripId: Int): Flow<List<Activity>> {
+    override fun getActivitiesByTrip(tripId: Long): Flow<List<Activity>> {
         Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Getting activities for trip $tripId")
-        return activities.map { items ->
-            items
-                .filter { it.tripId == tripId }
-                .sortedBy { it.dateTime }
-        }
+        return itineraryDao.getActivitiesByTrip(tripId)
+            .map { activities -> activities.map { it.toDomain() } }
     }
 
-    override fun getActivitiesByDate(date: LocalDate): Flow<List<Activity>> {
-        Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Getting activities for date $date")
-        return activities.map { items ->
-            items
-                .filter { it.dateTime.toLocalDate().atStartOfDay() == date.atStartOfDay() }
-                .sortedBy { it.dateTime }
-        }
+    override fun getActivitiesByDate(date: ZonedDateTime): Flow<List<Activity>> {
+        Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Getting activities for date ${date.toLocalDate()}")
+        return itineraryDao.getActivitiesByDate(date.toInstant().toEpochMilli())
+            .map { activities -> activities.map { it.toDomain() } }
     }
 
-    override fun getActivity(tripId: Int, activityId: Int): Flow<Activity> {
+    override fun getActivity(tripId: Long, activityId: Long): Flow<Activity> {
         Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Getting activity with id $activityId for trip $tripId")
-        return activities.map { items -> items.first { it.tripId == tripId && it.id == activityId } }
+        return itineraryDao.getActivity(tripId, activityId)
+            .map { it.toDomain() }
     }
 
-    override suspend fun addActivity(activity: Activity): Int {
+    override suspend fun addActivity(activity: Activity): Long {
         Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Adding activity to trip ${activity.tripId}")
-        if (activity.id == -1) {
-            activities.emit(activities.value + activity.copy(id = activities.value.lastOrNull()?.id?.plus(1) ?: 0))
-        } else if (activity.id !in activities.value.map { it.id }) {
-            activities.emit(activities.value + activity)
-        } else {
-            activities.emit(activities.value.map { if (it.id == activity.id) activity else it })
-        }
 
-        return activities.value.last().id
+
+        return itineraryDao.addActivity(activity.toEntity())
     }
 
-    override suspend fun existsActivity(tripId: Int, activityId: Int): Boolean {
-        return activities.value.any { it.id == activityId }
+    override suspend fun existsActivity(tripId: Long, activityId: Long): Boolean {
+        return itineraryDao.existsActivity(tripId, activityId)
     }
 
     override suspend fun deleteActivity(activity: Activity) {
         Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Deleting activity with id ${activity.id}")
-        activities.emit(activities.value - activity)
+        itineraryDao.deleteActivity(activity.toEntity())
     }
 }

@@ -31,8 +31,8 @@ import java.time.temporal.ChronoUnit
 
 @HiltViewModel(assistedFactory = UpsertActivityViewModel.UpsertItineraryViewModelFactory::class)
 class UpsertActivityViewModel @AssistedInject constructor(
-    @Assisted private val tripId: Int,
-    @Assisted private val activityId: Int? = null,
+    @Assisted private val tripId: Long,
+    @Assisted private val activityId: Long? = null,
     private val tripRepository: TripRepositoryImpl,
     private val itineraryRepository: ItineraryRepositoryImpl,
     private val upsertItineraryUseCase: UpsertItineraryUseCase,
@@ -158,7 +158,7 @@ class UpsertActivityViewModel @AssistedInject constructor(
         }
     }
 
-    suspend fun addItinerary(): Int? {
+    suspend fun addItinerary(): Long? {
         val titleCorrect = verifyTitle()
         val descriptionCorrect = verifyDescription()
         val dateTimeCorrect = verifyDateTime()
@@ -196,6 +196,6 @@ class UpsertActivityViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface UpsertItineraryViewModelFactory {
-        fun create(tripId: Int, activityId: Int?): UpsertActivityViewModel
+        fun create(tripId: Long, activityId: Long?): UpsertActivityViewModel
     }
 }

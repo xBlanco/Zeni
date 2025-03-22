@@ -21,7 +21,7 @@ import java.time.temporal.ChronoUnit
 
 @HiltViewModel(assistedFactory = UpsertTripViewModel.UpsertTripViewModelFactory::class)
 class UpsertTripViewModel @AssistedInject constructor(
-    @Assisted private val tripId: Int? = null,
+    @Assisted private val tripId: Long? = null,
     private val tripRepository: TripRepositoryImpl,
     private val upsertTripUseCase: UpsertTripUseCase,
     private val deleteTripUseCase: DeleteTripUseCase
@@ -128,7 +128,7 @@ class UpsertTripViewModel @AssistedInject constructor(
      *
      * @return The id of the trip if the trip was added successfully, null otherwise
      */
-    suspend fun addTrip(): Int? {
+    suspend fun addTrip(): Long? {
         val destinationCorrect = verifyDestination()
         val startDateCorrect = verifyStartDate()
         val endDateCorrect = verifyEndDate()
@@ -163,6 +163,6 @@ class UpsertTripViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface UpsertTripViewModelFactory {
-        fun create(tripId: Int?): UpsertTripViewModel
+        fun create(tripId: Long?): UpsertTripViewModel
     }
 }

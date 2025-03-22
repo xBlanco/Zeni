@@ -9,7 +9,7 @@ import javax.inject.Singleton
 class UpsertItineraryUseCase @Inject constructor(
     private val itineraryRepository: ItineraryRepositoryImpl
 ) {
-    suspend operator fun invoke(activity: Activity): Int {
+    suspend operator fun invoke(activity: Activity): Long {
         return itineraryRepository.addActivity(activity)
     }
 }

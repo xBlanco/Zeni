@@ -35,7 +35,7 @@ fun ItineraryScreen(
     viewModel: ItineraryViewModel,
     navController: NavController
 ) {
-    var todayDay by remember { mutableStateOf(LocalDate.now()) }
+    var todayDay by remember { mutableStateOf(ZonedDateTime.now()) }
     val activity by viewModel.getItineraries(todayDay).collectAsState()
 
     if (activity.isEmpty()) {
@@ -79,8 +79,8 @@ fun ItineraryScreen(
 
     LaunchedEffect(Unit) {
         while (true) {
-            if (todayDay != LocalDate.now()) {
-                todayDay = LocalDate.now()
+            if (todayDay.minute != ZonedDateTime.now().minute) {
+                todayDay = ZonedDateTime.now()
             }
             delay(60000)
         }

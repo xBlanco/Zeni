@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel(assistedFactory = TripViewModel.TripViewModelFactory::class)
 class TripViewModel @AssistedInject constructor(
-    @Assisted private val tripId: Int,
+    @Assisted private val tripId: Long,
     private val tripRepository: TripRepositoryImpl,
     private val itineraryRepository: ItineraryRepositoryImpl,
 ) : ViewModel() {
@@ -38,6 +38,6 @@ class TripViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface TripViewModelFactory {
-        fun create(tripId: Int): TripViewModel
+        fun create(tripId: Long): TripViewModel
     }
 }

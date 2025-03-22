@@ -7,11 +7,11 @@ interface TripRepository {
 
     fun getTrips(): Flow<List<Trip>>
 
-    fun getTrip(tripId: Int): Flow<Trip>
+    fun getTrip(tripId: Long): Flow<Trip>
 
-    suspend fun addTrip(trip: Trip): Int
+    suspend fun addTrip(trip: Trip): Long
 
-    suspend fun existsTrip(tripId: Int): Boolean
+    suspend fun existsTrip(tripId: Long): Boolean
 
     suspend fun deleteTrip(trip: Trip)
 }

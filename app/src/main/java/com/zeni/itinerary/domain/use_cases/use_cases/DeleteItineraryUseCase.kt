@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class DeleteItineraryUseCase @Inject constructor(
     private val itineraryRepository: ItineraryRepositoryImpl
 ) {
-    suspend operator fun invoke(tripId: Int, activityId: Int) {
+    suspend operator fun invoke(tripId: Long, activityId: Long) {
         itineraryRepository.deleteActivity(itineraryRepository.getActivity(tripId, activityId).first())
     }
 }

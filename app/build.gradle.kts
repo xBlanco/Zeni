@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     id("kotlin-kapt")
     alias(libs.plugins.android.hilt)
+    alias(libs.plugins.room)
 }
 
 android {
@@ -19,6 +20,10 @@ android {
         versionName = "0.2.0"
 
         testInstrumentationRunner = "com.zeni.HiltTestRunner"
+
+        room {
+            schemaDirectory("$projectDir/schemas")
+        }
     }
 
     buildTypes {
@@ -48,6 +53,10 @@ android {
         compose = true
         buildConfig = true
     }
+
+    sourceSets {
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -58,6 +67,14 @@ dependencies {
 
     implementation(libs.coil.compose)
     implementation (libs.androidx.datastore.preferences)
+
+    // ROOM dependencies
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.androidx.room.testing)
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)

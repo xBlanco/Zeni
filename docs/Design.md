@@ -11,20 +11,13 @@ This helps in organizing the code and making it more maintainable and reusable.
 The Model represents the data and business logic of the application. It is responsible for managing the data, whether it is from a local database or a remote server.
 
 **Entities:**
-- **User**
-  - `id`: `Int` - Unique identifier for the user.
-  - `name`: `String` - Name of the user.
-  - `email`: `String` - Email address of the user.
-  - `language`: `String` - Preferred language of the user.
-  - `notificationsEnabled`: `Boolean` - Whether notifications are enabled for the user.
-
 - **Trip**
   - `id`: `Int` - Unique identifier for the trip.
   - `destination`: `String` - Destination of the trip.
   - `startDate`: `ZonedDateTime` - Start date of the trip.
   - `endDate`: `ZonedDateTime` - End date of the trip.
-  - `itinerary`: `List<Activity>` - List of activities that form a Itinerary for the trip. In the relation with ROOMdb
-  - `images`: `List<Image>` - List of images for the trip. Add when ROOMdb
+  - `itinerary`: `List<Activity>` - List of activities that form a Itinerary for the trip.
+  - `images`: `List<Image>` - List of images for the trip.
 
 - **Activity**
   - `id`: `Int` - Unique identifier for the activity.
@@ -33,8 +26,7 @@ The Model represents the data and business logic of the application. It is respo
   - `description`: `String` - Description of the activity.
   - `dateTime`: `ZonedDateTime` - Date and time when the activity starts.
 
-- **Image** (when ROOMdb)
-  - `id`: `Int` - Unique identifier for the image.
+- **Image**
   - `tripId`: `Int` - Identifier of the trip to which the image belongs.
   - `url`: `String` - URL of the image.
   - `description`: `String` - Description of the image.
@@ -64,25 +56,15 @@ The ViewModel acts as a bridge between the Model and the View. It holds the data
 
 ```mermaid
 classDiagram
-User --> Trip
 Trip --> Activity
 Trip --> Image
-Trip --> AIRecommendations
-
-class User {
-    Int id
-    String name
-    String email
-    String language
-    Boolean notificationsEnabled
-}
 
 class Trip {
     Int id
     String destination
-    Date startDate
-    Date endDate
-    List~ItineraryItem~ itinerary
+    ZonedDateTime startDate
+    ZonedDateTime endDate
+    List~Activity~ itinerary
     List~Image~ images
 }
 

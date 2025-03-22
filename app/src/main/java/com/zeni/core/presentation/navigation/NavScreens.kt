@@ -17,21 +17,21 @@ object ScreenHome
 object ScreenTrips
 @Serializable
 data class ScreenUpsertTrip(
-    val tripId: Int? = null
+    val tripId: Long? = null
 )
 @Serializable
 data class ScreenTrip(
-    val tripId: Int
+    val tripId: Long
 )
 
 @Serializable
 data class ScreenUpsertActivity(
-    val tripId: Int,
-    val activityId: Int? = null
+    val tripId: Long,
+    val activityId: Long? = null
 )
 @Serializable
 data class ScreenItinerary(
-    val itineraryId: Int
+    val itineraryId: Long
 )
 
 @Serializable

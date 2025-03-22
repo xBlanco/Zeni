@@ -18,7 +18,7 @@ class ItineraryViewModel @AssistedInject constructor(
     private val itineraryRepository: ItineraryRepositoryImpl
 ) : ViewModel() {
 
-    fun getItineraries(todayDate: LocalDate) = itineraryRepository.getActivitiesByDate(todayDate)
+    fun getItineraries(todayDate: ZonedDateTime) = itineraryRepository.getActivitiesByDate(todayDate)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
