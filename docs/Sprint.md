@@ -61,11 +61,11 @@
 - [x] T2.1 Modify ViewModels to use Room Database instead of in-memory storage.
 - [x] T2.2 Ensure UI updates when database changes.
 - [x] T3.1 Write unit tests for DAOs and database interactions.
-- [x] T3.2 Implement data validation (e.g., prevent duplicate trip names, check valid dates).
+- [ ] T3.2 Implement data validation (e.g., prevent duplicate trip names, check valid dates).
+- [x] T3.3 Use Logcat to track database operations and errors.
 
 
 ## Distribute
-- [ ] T3.3 Use Logcat to track database operations and errors.
 - [ ] T3.4 Update documentation with database schema and usage at design.md.
 - [ ] Submit GitHub repository link with release/tag v0.3.0.
 - [ ] Include Sprint.md with team member task assignments.
