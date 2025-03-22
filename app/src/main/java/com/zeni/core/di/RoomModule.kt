@@ -2,6 +2,8 @@ package com.zeni.core.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import com.zeni.core.data.database.Migrations
 import com.zeni.core.data.database.TripsDatabase
 import dagger.Module
 import dagger.Provides
@@ -21,6 +23,7 @@ object RoomModule {
     @Singleton
     fun provideRoom(@ApplicationContext appContext: Context) =
         Room.databaseBuilder(appContext, TripsDatabase::class.java, DATABASE_NAME)
+            .addMigrations(*Migrations.migrations)
             .build()
 
     @Provides

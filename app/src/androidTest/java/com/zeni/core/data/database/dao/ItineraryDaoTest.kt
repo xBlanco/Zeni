@@ -1,6 +1,8 @@
-package com.zeni.core.data.repository
+package com.zeni.core.data.database.dao
 
 import androidx.test.filters.SmallTest
+import com.zeni.core.data.database.entities.ActivityEntity
+import com.zeni.core.data.database.entities.TripEntity
 import com.zeni.core.domain.model.Activity
 import com.zeni.core.domain.model.Trip
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -15,16 +17,16 @@ import javax.inject.Inject
 
 @SmallTest
 @HiltAndroidTest
-class ItineraryRepositoryTest {
+class ItineraryDaoTest {
 
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var tripRepository: TripRepositoryImpl
+    lateinit var tripDao: TripDao
 
     @Inject
-    lateinit var itineraryRepository: ItineraryRepositoryImpl
+    lateinit var itineraryDao: ItineraryDao
 
     var tripId = 0L
 
@@ -32,7 +34,7 @@ class ItineraryRepositoryTest {
     fun setup() = runBlocking {
         hiltRule.inject()
 
-        val trip = Trip(
+        val trip = TripEntity(
             id = 0,
             destination = "Test Destination",
             startDate = ZonedDateTime.of(
@@ -44,15 +46,16 @@ class ItineraryRepositoryTest {
                 2022, 1, 2,
                 0, 0, 0, 0,
                 ZonedDateTime.now().zone
-            )
+            ),
+            coverImageId = null
         )
 
-        tripId = tripRepository.addTrip(trip)
+        tripId = tripDao.addTrip(trip)
     }
 
     @Test
     fun testAddItinerary() = runBlocking {
-        val activity = Activity(
+        val activity = ActivityEntity(
             id = 0,
             tripId = tripId,
             title = "Test Activity",
@@ -64,13 +67,13 @@ class ItineraryRepositoryTest {
             )
         )
 
-        val itineraryId = itineraryRepository.addActivity(activity)
-        assert(activity.copy(id = itineraryId) == itineraryRepository.getActivity(tripId, itineraryId).first())
+        val itineraryId = itineraryDao.addActivity(activity)
+        assert(activity.copy(id = itineraryId) == itineraryDao.getActivity(tripId, itineraryId).first())
     }
 
     @Test
     fun testUpdateItinerary() = runBlocking {
-        val activity = Activity(
+        val activity = ActivityEntity(
             id = 0,
             tripId = tripId,
             title = "Test Activity",
@@ -82,19 +85,19 @@ class ItineraryRepositoryTest {
             )
         )
 
-        val itineraryId = itineraryRepository.addActivity(activity)
-        val updatedActivity = itineraryRepository.getActivity(tripId, itineraryId).first()
+        val itineraryId = itineraryDao.addActivity(activity)
+        val updatedActivity = itineraryDao.getActivity(tripId, itineraryId).first()
             .copy(
                 title = "Updated Activity"
             )
 
-        itineraryRepository.addActivity(updatedActivity)
-        assert(updatedActivity == itineraryRepository.getActivity(tripId, itineraryId).first())
+        itineraryDao.addActivity(updatedActivity)
+        assert(updatedActivity == itineraryDao.getActivity(tripId, itineraryId).first())
     }
 
     @Test
     fun testDeleteItinerary() = runBlocking {
-        val activity = Activity(
+        val activity = ActivityEntity(
             id = 0,
             tripId = tripId,
             title = "Test Activity",
@@ -106,8 +109,8 @@ class ItineraryRepositoryTest {
             )
         )
 
-        val activityId = itineraryRepository.addActivity(activity)
-        itineraryRepository.deleteActivity(activity.copy(id = activityId))
-        assert(!itineraryRepository.existsActivity(tripId, activityId))
+        val activityId = itineraryDao.addActivity(activity)
+        itineraryDao.deleteActivity(activity.copy(id = activityId))
+        assert(!itineraryDao.existsActivity(tripId, activityId))
     }
 }

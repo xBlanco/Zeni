@@ -1,29 +1,29 @@
-package com.zeni.core.data.repository
+package com.zeni.core.data.database.dao
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
+import com.zeni.core.data.database.entities.TripEntity
+import com.zeni.core.data.mappers.toEntity
+import com.zeni.core.data.repository.TripRepositoryImpl
 import com.zeni.core.domain.model.Trip
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 import java.time.ZonedDateTime
 import javax.inject.Inject
 
 @SmallTest
 @HiltAndroidTest
-class TripRepositoryTest {
+class TripDaoTest {
 
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var tripRepository: TripRepositoryImpl
+    lateinit var tripDao: TripDao
 
     @Before
     fun setup() {
@@ -32,7 +32,7 @@ class TripRepositoryTest {
 
     @Test
     fun testAddTrip() = runBlocking {
-        val trip = Trip(
+        val trip = TripEntity(
             id = 0,
             destination = "Test Destination",
             startDate = ZonedDateTime.of(
@@ -44,16 +44,17 @@ class TripRepositoryTest {
                 2022, 1, 2,
                 0, 0, 0, 0,
                 ZonedDateTime.now().zone
-            )
+            ),
+            coverImageId = null
         )
 
-        val tripId = tripRepository.addTrip(trip)
-        assert(trip.copy(id = tripId) == tripRepository.getTrip(tripId).first())
+        val tripId = tripDao.addTrip(trip)
+        assert(trip.copy(id = tripId) == tripDao.getTrip(tripId).first().trip)
     }
 
     @Test
     fun testUpdateTrip() = runBlocking {
-        val trip = Trip(
+        val trip = TripEntity(
             id = 0,
             destination = "Test Destination",
             startDate = ZonedDateTime.of(
@@ -65,21 +66,22 @@ class TripRepositoryTest {
                 2022, 1, 2,
                 0, 0, 0, 0,
                 ZonedDateTime.now().zone
-            )
+            ),
+            coverImageId = null
         )
 
-        val tripId = tripRepository.addTrip(trip)
-        val updatedTrip = tripRepository.getTrip(tripId).first().copy(
+        val tripId = tripDao.addTrip(trip)
+        val updatedTrip = tripDao.getTrip(tripId).first().trip.copy(
             destination = "Updated Destination"
         )
 
-        tripRepository.addTrip(updatedTrip)
-        assert(updatedTrip.copy(id = tripId) == tripRepository.getTrip(tripId).first())
+        tripDao.addTrip(updatedTrip)
+        assert(updatedTrip.copy(id = tripId) == tripDao.getTrip(tripId).first().trip)
     }
 
     @Test
     fun testDeleteTrip() = runBlocking {
-        val trip = Trip(
+        val trip = TripEntity(
             id = 0,
             destination = "Test Destination",
             startDate = ZonedDateTime.of(
@@ -91,11 +93,12 @@ class TripRepositoryTest {
                 2022, 1, 2,
                 0, 0, 0, 0,
                 ZonedDateTime.now().zone
-            )
+            ),
+            coverImageId = null
         )
 
-        val tripId = tripRepository.addTrip(trip)
-        tripRepository.deleteTrip(trip.copy(id = tripId))
-        assert(!tripRepository.existsTrip(tripId))
+        val tripId = tripDao.addTrip(trip)
+        tripDao.deleteTrip(trip.copy(id = tripId))
+        assert(!tripDao.existsTrip(tripId))
     }
 }

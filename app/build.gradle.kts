@@ -17,7 +17,7 @@ android {
         minSdk = 27
         targetSdk = 35
         versionCode = 1
-        versionName = "0.2.0"
+        versionName = "0.3.0"
 
         testInstrumentationRunner = "com.zeni.HiltTestRunner"
 
@@ -70,11 +70,12 @@ dependencies {
 
     // ROOM dependencies
     implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.paging)
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
-    testImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.androidx.room.ktx)
+    androidTestImplementation(libs.androidx.room.runtime)
     androidTestImplementation(libs.androidx.room.testing)
+    kaptAndroidTest(libs.androidx.room.compiler)
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
