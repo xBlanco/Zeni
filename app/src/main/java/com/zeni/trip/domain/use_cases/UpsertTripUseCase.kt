@@ -9,7 +9,7 @@ import javax.inject.Singleton
 class UpsertTripUseCase @Inject constructor(
     private val tripRepository: TripRepositoryImpl
 ) {
-    suspend operator fun invoke(trip: Trip): Long {
-        return tripRepository.addTrip(trip)
+    suspend operator fun invoke(trip: Trip) {
+        tripRepository.addTrip(trip)
     }
 }

@@ -5,7 +5,7 @@ import com.zeni.core.data.database.relations.TripRelation
 import com.zeni.core.domain.model.Trip
 
 fun Trip.toEntity() = TripEntity(
-    id = id,
+    name = name,
     destination = destination,
     startDate = startDate,
     endDate = endDate,
@@ -13,7 +13,7 @@ fun Trip.toEntity() = TripEntity(
 )
 
 fun TripRelation.toDomain() = Trip(
-    id = trip.id,
+    name = trip.name,
     destination = trip.destination,
     startDate = trip.startDate,
     endDate = trip.endDate,

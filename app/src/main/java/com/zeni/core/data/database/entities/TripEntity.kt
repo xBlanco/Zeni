@@ -18,8 +18,8 @@ import java.time.ZonedDateTime
     ]
 )
 data class TripEntity(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") val id: Long = 0,
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "destination") val destination: String,
     @ColumnInfo(name = "start_date") val startDate: ZonedDateTime,
     @ColumnInfo(name = "end_date") val endDate: ZonedDateTime,

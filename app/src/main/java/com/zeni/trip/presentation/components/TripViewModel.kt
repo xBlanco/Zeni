@@ -4,32 +4,28 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zeni.core.data.repository.ItineraryRepositoryImpl
 import com.zeni.core.data.repository.TripRepositoryImpl
-import com.zeni.trip.domain.use_cases.DeleteTripUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
-import javax.inject.Inject
 
 @HiltViewModel(assistedFactory = TripViewModel.TripViewModelFactory::class)
 class TripViewModel @AssistedInject constructor(
-    @Assisted private val tripId: Long,
-    private val tripRepository: TripRepositoryImpl,
-    private val itineraryRepository: ItineraryRepositoryImpl,
+    @Assisted private val tripName: String,
+    tripRepository: TripRepositoryImpl,
+    itineraryRepository: ItineraryRepositoryImpl,
 ) : ViewModel() {
 
-    val trip = tripRepository.getTrip(tripId)
+    val trip = tripRepository.getTrip(tripName)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
             initialValue = null
         )
 
-    val activities = itineraryRepository.getActivitiesByTrip(tripId)
+    val activities = itineraryRepository.getActivitiesByTrip(tripName)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
@@ -38,6 +34,6 @@ class TripViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface TripViewModelFactory {
-        fun create(tripId: Long): TripViewModel
+        fun create(tripName: String): TripViewModel
     }
 }

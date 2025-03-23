@@ -77,7 +77,7 @@ fun NavGraph(
         composable<ScreenUpsertTrip> {
             val args = it.toRoute<ScreenUpsertTrip>()
             val viewModel = hiltViewModel<UpsertTripViewModel, UpsertTripViewModel.UpsertTripViewModelFactory> { factory ->
-                factory.create(args.tripId)
+                factory.create(args.tripName)
             }
 
             UpsertTripScreen(
@@ -88,7 +88,7 @@ fun NavGraph(
         composable<ScreenTrip> {
             val args = it.toRoute<ScreenTrip>()
             val viewModel = hiltViewModel<TripViewModel, TripViewModel.TripViewModelFactory> { factory ->
-                factory.create(args.tripId)
+                factory.create(args.tripName)
             }
 
             TripScreen(
@@ -106,7 +106,7 @@ fun NavGraph(
         composable<ScreenUpsertActivity> {
             val args = it.toRoute<ScreenUpsertActivity>()
             val viewModel = hiltViewModel<UpsertActivityViewModel, UpsertActivityViewModel.UpsertItineraryViewModelFactory> { factory ->
-                factory.create(args.tripId, args.activityId)
+                factory.create(args.tripName, args.activityId)
             }
             UpsertItineraryScreen(
                 viewModel = viewModel,

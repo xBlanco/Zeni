@@ -7,7 +7,7 @@ import com.zeni.core.data.repository.ItineraryRepositoryImpl
 import com.zeni.core.data.repository.TripRepositoryImpl
 import com.zeni.core.domain.model.Activity
 import com.zeni.core.domain.model.Trip
-import com.zeni.itinerary.domain.use_cases.use_cases.UpsertItineraryUseCase
+import com.zeni.itinerary.domain.use_cases.use_cases.UpsertActivityUseCase
 import com.zeni.itinerary.domain.use_cases.use_cases.DeleteItineraryUseCase
 import com.zeni.itinerary.domain.use_cases.utils.UpsertItineraryError
 import dagger.assisted.Assisted
@@ -23,19 +23,17 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
-import java.time.temporal.ChronoUnit
 
 @HiltViewModel(assistedFactory = UpsertActivityViewModel.UpsertItineraryViewModelFactory::class)
 class UpsertActivityViewModel @AssistedInject constructor(
-    @Assisted private val tripId: Long,
+    @Assisted private val tripName: String,
     @Assisted private val activityId: Long? = null,
     private val tripRepository: TripRepositoryImpl,
     private val itineraryRepository: ItineraryRepositoryImpl,
-    private val upsertItineraryUseCase: UpsertItineraryUseCase,
+    private val upsertItineraryUseCase: UpsertActivityUseCase,
     private val deleteItineraryUseCase: DeleteItineraryUseCase
 ) : ViewModel() {
 
@@ -138,7 +136,7 @@ class UpsertActivityViewModel @AssistedInject constructor(
             if (isEditing) {
                 // Edit the activity
                 Log.d(UpsertActivityViewModel::class.java.simpleName, "Editing activity $activityId")
-                val editingActivity = itineraryRepository.getActivity(tripId, activityId!!).firstOrNull() ?: return@launch
+                val editingActivity = itineraryRepository.getActivity(tripName, activityId!!).firstOrNull() ?: return@launch
                 title.emit(editingActivity.title)
                 description.emit(editingActivity.description)
 
@@ -146,7 +144,7 @@ class UpsertActivityViewModel @AssistedInject constructor(
                 date.emit(savedDate.toLocalDate())
                 time.emit(savedDate.toLocalTime())
             }
-            trip.emit(tripRepository.getTrip(tripId).first())
+            trip.emit(tripRepository.getTrip(tripName).first())
         }
     }
 
@@ -158,7 +156,7 @@ class UpsertActivityViewModel @AssistedInject constructor(
         }
     }
 
-    suspend fun addItinerary(): Long? {
+    suspend fun addActivity(): Long? {
         val titleCorrect = verifyTitle()
         val descriptionCorrect = verifyDescription()
         val dateTimeCorrect = verifyDateTime()
@@ -181,8 +179,8 @@ class UpsertActivityViewModel @AssistedInject constructor(
 
         val itineraryId = upsertItineraryUseCase(
             Activity(
-                id = activityId ?: -1,
-                tripId = tripId,
+                id = activityId ?: 0,
+                tripName = tripName,
                 title = title.value,
                 description = description.value,
                 dateTime = dateTime.value!!
@@ -192,10 +190,10 @@ class UpsertActivityViewModel @AssistedInject constructor(
         return itineraryId
     }
 
-    suspend fun deleteItinerary() = deleteItineraryUseCase(tripId, activityId!!)
+    suspend fun deleteItinerary() = deleteItineraryUseCase(tripName, activityId!!)
 
     @AssistedFactory
     interface UpsertItineraryViewModelFactory {
-        fun create(tripId: Long, activityId: Long?): UpsertActivityViewModel
+        fun create(tripName: String, activityId: Long?): UpsertActivityViewModel
     }
 }

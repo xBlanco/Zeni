@@ -21,14 +21,34 @@ import java.time.temporal.ChronoUnit
 
 @HiltViewModel(assistedFactory = UpsertTripViewModel.UpsertTripViewModelFactory::class)
 class UpsertTripViewModel @AssistedInject constructor(
-    @Assisted private val tripId: Long? = null,
+    @Assisted private val tripName: String? = null,
     private val tripRepository: TripRepositoryImpl,
     private val upsertTripUseCase: UpsertTripUseCase,
     private val deleteTripUseCase: DeleteTripUseCase
 ) : ViewModel() {
 
     val isEditing: Boolean
-        get() = tripId != null
+        get() = tripName != null
+
+    val name: StateFlow<String>
+        field = MutableStateFlow(tripName ?: "")
+    val isNameCorrect: StateFlow<Boolean>
+        field = MutableStateFlow(true)
+    fun setName(value: String) {
+        viewModelScope.launch {
+            name.emit(value)
+
+            if (!isNameCorrect.value) {
+                isNameCorrect.emit(value = true)
+            }
+        }
+    }
+    suspend fun verifyName(): Boolean {
+        val isCorrect = name.value.isNotBlank() && (isEditing || !tripRepository.existsTrip(name.value))
+        isNameCorrect.emit(value = isCorrect)
+
+        return isCorrect
+    }
 
     val destination: StateFlow<String>
         field = MutableStateFlow("")
@@ -107,7 +127,7 @@ class UpsertTripViewModel @AssistedInject constructor(
         if (isEditing) {
             // Edit a trip
             viewModelScope.launch {
-                val editingTrip = tripRepository.getTrip(tripId!!).first()
+                val editingTrip = tripRepository.getTrip(tripName!!).first()
                 destination.emit(editingTrip.destination)
                 startDate.emit(editingTrip.startDate)
                 endDate.emit(editingTrip.endDate)
@@ -123,46 +143,44 @@ class UpsertTripViewModel @AssistedInject constructor(
         }
     }
 
-    /**
-     * Adds a trip to the database and returns the id of the trip
-     *
-     * @return The id of the trip if the trip was added successfully, null otherwise
-     */
-    suspend fun addTrip(): Long? {
+    suspend fun addTrip(): Boolean {
+        val nameCorrect = verifyName()
         val destinationCorrect = verifyDestination()
         val startDateCorrect = verifyStartDate()
         val endDateCorrect = verifyEndDate()
-        if (!destinationCorrect || !startDateCorrect || !endDateCorrect) {
+        if (!nameCorrect || !destinationCorrect || !startDateCorrect || !endDateCorrect) {
             when {
-                destination.value.isBlank() && startDate.value == null && endDate.value == null -> addingError.emit(UpsertTripError.EMPTY_FIELDS)
+                destination.value.isBlank() && name.value.isBlank() && startDate.value == null && endDate.value == null -> addingError.emit(UpsertTripError.EMPTY_FIELDS)
                 startDate.value == null && endDate.value == null -> addingError.emit(UpsertTripError.START_AND_END_DATE_EMPTY)
+                name.value.isBlank() -> addingError.emit(UpsertTripError.NAME_EMPTY)
                 destination.value.isBlank() -> addingError.emit(UpsertTripError.DESTINATION_EMPTY)
                 startDate.value == null -> addingError.emit(UpsertTripError.START_DATE_EMPTY)
                 endDate.value == null -> addingError.emit(UpsertTripError.END_DATE_EMPTY)
+                !nameCorrect -> addingError.emit(UpsertTripError.NAME_ALREADY_EXISTS)
                 !startDateCorrect -> addingError.emit(UpsertTripError.START_DATE_BEFORE_TODAY)
                 !endDateCorrect -> addingError.emit(UpsertTripError.END_DATE_BEFORE_START_DATE)
             }
-            return null
+            return false
         }
 
-        val tripId = upsertTripUseCase(
+        upsertTripUseCase(
             Trip(
-                id = tripId ?: -1,
+                name = tripName ?: name.value,
                 destination = destination.value,
                 startDate = startDate.value!!,
                 endDate = endDate.value!!,
             )
         )
 
-        return tripId
+        return true
     }
 
     suspend fun deleteTrip() {
-        deleteTripUseCase(tripRepository.getTrip(tripId!!).first())
+        deleteTripUseCase(tripRepository.getTrip(tripName!!).first())
     }
 
     @AssistedFactory
     interface UpsertTripViewModelFactory {
-        fun create(tripId: Long?): UpsertTripViewModel
+        fun create(tripName: String?): UpsertTripViewModel
     }
 }

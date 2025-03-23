@@ -6,14 +6,14 @@ import com.zeni.core.domain.model.TripImage
 
 fun TripImage.toEntity() = TripImageEntity(
     id = id,
-    tripId = tripId,
+    tripName = tripName,
     url = url.toString(),
     description = description
 )
 
 fun TripImageEntity.toDomain() = TripImage(
     id = id,
-    tripId = tripId,
+    tripName = tripName,
     url = url.toUri(),
     description = description
 )

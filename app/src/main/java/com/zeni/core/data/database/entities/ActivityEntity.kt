@@ -10,13 +10,13 @@ import java.time.ZonedDateTime
 @Entity(
     tableName = "activity_table",
     indices = [
-        Index(value = ["trip_id"]),
+        Index(value = ["trip_name"]),
     ],
     foreignKeys = [
         ForeignKey(
             entity = TripEntity::class,
-            parentColumns = ["id"],
-            childColumns = ["trip_id"],
+            parentColumns = ["name"],
+            childColumns = ["trip_name"],
             onDelete = ForeignKey.CASCADE
         )
     ]
@@ -24,7 +24,7 @@ import java.time.ZonedDateTime
 data class ActivityEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Long = 0,
-    @ColumnInfo(name = "trip_id") val tripId: Long,
+    @ColumnInfo(name = "trip_name") val tripName: String,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "date_time") val dateTime: ZonedDateTime

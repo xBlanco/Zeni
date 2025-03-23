@@ -30,10 +30,10 @@ class TripRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getTrip(tripId: Long): Flow<Trip> {
-        DatabaseLogger.dbOperation("Getting trip with id $tripId")
+    override fun getTrip(tripName: String): Flow<Trip> {
+        DatabaseLogger.dbOperation("Getting trip $tripName")
         return try {
-            val tripFlow = tripDao.getTrip(tripId)
+            val tripFlow = tripDao.getTrip(tripName)
                 .map { it.toDomain() }
             DatabaseLogger.dbOperation("Trip retrieved successfully")
 
@@ -44,23 +44,21 @@ class TripRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addTrip(trip: Trip): Long {
+    override suspend fun addTrip(trip: Trip) {
         DatabaseLogger.dbOperation("Adding trip to ${trip.destination}")
         return try {
-            val id = tripDao.addTrip(trip.toEntity())
-            DatabaseLogger.dbOperation("Trip added successfully with id: $id")
-
-            id
+            tripDao.addTrip(trip.toEntity())
+            DatabaseLogger.dbOperation("Trip added successfully")
         } catch (e: Exception) {
             DatabaseLogger.dbError("Error adding trip: ${e.message}", e)
             throw e
         }
     }
 
-    override suspend fun existsTrip(tripId: Long): Boolean {
-        DatabaseLogger.dbOperation("Checking if trip exists with id $tripId")
+    override suspend fun existsTrip(tripName: String): Boolean {
+        DatabaseLogger.dbOperation("Checking if trip $tripName exists")
         return try {
-            tripDao.existsTrip(tripId)
+            tripDao.existsTrip(tripName)
         } catch (e: Exception) {
             DatabaseLogger.dbError("Error checking if trip exists: ${e.message}", e)
             throw e
@@ -68,7 +66,7 @@ class TripRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteTrip(trip: Trip) {
-        DatabaseLogger.dbOperation("Deleting trip with id ${trip.id}")
+        DatabaseLogger.dbOperation("Deleting trip: ${trip.name}")
         try {
             tripDao.deleteTrip(trip.toEntity())
             DatabaseLogger.dbOperation("Trip deleted successfully")

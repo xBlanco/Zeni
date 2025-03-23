@@ -2,16 +2,16 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "38e52ef5e6a1f574322dbe107a6c5b22",
+    "identityHash": "35178733f5d4ada3a1fbccdb8fab7e0d",
     "entities": [
       {
         "tableName": "trip_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `destination` TEXT NOT NULL, `start_date` INTEGER NOT NULL, `end_date` INTEGER NOT NULL, `cover_image_id` INTEGER, FOREIGN KEY(`cover_image_id`) REFERENCES `trip_images_table`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `destination` TEXT NOT NULL, `start_date` INTEGER NOT NULL, `end_date` INTEGER NOT NULL, `cover_image_id` INTEGER, PRIMARY KEY(`name`), FOREIGN KEY(`cover_image_id`) REFERENCES `trip_images_table`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
         "fields": [
           {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -39,9 +39,9 @@
           }
         ],
         "primaryKey": {
-          "autoGenerate": true,
+          "autoGenerate": false,
           "columnNames": [
-            "id"
+            "name"
           ]
         },
         "foreignKeys": [
@@ -60,7 +60,7 @@
       },
       {
         "tableName": "trip_images_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trip_id` INTEGER NOT NULL, `url` TEXT NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`trip_id`) REFERENCES `trip_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trip_name` TEXT NOT NULL, `url` TEXT NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`trip_name`) REFERENCES `trip_table`(`name`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -69,9 +69,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "tripId",
-            "columnName": "trip_id",
-            "affinity": "INTEGER",
+            "fieldPath": "tripName",
+            "columnName": "trip_name",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -95,13 +95,13 @@
         },
         "indices": [
           {
-            "name": "index_trip_images_table_trip_id",
+            "name": "index_trip_images_table_trip_name",
             "unique": false,
             "columnNames": [
-              "trip_id"
+              "trip_name"
             ],
             "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_trip_images_table_trip_id` ON `${TABLE_NAME}` (`trip_id`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_trip_images_table_trip_name` ON `${TABLE_NAME}` (`trip_name`)"
           }
         ],
         "foreignKeys": [
@@ -110,17 +110,17 @@
             "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
-              "trip_id"
+              "trip_name"
             ],
             "referencedColumns": [
-              "id"
+              "name"
             ]
           }
         ]
       },
       {
         "tableName": "activity_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trip_id` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `date_time` INTEGER NOT NULL, FOREIGN KEY(`trip_id`) REFERENCES `trip_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trip_name` TEXT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `date_time` INTEGER NOT NULL, FOREIGN KEY(`trip_name`) REFERENCES `trip_table`(`name`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -129,9 +129,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "tripId",
-            "columnName": "trip_id",
-            "affinity": "INTEGER",
+            "fieldPath": "tripName",
+            "columnName": "trip_name",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -161,13 +161,13 @@
         },
         "indices": [
           {
-            "name": "index_activity_table_trip_id",
+            "name": "index_activity_table_trip_name",
             "unique": false,
             "columnNames": [
-              "trip_id"
+              "trip_name"
             ],
             "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_activity_table_trip_id` ON `${TABLE_NAME}` (`trip_id`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_activity_table_trip_name` ON `${TABLE_NAME}` (`trip_name`)"
           }
         ],
         "foreignKeys": [
@@ -176,10 +176,10 @@
             "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
-              "trip_id"
+              "trip_name"
             ],
             "referencedColumns": [
-              "id"
+              "name"
             ]
           }
         ]
@@ -187,7 +187,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '38e52ef5e6a1f574322dbe107a6c5b22')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '35178733f5d4ada3a1fbccdb8fab7e0d')"
     ]
   }
 }

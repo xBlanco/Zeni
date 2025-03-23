@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UpsertItineraryUseCase @Inject constructor(
+class UpsertActivityUseCase @Inject constructor(
     private val itineraryRepository: ItineraryRepositoryImpl
 ) {
     suspend operator fun invoke(activity: Activity): Long {

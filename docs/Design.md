@@ -12,7 +12,7 @@ The Model represents the data and business logic of the application. It is respo
 
 **Entities:**
 - **Trip**
-  - `id`: `Int` - Unique identifier for the trip.
+  - `name`: `String` - Unique identifier for the trip.
   - `destination`: `String` - Destination of the trip.
   - `startDate`: `ZonedDateTime` - Start date of the trip.
   - `endDate`: `ZonedDateTime` - End date of the trip.
@@ -60,7 +60,7 @@ Trip --> Activity
 Trip --> Image
 
 class Trip {
-    Int id
+    String name
     String destination
     ZonedDateTime startDate
     ZonedDateTime endDate
@@ -70,7 +70,7 @@ class Trip {
 
 class Activity {
     Int id
-    Int tripId
+    String tripName
     String title
     String description
     ZonedDateTime dateTime
@@ -78,7 +78,7 @@ class Activity {
 
 class Image {
     Int id
-    Int tripId
+    String tripName
     String url
     String description
 }

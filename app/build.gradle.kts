@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -40,6 +42,11 @@ android {
         sourceSets.all {
             languageSettings.enableLanguageFeature("ExplicitBackingFields")
         }
+    }
+    composeCompiler {
+        featureFlags = setOf(
+            ComposeFeatureFlag.StrongSkipping
+        )
     }
 
     compileOptions {

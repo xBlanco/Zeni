@@ -5,7 +5,7 @@ import com.zeni.core.domain.model.Activity
 
 fun Activity.toEntity() = ActivityEntity(
     id = id,
-    tripId = tripId,
+    tripName = tripName,
     title = title,
     description = description,
     dateTime = dateTime
@@ -13,7 +13,7 @@ fun Activity.toEntity() = ActivityEntity(
 
 fun ActivityEntity.toDomain() = Activity(
     id = id,
-    tripId = tripId,
+    tripName = tripName,
     title = title,
     description = description,
     dateTime = dateTime

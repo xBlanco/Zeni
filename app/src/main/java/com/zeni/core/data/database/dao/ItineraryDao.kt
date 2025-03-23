@@ -10,21 +10,21 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ItineraryDao {
 
-    @Query("SELECT * FROM activity_table WHERE trip_id = :tripId ORDER BY date_time DESC")
-    fun getActivitiesByTrip(tripId: Long): Flow<List<ActivityEntity>>
+    @Query("SELECT * FROM activity_table WHERE trip_name = :tripName ORDER BY date_time ASC")
+    fun getActivitiesByTrip(tripName: String): Flow<List<ActivityEntity>>
 
     @Query("""
         SELECT * FROM activity_table 
-        WHERE date(datetime(date_time/1000, 'unixepoch')) = date(datetime(:timestamp/1000, 'unixepoch')) 
-        ORDER BY date_time DESC
+        WHERE date_time >= :startTimeStamp AND date_time <= :endTimeStamp
+        ORDER BY date_time ASC
     """)
-    fun getActivitiesByDate(timestamp: Long): Flow<List<ActivityEntity>>
+    fun getActivitiesByDate(startTimeStamp: Long, endTimeStamp: Long): Flow<List<ActivityEntity>>
 
-    @Query("SELECT * FROM activity_table WHERE trip_id = :tripId AND id = :activityId")
-    fun getActivity(tripId: Long, activityId: Long): Flow<ActivityEntity>
+    @Query("SELECT * FROM activity_table WHERE trip_name = :tripName AND id = :activityId")
+    fun getActivity(tripName: String, activityId: Long): Flow<ActivityEntity>
 
-    @Query("SELECT EXISTS(SELECT 1 FROM activity_table WHERE trip_id = :tripId AND id = :activityId)")
-    suspend fun existsActivity(tripId: Long, activityId: Long): Boolean
+    @Query("SELECT EXISTS(SELECT 1 FROM activity_table WHERE trip_name = :tripName AND id = :activityId)")
+    suspend fun existsActivity(tripName: String, activityId: Long): Boolean
 
     @Upsert
     suspend fun addActivity(activity: ActivityEntity): Long

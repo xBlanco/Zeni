@@ -4,7 +4,7 @@ import android.net.Uri
 
 data class TripImage(
     val id: Long,
-    val tripId: Long,
+    val tripName: String,
     val url: Uri,
     val description: String
 )

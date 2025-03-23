@@ -1,6 +1,5 @@
 package com.zeni.itinerary.presentation
 
-import android.widget.TimePicker
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -42,24 +41,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.zeni.R
 import com.zeni.core.domain.utils.SelectableDatesNotPast
 import com.zeni.core.domain.utils.extensions.navigateBack
 import com.zeni.core.presentation.composables.TimePickerDialog
 import com.zeni.core.presentation.navigation.ScreenInitial
-import com.zeni.core.presentation.navigation.ScreenTrip
 import com.zeni.itinerary.presentation.components.UpsertActivityViewModel
 import com.zeni.itinerary.domain.use_cases.utils.UpsertItineraryError
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
-import java.time.ZoneId
 import java.time.ZoneOffset
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
@@ -217,8 +210,8 @@ fun UpsertItineraryScreen(
                 Button(
                     onClick = {
                         scope.launch {
-                            val itineraryId = viewModel.addItinerary()
-                            if (itineraryId != null) {
+                            val activityName = viewModel.addActivity()
+                            if (activityName != null) {
                                 navController.navigateBack()
                             }
                         }
@@ -271,7 +264,7 @@ fun UpsertItineraryScreen(
                         UpsertItineraryError.TITLE_EMPTY -> stringResource(R.string.error_creating_title_itinerary_activity)
                         UpsertItineraryError.DESCRIPTION_EMPTY -> stringResource(R.string.error_creating_description_itinerary_activity)
                         UpsertItineraryError.DATE_TIME_EMPTY -> stringResource(R.string.error_creating_datetime_itinerary_activity)
-                        UpsertItineraryError.DATE_TIME_BEFORE_NOW -> stringResource(R.string.error_creating_trip_start_before_today)
+                        UpsertItineraryError.DATE_TIME_BEFORE_NOW -> stringResource(R.string.error_creating_trip_start_in_past)
                         UpsertItineraryError.DATE_TIME_NOT_IN_TRIP_PERIOD -> stringResource(R.string.error_creating_date_not_in_trip_itinerary_activity_title)
                         UpsertItineraryError.NONE -> ""
                     },

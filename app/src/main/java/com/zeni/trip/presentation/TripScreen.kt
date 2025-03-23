@@ -116,7 +116,7 @@ fun TripScreen(
 
                 IconButton(
                     onClick = {
-                        navController.navigate(ScreenUpsertActivity(trip!!.id))
+                        navController.navigate(ScreenUpsertActivity(trip!!.name))
                     },
                     colors = IconButtonDefaults.iconButtonColors(
                         contentColor = LocalContentColor.current.copy(alpha = 0.65f)
@@ -149,9 +149,10 @@ fun TripScreen(
                                 .fillMaxWidth(),
                             onEditClick = {
                                 navController.navigate(
-                                    ScreenUpsertActivity(trip!!.id, activity.id)
+                                    ScreenUpsertActivity(trip!!.name, activity.id)
                                 )
-                            }
+                            },
+                            showTimeTo = true
                         )
                     }
                 }
@@ -213,7 +214,7 @@ private fun TopBar(
         },
         actions = {
             IconButton(
-                onClick = { navController.navigate(ScreenUpsertTrip(trip.id)) }
+                onClick = { navController.navigate(ScreenUpsertTrip(trip.name)) }
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
@@ -248,12 +249,20 @@ private fun TripData(
     ) {
         Text(
             text = stringResource(
-                id = R.string.trip_destiny,
-                trip.destination
+                id = R.string.trip_name,
+                trip.name
             ),
             modifier = Modifier
                 .padding(bottom = 4.dp),
             fontWeight = FontWeight.Bold
+        )
+
+        Text(
+            text = stringResource(
+                id = R.string.trip_destiny,
+                trip.destination
+            ),
+            fontSize = 12.sp
         )
 
         Text(

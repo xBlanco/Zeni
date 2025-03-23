@@ -4,7 +4,7 @@ import java.time.ZonedDateTime
 
 data class Activity(
     val id: Long,
-    val tripId: Long,
+    val tripName: String,
     val title: String,
     val description: String,
     val dateTime: ZonedDateTime

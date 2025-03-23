@@ -45,7 +45,7 @@
         El camp de data de fi no pot estar buit
     </string>
     <string name="error_creating_trip_start_and_end_empty">
-        La data d\'inici no pot ser posterior a la data de fi
+        Les dates d\'inici i fi son obligatories
     </string>
     <string name="error_creating_trip_fields_empty">
         Tots els camps són obligatoris
@@ -53,8 +53,8 @@
     <string name="error_creating_trip_end_before_start">
         La data de fi no pot ser anterior a la data d\'inici
     </string>
-    <string name="error_creating_trip_start_before_today">
-        La data d\'inici no pot ser anterior a la data d\'avui
+    <string name="error_creating_trip_start_in_past">
+        No es poden programar activitats perquè comencin en el passat
     </string>
     <string name="advert_title_deleting_trip">
         Estàs segur que vols esborrar aquest viatge?
@@ -117,14 +117,14 @@
 
     <!-- Informació d\'activitat -->
     <plurals name="time_remaining_hours">
-        <item quantity="one">%d hora restant</item>
-        <item quantity="many">%d hores restants</item>
-        <item quantity="other">%d hores restants</item>
+        <item quantity="one">Comença en %d hora</item>
+        <item quantity="many">Comença en %d hores</item>
+        <item quantity="other">Comença en %d hores</item>
     </plurals>
     <plurals name="time_remaining_minutes">
-        <item quantity="one">%d minut restant</item>
-        <item quantity="many">%d minuts restants</item>
-        <item quantity="other">%d minuts restants</item>
+        <item quantity="one">Comença en %d minut</item>
+        <item quantity="many">Comença en %d minuts</item>
+        <item quantity="other">Comença en %d minuts</item>
     </plurals>
 
     <!-- Pantalla de més opcions -->

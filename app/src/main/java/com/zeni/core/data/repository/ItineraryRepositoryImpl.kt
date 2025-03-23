@@ -1,6 +1,5 @@
 package com.zeni.core.data.repository
 
-import android.util.Log
 import com.zeni.core.data.database.dao.ItineraryDao
 import com.zeni.core.data.mappers.toDomain
 import com.zeni.core.data.mappers.toEntity
@@ -8,7 +7,6 @@ import com.zeni.core.domain.model.Activity
 import com.zeni.core.domain.repository.ItineraryRepository
 import com.zeni.core.util.DatabaseLogger
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 import java.time.ZonedDateTime
@@ -20,10 +18,10 @@ class ItineraryRepositoryImpl @Inject constructor(
     private val itineraryDao: ItineraryDao
 ): ItineraryRepository {
 
-    override fun getActivitiesByTrip(tripId: Long): Flow<List<Activity>> {
-        DatabaseLogger.dbOperation("Getting activities for trip $tripId")
+    override fun getActivitiesByTrip(tripName: String): Flow<List<Activity>> {
+        DatabaseLogger.dbOperation("Getting activities for trip $tripName")
         return try {
-            val activitiesFlow = itineraryDao.getActivitiesByTrip(tripId)
+            val activitiesFlow = itineraryDao.getActivitiesByTrip(tripName)
                 .map { activities -> activities.map { it.toDomain() } }
             DatabaseLogger.dbOperation("Activities retrieved successfully")
 
@@ -37,7 +35,11 @@ class ItineraryRepositoryImpl @Inject constructor(
     override fun getActivitiesByDate(date: ZonedDateTime): Flow<List<Activity>> {
         DatabaseLogger.dbOperation("Getting activities for date ${date.toLocalDate()}")
         return try {
-            val activitiesFlow = itineraryDao.getActivitiesByDate(date.toInstant().toEpochMilli())
+            val startDateTime = date.withHour(0).withMinute(0).withSecond(0).withNano(0)
+                .toInstant().toEpochMilli()
+            val endDateTime = date.withHour(23).withMinute(59).withSecond(59).withNano(999999999)
+                .toInstant().toEpochMilli()
+            val activitiesFlow = itineraryDao.getActivitiesByDate(startDateTime, endDateTime)
                 .map { activities -> activities.map { it.toDomain() } }
             DatabaseLogger.dbOperation("Activities retrieved successfully")
 
@@ -48,10 +50,10 @@ class ItineraryRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getActivity(tripId: Long, activityId: Long): Flow<Activity> {
-        DatabaseLogger.dbOperation("Getting activity with id $activityId for trip $tripId")
+    override fun getActivity(tripName: String, activityId: Long): Flow<Activity> {
+        DatabaseLogger.dbOperation("Getting activity with id $activityId for trip $tripName")
         return try {
-            val activityFlow = itineraryDao.getActivity(tripId, activityId)
+            val activityFlow = itineraryDao.getActivity(tripName, activityId)
                 .map { it.toDomain() }
             DatabaseLogger.dbOperation("Activity retrieved successfully")
 
@@ -63,22 +65,22 @@ class ItineraryRepositoryImpl @Inject constructor(
     }
 
     override suspend fun addActivity(activity: Activity): Long {
-        DatabaseLogger.dbOperation("Adding activity to trip ${activity.tripId}")
+        DatabaseLogger.dbOperation("Adding activity to trip ${activity.tripName}")
         return try {
-            val id = itineraryDao.addActivity(activity.toEntity())
-            DatabaseLogger.dbOperation("Activity added successfully with id: $id")
+            val activityId = itineraryDao.addActivity(activity.toEntity())
+            DatabaseLogger.dbOperation("Activity added successfully")
 
-            id
+            activityId
         } catch (e: Exception) {
             DatabaseLogger.dbError("Error adding activity: ${e.message}", e)
             throw e
         }
     }
 
-    override suspend fun existsActivity(tripId: Long, activityId: Long): Boolean {
-        DatabaseLogger.dbOperation("Checking if activity with id $activityId exists for trip $tripId")
+    override suspend fun existsActivity(tripName: String, activityId: Long): Boolean {
+        DatabaseLogger.dbOperation("Checking if activity with id $activityId exists for trip $tripName")
         return try {
-            itineraryDao.existsActivity(tripId, activityId)
+            itineraryDao.existsActivity(tripName, activityId)
         } catch (e: Exception) {
             DatabaseLogger.dbError("Error checking if activity exists: ${e.message}", e)
             throw e
