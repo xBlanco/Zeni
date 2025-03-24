@@ -24,6 +24,10 @@
 - [x] T3.4 Update documentation with test results and fixes applied.
 
 ### Sprint 3
+- [ ] T3.4 Update documentation with database schema (assets/com.zeni.../*) and usage at design.md.
+- [ ] Submit GitHub repository link with release/tag v0.3.0.
+- [ ] Include Sprint.md with team member task assignments.
+- [ ] Record video demonstration (save in /docs/evidence/v0.3.0).
 
 ----------------------------------------------------------------------------------------------------
 ## Alex
@@ -63,10 +67,3 @@
 - [x] T3.1 Write unit tests for DAOs and database interactions.
 - [x] T3.2 Implement data validation (e.g., prevent duplicate trip names, check valid dates).
 - [x] T3.3 Use Logcat to track database operations and errors.
-
-
-## Distribute
-- [ ] T3.4 Update documentation with database schema and usage at design.md.
-- [ ] Submit GitHub repository link with release/tag v0.3.0.
-- [ ] Include Sprint.md with team member task assignments.
-- [ ] Record video demonstration (save in /docs/evidence/v0.3.0).  

@@ -31,24 +31,24 @@ To get started with the project, clone the repository and open it in Android Stu
 Please read the `CONTRIBUTING.md` file for details on our code of conduct, and the process for submitting pull requests.
 
 ## Directory structure
-   .
-   ├── .github                               # CI files.
-   ├── app/src
-   │   ├── androidTest                       # Tests for android only.
-   │   ├── main/java/com/zeni
-   │   │   ├── auth                          # Authentication related functions and UI.
-   │   │   ├── core                          # Share code.
-   │   │   │   ├── data                      # Model related classes.
-   │   │   │   ├── di                        # Dependency injection related classes.
-   │   │   │   ├── domain                    # Business logic related classes.
-   │   │   │   └── presentation              # UI related classes.
-   │   │   ├── home                          # Customizable screen with shortcuts.
-   │   │   ├── itinerary                     # Itinerary related functions and UI.
-   │   │   ├── settings                      # Settings related functions and UI.
-   │   │   └── trip                          # Trip related functions and UI.
-   │   └── test                              # Tests
-   ├── docs                                  # Documentation files.
-   └── zLogos                                # Zeni logos.
+-   .
+-   ├── .github                               # CI files.
+-   ├── app/src
+-   │   ├── androidTest                       # Tests for android only.
+-   │   ├── main/java/com/zeni
+-   │   │   ├── auth                          # Authentication related functions and UI.
+-   │   │   ├── core                          # Share code.
+-   │   │   │   ├── data                      # Model related classes.
+-   │   │   │   ├── di                        # Dependency injection related classes.
+-   │   │   │   ├── domain                    # Business logic related classes.
+-   │   │   │   └── presentation              # UI related classes.
+-   │   │   ├── home                          # Customizable screen with shortcuts.
+-   │   │   ├── itinerary                     # Itinerary related functions and UI.
+-   │   │   ├── settings                      # Settings related functions and UI.
+-   │   │   └── trip                          # Trip related functions and UI.
+-   │   └── test                              # Tests
+-   ├── docs                                  # Documentation files.
+-   └── zLogos                                # Zeni logos.
 
 ## License
 This project is licensed under the Apache 2.0 License - see the `LICENSE` file for details.
