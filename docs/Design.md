@@ -31,9 +31,6 @@ The Model represents the data and business logic of the application. It is respo
   - `url`: `String` - URL of the image.
   - `description`: `String` - Description of the image.
 
-##### Mermaid visualization of the Model
-![img.png](mermaid.png)
-
 
 #### View
 The View is responsible for displaying the data to the user and handling user interactions.
@@ -53,7 +50,7 @@ The ViewModel acts as a bridge between the Model and the View. It holds the data
 - A `Trip` can have multiple `Activity`s.
 - A `Trip` can have multiple `Image`s.
 
-
+### Visualization of the Model
 ```mermaid
 classDiagram
 Trip --> Activity
@@ -68,6 +65,13 @@ class Trip {
     List~Image~ images
 }
 
+class Image {
+    Int id
+    String tripName
+    String url
+    String description
+}
+
 class Activity {
     Int id
     String tripName
@@ -75,15 +79,11 @@ class Activity {
     String description
     ZonedDateTime dateTime
 }
-
-class Image {
-    Int id
-    String tripName
-    String url
-    String description
-}
 ```
 
+
+## Database schema
+### Mermaid diagram
 ```mermaid
 classDiagram
 class trip_table {
@@ -113,4 +113,73 @@ trip_table "1" --o "*" trip_images_table : has
 trip_table "1" --o "*" activity_table : has
 ```
 
+### SQL table creation
 
+trip_table
+```
+CREATE TABLE IF NOT EXISTS trip_table (
+    name TEXT NOT NULL PRIMARY KEY,
+    destination TEXT NOT NULL,
+    start_date INTEGER NOT NULL,
+    end_date INTEGER NOT NULL,
+    cover_image_id INTEGER,
+    FOREIGN KEY(cover_image_id) REFERENCES trip_images_table(id) ON UPDATE NO ACTION ON DELETE SET NULL
+);
+```
+trip_images_table
+```
+CREATE TABLE IF NOT EXISTS trip_images_table (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    trip_name TEXT NOT NULL,
+    url TEXT NOT NULL,
+    description TEXT NOT NULL,
+    FOREIGN KEY(trip_name) REFERENCES trip_table(name) ON UPDATE NO ACTION ON DELETE CASCADE
+);
+CREATE INDEX IF NOT EXISTS index_trip_images_table_trip_name ON trip_images_table (trip_name);
+```
+activity_table
+```
+CREATE TABLE IF NOT EXISTS activity_table (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    trip_name TEXT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    date_time INTEGER NOT NULL,
+    FOREIGN KEY(trip_name) REFERENCES trip_table(name) ON UPDATE NO ACTION ON DELETE CASCADE
+);
+CREATE INDEX IF NOT EXISTS index_activity_table_trip_name ON activity_table (trip_name);
+```
+
+### Database usage
+
+  - Create a Trip
+```
+INSERT INTO trip_table (name, destination, start_date, end_date, cover_image_id)
+VALUES ('Summer Vacation', 'Hawaii', 1672531200, 1672617600, NULL);
+```
+
+  - Adding an Image to a Trip
+```
+INSERT INTO trip_images_table (trip_name, url, description)
+VALUES ('Summer Vacation', 'https://example.com/image.jpg', 'Beach view');
+```
+
+  - Adding an Activity
+```
+INSERT INTO activity_table (trip_name, title, description, date_time)
+VALUES ('Summer Vacation', 'Snorkeling', 'Snorkeling at the coral reef', 1672552800);
+```
+
+  - Retrieving Trips with Images and Activities
+```
+SELECT trip_table.*, trip_images_table.url AS cover_image, activity_table.title AS activity_title
+FROM trip_table
+LEFT JOIN trip_images_table ON trip_table.name = trip_images_table.trip_name
+LEFT JOIN activity_table ON trip_table.name = activity_table.trip_name;
+```
+
+  - Deleting a Trip 
+```
+DELETE FROM trip_table WHERE name = 'Summer Vacation';
+```
+(This will also remove associated images and activities due to ON DELETE CASCADE)
