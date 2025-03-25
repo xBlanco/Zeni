@@ -53,8 +53,8 @@ The ViewModel acts as a bridge between the Model and the View. It holds the data
 ### Visualization of the Model
 ```mermaid
 classDiagram
-Trip --> Activity
 Trip --> Image
+Trip --> Activity
 
 class Trip {
     String name
@@ -80,6 +80,8 @@ class Activity {
     ZonedDateTime dateTime
 }
 ```
+
+
 
 
 ## Database schema
@@ -113,9 +115,10 @@ trip_table "1" --o "*" trip_images_table : has
 trip_table "1" --o "*" activity_table : has
 ```
 
+
 ### SQL table creation
 
-trip_table
+ - trip_table
 ```
 CREATE TABLE IF NOT EXISTS trip_table (
     name TEXT NOT NULL PRIMARY KEY,
@@ -126,7 +129,7 @@ CREATE TABLE IF NOT EXISTS trip_table (
     FOREIGN KEY(cover_image_id) REFERENCES trip_images_table(id) ON UPDATE NO ACTION ON DELETE SET NULL
 );
 ```
-trip_images_table
+ - trip_images_table
 ```
 CREATE TABLE IF NOT EXISTS trip_images_table (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -137,7 +140,7 @@ CREATE TABLE IF NOT EXISTS trip_images_table (
 );
 CREATE INDEX IF NOT EXISTS index_trip_images_table_trip_name ON trip_images_table (trip_name);
 ```
-activity_table
+- activity_table
 ```
 CREATE TABLE IF NOT EXISTS activity_table (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -149,6 +152,7 @@ CREATE TABLE IF NOT EXISTS activity_table (
 );
 CREATE INDEX IF NOT EXISTS index_activity_table_trip_name ON activity_table (trip_name);
 ```
+
 
 ### Database usage
 
