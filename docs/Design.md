@@ -83,7 +83,7 @@ class Activity {
 
 
 
-
+#
 ## Database schema
 ### Mermaid diagram
 ```mermaid
