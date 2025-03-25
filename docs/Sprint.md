@@ -24,7 +24,7 @@
 - [x] T3.4 Update documentation with test results and fixes applied.
 
 ### Sprint 3
-- [ ] T3.4 Update documentation with database schema (assets/com.zeni.../*) and usage at design.md.
+- [x] T3.4 Update documentation with database schema (assets/com.zeni.../*) and usage at design.md.
 - [ ] Submit GitHub repository link with release/tag v0.3.0.
 - [ ] Include Sprint.md with team member task assignments.
 - [ ] Record video demonstration (save in /docs/evidence/v0.3.0).

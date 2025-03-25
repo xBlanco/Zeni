@@ -82,3 +82,35 @@ class Image {
     String url
     String description
 }
+```
+
+```mermaid
+classDiagram
+class trip_table {
+    name TEXT NOT NULL PRIMARY KEY
+    destination TEXT NOT NULL
+    start_date INTEGER NOT NULL
+    end_date INTEGER NOT NULL
+    cover_image_id INTEGER
+}
+
+class trip_images_table {
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+    trip_name TEXT NOT NULL
+    url TEXT NOT NULL
+    description TEXT NOT NULL
+}
+
+class activity_table {
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+    trip_name TEXT NOT NULL
+    title TEXT NOT NULL
+    description TEXT NOT NULL
+    date_time INTEGER NOT NULL
+}
+
+trip_table "1" --o "*" trip_images_table : has
+trip_table "1" --o "*" activity_table : has
+```
+
+
