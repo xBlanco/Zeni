@@ -44,7 +44,6 @@ import com.zeni.core.domain.utils.SelectableDatesNotPast
 import com.zeni.core.domain.utils.extensions.navigateBack
 import com.zeni.core.presentation.navigation.ScreenInitial
 import com.zeni.core.presentation.navigation.ScreenTrip
-import com.zeni.core.presentation.navigation.ScreenTrips
 import com.zeni.trip.domain.utils.UpsertTripError
 import com.zeni.trip.presentation.components.UpsertTripViewModel
 import kotlinx.coroutines.launch
@@ -62,6 +61,9 @@ fun UpsertTripScreen(
     navController: NavController
 ) {
     val scope = rememberCoroutineScope()
+
+    val name by viewModel.name.collectAsStateWithLifecycle()
+    val isNameCorrect by viewModel.isNameCorrect.collectAsStateWithLifecycle()
 
     val destinationName by viewModel.destination.collectAsStateWithLifecycle()
     val isDestinationCorrect by viewModel.isDestinationCorrect.collectAsStateWithLifecycle()
@@ -101,6 +103,23 @@ fun UpsertTripScreen(
             ),
             horizontalAlignment = Alignment.Start
         ) {
+            if (!viewModel.isEditing) {
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = viewModel::setName,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    label = {
+                        Text(
+                            text = stringResource(R.string.name_text_label)
+                        )
+                    },
+                    isError = !isNameCorrect,
+                    singleLine = true,
+                    shape = MaterialTheme.shapes.large
+                )
+            }
+
             OutlinedTextField(
                 value = destinationName,
                 onValueChange = viewModel::setDestination,
@@ -197,16 +216,20 @@ fun UpsertTripScreen(
                 Button(
                     onClick = {
                         scope.launch {
-                            val tripId = viewModel.addTrip()
-                            if (tripId != null) {
+                            if (viewModel.addTrip()) {
                                 navController.popBackStack()
-                                navController.navigate(ScreenTrip(tripId = tripId))
+                                navController.navigate(ScreenTrip(tripName = name)) {
+                                    popUpTo<ScreenTrip> {
+                                        inclusive = true
+                                    }
+                                }
                             }
                         }
                     },
                     modifier = Modifier
                         .weight(weight = 1f),
-                    enabled = destinationName.isNotBlank() && startDate != null && endDate != null
+                    enabled = name.isNotBlank() && destinationName.isNotBlank() &&
+                            startDate != null && endDate != null
                 ) {
                     Text(
                         text = if (viewModel.isEditing) stringResource(R.string.save_trip_button)
@@ -259,10 +282,12 @@ fun UpsertTripScreen(
                     text = when (addingError) {
                         UpsertTripError.EMPTY_FIELDS -> stringResource(R.string.error_creating_trip_fields_empty)
                         UpsertTripError.START_AND_END_DATE_EMPTY -> stringResource(R.string.error_creating_trip_start_and_end_empty)
+                        UpsertTripError.NAME_EMPTY -> stringResource(R.string.error_creating_trip_name_empty)
                         UpsertTripError.DESTINATION_EMPTY -> stringResource(R.string.error_creating_trip_destination_empty)
                         UpsertTripError.START_DATE_EMPTY -> stringResource(R.string.error_creating_trip_start_empty)
                         UpsertTripError.END_DATE_EMPTY -> stringResource(R.string.error_creating_trip_end_empty)
-                        UpsertTripError.START_DATE_BEFORE_TODAY -> stringResource(R.string.error_creating_trip_start_before_today)
+                        UpsertTripError.NAME_ALREADY_EXISTS -> stringResource(R.string.error_creating_trip_name_already_exists)
+                        UpsertTripError.START_DATE_BEFORE_TODAY -> stringResource(R.string.error_creating_trip_start_in_past)
                         UpsertTripError.END_DATE_BEFORE_START_DATE -> stringResource(R.string.error_creating_trip_end_before_start)
                         UpsertTripError.NONE -> ""
                     },

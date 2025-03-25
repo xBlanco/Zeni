@@ -48,7 +48,7 @@ class TripRepositoryTest {
         )
 
         val tripId = tripRepository.addTrip(trip)
-        assert(trip == tripRepository.getTrip(tripId).first())
+        assert(trip.copy(id = tripId) == tripRepository.getTrip(tripId).first())
     }
 
     @Test
@@ -69,12 +69,12 @@ class TripRepositoryTest {
         )
 
         val tripId = tripRepository.addTrip(trip)
-        val updatedTrip = trip.copy(
+        val updatedTrip = tripRepository.getTrip(tripId).first().copy(
             destination = "Updated Destination"
         )
 
         tripRepository.addTrip(updatedTrip)
-        assert(updatedTrip == tripRepository.getTrip(tripId).first())
+        assert(updatedTrip.copy(id = tripId) == tripRepository.getTrip(tripId).first())
     }
 
     @Test
@@ -95,7 +95,7 @@ class TripRepositoryTest {
         )
 
         val tripId = tripRepository.addTrip(trip)
-        tripRepository.deleteTrip(trip)
+        tripRepository.deleteTrip(trip.copy(id = tripId))
         assert(!tripRepository.existsTrip(tripId))
     }
 }

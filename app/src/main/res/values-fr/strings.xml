@@ -45,7 +45,7 @@
         La date de fin ne peut pas être vide
     </string>
     <string name="error_creating_trip_start_and_end_empty">
-        La date de début ne peut pas être postérieure à la date de fin
+        Les dates de début et de fin sont obligatoires
     </string>
     <string name="error_creating_trip_fields_empty">
         Tous les champs sont obligatoires
@@ -53,8 +53,8 @@
     <string name="error_creating_trip_end_before_start">
         La date de fin ne peut pas être antérieure à la date de début
     </string>
-    <string name="error_creating_trip_start_before_today">
-        La date de début ne peut pas être antérieure à aujourd\'hui
+    <string name="error_creating_trip_start_in_past">
+        Les activités ne peuvent pas être programmés pour commencer dans le passé
     </string>
     <string name="advert_title_deleting_trip">
         Voulez-vous vraiment supprimer ce voyage?
@@ -117,14 +117,14 @@
 
     <!-- Informations d\'activité -->
     <plurals name="time_remaining_hours">
-        <item quantity="one">%d heure restante</item>
-        <item quantity="many">%d heures restantes</item>
-        <item quantity="other">%d heures restantes</item>
+        <item quantity="one">Commence dans %d heure</item>
+        <item quantity="many">Commence dans %d heures</item>
+        <item quantity="other">Commence dans %d heures</item>
     </plurals>
     <plurals name="time_remaining_minutes">
-        <item quantity="one">%d minute restante</item>
-        <item quantity="many">%d minutes restantes</item>
-        <item quantity="other">%d minutes restantes</item>
+        <item quantity="one">Commence dans %d minute</item>
+        <item quantity="many">Commence dans %d minutes</item>
+        <item quantity="other">Commence dans %d minutes</item>
     </plurals>
 
     <!-- Écran Plus -->

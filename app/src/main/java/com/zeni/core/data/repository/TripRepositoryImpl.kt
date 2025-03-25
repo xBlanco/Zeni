@@ -1,57 +1,77 @@
 package com.zeni.core.data.repository
 
-import android.util.Log
+import com.zeni.core.data.database.dao.TripDao
+import com.zeni.core.data.mappers.toDomain
+import com.zeni.core.data.mappers.toEntity
 import com.zeni.core.domain.model.Trip
 import com.zeni.core.domain.repository.TripRepository
+import com.zeni.core.util.DatabaseLogger
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class TripRepositoryImpl @Inject constructor(): TripRepository {
-    /**
-     * List of trips, TODO: Move to ROOMdb
-     */
-    private val trips = MutableStateFlow(emptyList<Trip>())
+class TripRepositoryImpl @Inject constructor(
+    private val tripDao: TripDao
+): TripRepository {
 
     override fun getTrips(): Flow<List<Trip>> {
-        Log.i(TripRepositoryImpl::class.java.simpleName, "Getting ${trips.value.size} trips")
-        return trips
-            .map { trips ->
-                trips.sortedBy { it.startDate }
-            }
-    }
+        DatabaseLogger.dbOperation("Getting all trips from database")
+        return try {
+            val tripsFlow = tripDao.getTrips()
+                .map { trips -> trips.map { it.toDomain() } }
+            DatabaseLogger.dbOperation("Trips retrieved successfully")
 
-    override fun getTrip(tripId: Int): Flow<Trip> {
-        Log.i(TripRepositoryImpl::class.java.simpleName, "Getting trip with id $tripId")
-        return trips.map { trips ->
-            trips.first { trip -> trip.id == tripId }
+            tripsFlow
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error getting trips: ${e.message}", e)
+            throw e
         }
     }
 
-    override suspend fun addTrip(trip: Trip): Int {
-        Log.i(TripRepositoryImpl::class.java.simpleName, "Adding trip to ${trip.destination}")
+    override fun getTrip(tripName: String): Flow<Trip> {
+        DatabaseLogger.dbOperation("Getting trip $tripName")
+        return try {
+            val tripFlow = tripDao.getTrip(tripName)
+                .map { it.toDomain() }
+            DatabaseLogger.dbOperation("Trip retrieved successfully")
 
-        if (trip.id == -1) {
-            trips.emit(trips.value + trip.copy(id = trips.value.lastOrNull()?.id?.plus(1) ?: 0))
-        } else if (trip.id !in trips.value.map { it.id }) {
-            trips.emit(trips.value + trip)
-        } else {
-            trips.emit(trips.value.map { if (it.id == trip.id) trip else it })
+            tripFlow
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error getting trip: ${e.message}", e)
+            throw e
         }
-
-        return trips.value.last().id
     }
 
-    override suspend fun existsTrip(tripId: Int): Boolean {
-        return trips.value.any { it.id == tripId }
+    override suspend fun addTrip(trip: Trip) {
+        DatabaseLogger.dbOperation("Adding trip to ${trip.destination}")
+        return try {
+            tripDao.addTrip(trip.toEntity())
+            DatabaseLogger.dbOperation("Trip added successfully")
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error adding trip: ${e.message}", e)
+            throw e
+        }
+    }
+
+    override suspend fun existsTrip(tripName: String): Boolean {
+        DatabaseLogger.dbOperation("Checking if trip $tripName exists")
+        return try {
+            tripDao.existsTrip(tripName)
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error checking if trip exists: ${e.message}", e)
+            throw e
+        }
     }
 
     override suspend fun deleteTrip(trip: Trip) {
-        Log.i(TripRepositoryImpl::class.java.simpleName, "Deleting trip with id ${trip.id}")
-        trips.emit(trips.value - trip)
+        DatabaseLogger.dbOperation("Deleting trip: ${trip.name}")
+        try {
+            tripDao.deleteTrip(trip.toEntity())
+            DatabaseLogger.dbOperation("Trip deleted successfully")
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error deleting trip: ${e.message}", e)
+        }
     }
 }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
@@ -35,6 +36,7 @@ import java.time.format.DateTimeFormatter
 fun ActivityInformation(
     activity: Activity,
     modifier: Modifier = Modifier,
+    showTripName: Boolean = false,
     showTimeTo: Boolean = false,
     onEditClick: (() -> Unit)? = null
 ) {
@@ -74,6 +76,16 @@ fun ActivityInformation(
                 fontWeight = FontWeight.Bold
             )
 
+            if (showTripName) {
+                Text(
+                    text = stringResource(
+                        id = R.string.trip_activity_trip_name,
+                        activity.tripName
+                    ),
+                    fontSize = 12.sp
+                )
+            }
+
             Text(
                 text = stringResource(
                     id = R.string.trip_activity_description,
@@ -91,6 +103,8 @@ fun ActivityInformation(
             )
 
             Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
@@ -101,7 +115,7 @@ fun ActivityInformation(
                     fontSize = 12.sp
                 )
 
-                if (showTimeTo) {
+                if (showTimeTo && activity.dateTime.isAfter(ZonedDateTime.now())) {
                     val now = ZonedDateTime.now()
                     val duration = Duration.between(now, activity.dateTime)
                     val hours = duration.toHours() % 24

@@ -69,8 +69,13 @@ fun InitialScreen(
         HorizontalPager(
             state = pagerState,
             modifier = Modifier
-                .padding(contentPadding)
+                .padding(contentPadding),
+            beyondViewportPageCount = Screen.entries.size - 1,
+            key = { currentIndex ->
+                Screen.entries[currentIndex].name
+            }
         ) { currentIndex ->
+
             when (currentIndex) {
                 Screen.Home.ordinal -> {
                     HomeScreen(

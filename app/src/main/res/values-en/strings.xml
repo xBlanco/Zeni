@@ -42,7 +42,7 @@
         The end date field cannot be empty
     </string>
     <string name="error_creating_trip_start_and_end_empty">
-        The start date cannot be later than the end date
+        Start and end dates are mandatory
     </string>
     <string name="error_creating_trip_fields_empty">
         All fields are required
@@ -50,8 +50,8 @@
     <string name="error_creating_trip_end_before_start">
         The end date cannot be earlier than the start date
     </string>
-    <string name="error_creating_trip_start_before_today">
-        The start date cannot be earlier than today
+    <string name="error_creating_trip_start_in_past">
+        Activities cannot be scheduled to start in the past
     </string>
     <string name="advert_title_deleting_trip">
         Are you sure you want to delete this trip?
@@ -111,12 +111,12 @@
 
     <!-- ActivityInformation -->
     <plurals name="time_remaining_hours">
-        <item quantity="one">%d hour remaining</item>
-        <item quantity="other">%d hours remaining</item>
+        <item quantity="one">Starts in %d hour</item>
+        <item quantity="other">Starts in %d hours</item>
     </plurals>
     <plurals name="time_remaining_minutes">
-        <item quantity="one">%d minute remaining</item>
-        <item quantity="other">%d minutes remaining</item>
+        <item quantity="one">Starts in %d minute</item>
+        <item quantity="other">Starts in %d minutes</item>
     </plurals>
 
     <string name="settings_title">Settings</string>

@@ -14,6 +14,7 @@
 - [x] T4.3. Create a Splash Screen with the app logo.
 - [x] T4.5. Add a Terms & Conditions screen.
 - [x] T4.6. Ensure the app supports multiple languages.
+
 ### Sprint 2
 - [x] Correction T2.4 of sprint 1. Fix CONTRIBUTING.md so that teams branching strategy reflect real use.
 - [x] T1.2 Implement CRUD operations for itinerary items (addActivity, updateActivity, deleteActivity).
@@ -22,7 +23,14 @@
 - [x] T3.3 Simulate user interactions and log errors or unexpected behaviors.
 - [x] T3.4 Update documentation with test results and fixes applied.
 
-------------------------------------------------------------------------------------------------------------------------
+### Sprint 3
+- [x] T2.2 Ensure UI updates when database changes.
+- [x] T3.1 Write unit tests for DAOs and database interactions.
+- [x] T3.2 Implement data validation (e.g., prevent duplicate trip names, check valid dates).
+- [x] T3.3 Use Logcat to track database operations and errors.
+- [x] T3.4 Update documentation with database schema and usage at design.md.
+
+----------------------------------------------------------------------------------------------------
 ## Alex
 ### Sprint 1
 - [x] T1.1. Define the Android version to ensure compatibility with most devices.
@@ -36,6 +44,7 @@
 - [x] T3.2. Implement core classes and its functions, annotating pending logic with @TODO.
 - [x] T4.1. Create a Product Name.
 - [x] T4.4. Implement an About Page (team info, version, summary).
+
 ### Sprint 2
 - [x] Improvements T1.6 of sprint 1.
 - [x] T1.1 Implement CRUD operations for trips (addTrip, editTrip, deleteTrip).
@@ -48,3 +57,10 @@
 - [x] T3.1 Implement basic input validation (e.g., empty fields, incorrect dates).
 - [x] T3.2 Write unit tests for trip and itinerary CRUD operations.
 - [x] T3.5 Add logs (to be seen in logcat) and commentaries applying good practices.
+
+### Sprint 3
+- [x] T1.1 Create Room Database class.
+- [x] T1.2 Define Entities for Trip and ItineraryItem. Must contain at least one datetime field, text, and integer.
+- [x] T1.3 Create Data Access Objects (DAOs) for database operations.
+- [x] T1.4 Implement CRUD operations using DAO for trips and itineraries.
+- [x] T2.1 Modify ViewModels to use Room Database instead of in-memory storage.

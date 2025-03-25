@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     id("kotlin-kapt")
     alias(libs.plugins.android.hilt)
+    alias(libs.plugins.room)
 }
 
 android {
@@ -16,9 +19,13 @@ android {
         minSdk = 27
         targetSdk = 35
         versionCode = 1
-        versionName = "0.2.0"
+        versionName = "0.3.0"
 
         testInstrumentationRunner = "com.zeni.HiltTestRunner"
+
+        room {
+            schemaDirectory("$projectDir/schemas")
+        }
     }
 
     buildTypes {
@@ -36,6 +43,11 @@ android {
             languageSettings.enableLanguageFeature("ExplicitBackingFields")
         }
     }
+    composeCompiler {
+        featureFlags = setOf(
+            ComposeFeatureFlag.StrongSkipping
+        )
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -48,6 +60,10 @@ android {
         compose = true
         buildConfig = true
     }
+
+    sourceSets {
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -58,6 +74,15 @@ dependencies {
 
     implementation(libs.coil.compose)
     implementation (libs.androidx.datastore.preferences)
+
+    // ROOM dependencies
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    androidTestImplementation(libs.androidx.room.ktx)
+    androidTestImplementation(libs.androidx.room.runtime)
+    androidTestImplementation(libs.androidx.room.testing)
+    kaptAndroidTest(libs.androidx.room.compiler)
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)

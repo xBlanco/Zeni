@@ -1,10 +1,12 @@
 package com.zeni.core.data.repository
 
-import android.util.Log
+import com.zeni.core.data.database.dao.ItineraryDao
+import com.zeni.core.data.mappers.toDomain
+import com.zeni.core.data.mappers.toEntity
 import com.zeni.core.domain.model.Activity
 import com.zeni.core.domain.repository.ItineraryRepository
+import com.zeni.core.util.DatabaseLogger
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 import java.time.ZonedDateTime
@@ -12,54 +14,86 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ItineraryRepositoryImpl @Inject constructor(): ItineraryRepository {
-    /**
-     * List of itinerary items,
-     */
-    private val activities = MutableStateFlow(emptyList<Activity>())
+class ItineraryRepositoryImpl @Inject constructor(
+    private val itineraryDao: ItineraryDao
+): ItineraryRepository {
 
-    override fun getActivitiesByTrip(tripId: Int): Flow<List<Activity>> {
-        Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Getting activities for trip $tripId")
-        return activities.map { items ->
-            items
-                .filter { it.tripId == tripId }
-                .sortedBy { it.dateTime }
+    override fun getActivitiesByTrip(tripName: String): Flow<List<Activity>> {
+        DatabaseLogger.dbOperation("Getting activities for trip $tripName")
+        return try {
+            val activitiesFlow = itineraryDao.getActivitiesByTrip(tripName)
+                .map { activities -> activities.map { it.toDomain() } }
+            DatabaseLogger.dbOperation("Activities retrieved successfully")
+
+            activitiesFlow
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error getting activities: ${e.message}", e)
+            throw e
         }
     }
 
-    override fun getActivitiesByDate(date: LocalDate): Flow<List<Activity>> {
-        Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Getting activities for date $date")
-        return activities.map { items ->
-            items
-                .filter { it.dateTime.toLocalDate().atStartOfDay() == date.atStartOfDay() }
-                .sortedBy { it.dateTime }
+    override fun getActivitiesByDate(date: ZonedDateTime): Flow<List<Activity>> {
+        DatabaseLogger.dbOperation("Getting activities for date ${date.toLocalDate()}")
+        return try {
+            val startDateTime = date.withHour(0).withMinute(0).withSecond(0).withNano(0)
+                .toInstant().toEpochMilli()
+            val endDateTime = date.withHour(23).withMinute(59).withSecond(59).withNano(999999999)
+                .toInstant().toEpochMilli()
+            val activitiesFlow = itineraryDao.getActivitiesByDate(startDateTime, endDateTime)
+                .map { activities -> activities.map { it.toDomain() } }
+            DatabaseLogger.dbOperation("Activities retrieved successfully")
+
+            activitiesFlow
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error getting activities: ${e.message}", e)
+            throw e
         }
     }
 
-    override fun getActivity(tripId: Int, activityId: Int): Flow<Activity> {
-        Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Getting activity with id $activityId for trip $tripId")
-        return activities.map { items -> items.first { it.tripId == tripId && it.id == activityId } }
-    }
+    override fun getActivity(tripName: String, activityId: Long): Flow<Activity> {
+        DatabaseLogger.dbOperation("Getting activity with id $activityId for trip $tripName")
+        return try {
+            val activityFlow = itineraryDao.getActivity(tripName, activityId)
+                .map { it.toDomain() }
+            DatabaseLogger.dbOperation("Activity retrieved successfully")
 
-    override suspend fun addActivity(activity: Activity): Int {
-        Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Adding activity to trip ${activity.tripId}")
-        if (activity.id == -1) {
-            activities.emit(activities.value + activity.copy(id = activities.value.lastOrNull()?.id?.plus(1) ?: 0))
-        } else if (activity.id !in activities.value.map { it.id }) {
-            activities.emit(activities.value + activity)
-        } else {
-            activities.emit(activities.value.map { if (it.id == activity.id) activity else it })
+            activityFlow
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error getting activity: ${e.message}", e)
+            throw e
         }
-
-        return activities.value.last().id
     }
 
-    override suspend fun existsActivity(tripId: Int, activityId: Int): Boolean {
-        return activities.value.any { it.id == activityId }
+    override suspend fun addActivity(activity: Activity): Long {
+        DatabaseLogger.dbOperation("Adding activity to trip ${activity.tripName}")
+        return try {
+            val activityId = itineraryDao.addActivity(activity.toEntity())
+            DatabaseLogger.dbOperation("Activity added successfully")
+
+            activityId
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error adding activity: ${e.message}", e)
+            throw e
+        }
+    }
+
+    override suspend fun existsActivity(tripName: String, activityId: Long): Boolean {
+        DatabaseLogger.dbOperation("Checking if activity with id $activityId exists for trip $tripName")
+        return try {
+            itineraryDao.existsActivity(tripName, activityId)
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error checking if activity exists: ${e.message}", e)
+            throw e
+        }
     }
 
     override suspend fun deleteActivity(activity: Activity) {
-        Log.i(ItineraryRepositoryImpl::class.java.simpleName, "Deleting activity with id ${activity.id}")
-        activities.emit(activities.value - activity)
+        DatabaseLogger.dbOperation("Deleting activity with id ${activity.id}")
+        try {
+            itineraryDao.deleteActivity(activity.toEntity())
+            DatabaseLogger.dbOperation("Activity deleted successfully")
+        } catch (e: Exception) {
+            DatabaseLogger.dbError("Error deleting activity: ${e.message}", e)
+        }
     }
 }

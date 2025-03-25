@@ -60,14 +60,14 @@ fun TripsScreen(
         ) {
             items(
                 items = trips,
-                key = { trip -> trip.id }
+                key = { trip -> trip.name }
             ) { trip ->
 
                 TripItem(
                     trip = trip,
                     onClick = {
                         navController.navigate(
-                            route = ScreenTrip(tripId = trip.id)
+                            route = ScreenTrip(tripName = trip.name)
                         )
                     },
                     modifier = Modifier

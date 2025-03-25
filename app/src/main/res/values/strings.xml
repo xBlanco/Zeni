@@ -26,6 +26,7 @@
     <!--  UpsertTripScreen  -->
     <string name="add_trip_title">Añadir viaje</string>
     <string name="editing_trip_title">Editando viaje</string>
+    <string name="name_text_label">Nombre</string>
     <string name="destination_text_label">Destinación</string>
     <string name="select_start_date_text_label">Fecha de inicio</string>
     <string name="select_start_date_text">Fecha de inicio: %s</string>
@@ -34,6 +35,9 @@
     <string name="add_trip_button">Crear viaje</string>
     <string name="save_trip_button">Actualizar viaje</string>
     <string name="delete_trip_button">Borrar viaje</string>
+    <string name="error_creating_trip_name_empty">
+        El campo de nombre no puede estar vacío
+    </string>
     <string name="error_creating_trip_destination_empty">
         El campo de destinación no puede estar vacío
     </string>
@@ -43,8 +47,11 @@
     <string name="error_creating_trip_end_empty">
         El campo de fecha de fin no puede estar vacío
     </string>
+    <string name="error_creating_trip_name_already_exists">
+        El nombre de viaje ya existe
+    </string>
     <string name="error_creating_trip_start_and_end_empty">
-        La fecha de inicio no puede ser posterior a la fecha de fin
+        Las fechas de inicio y fin son obligatorias
     </string>
     <string name="error_creating_trip_fields_empty">
         Todos los campos son obligatorios
@@ -52,8 +59,8 @@
     <string name="error_creating_trip_end_before_start">
         La fecha de fin no puede ser anterior a la fecha de inicio
     </string>
-    <string name="error_creating_trip_start_before_today">
-        La fecha de inicio no puede ser anterior a la fecha de hoy
+    <string name="error_creating_trip_start_in_past">
+        No se pueden programar actividades que comiencen en el pasado
     </string>
     <string name="advert_title_deleting_trip">
         ¿Estás seguro de que quieres borrar este viaje?
@@ -66,6 +73,7 @@
     <string name="trip_title">Viaje a %s</string>
     <string name="edit_trip">Editar viaje</string>
     <string name="add_activity">Añadir actividad</string>
+    <string name="trip_name">Nombre: %s</string>
     <string name="trip_destiny">Destino: %s</string>
     <string name="trip_start_date">Fecha de inicio: %s</string>
     <string name="trip_end_date">Fecha de fin: %s</string>
@@ -75,6 +83,7 @@
         Crea una actividad para hacer algo durante tu viaje en %s
     </string>
     <string name="trip_activity_name">Nombre: %s</string>
+    <string name="trip_activity_trip_name">Parte de tu viaje: %s</string>
     <string name="trip_activity_description">Descripción: %s</string>
     <string name="trip_activity_date">Fecha: %s</string>
     <string name="trip_activity_time">Hora: %s</string>
@@ -115,12 +124,12 @@
 
     <!-- ActivityInformation -->
     <plurals name="time_remaining_hours">
-        <item quantity="one">%d hora restante</item>
-        <item quantity="other">%d horas restantes</item>
+        <item quantity="one">Comienza en %d hora</item>
+        <item quantity="other">Comienza en %d horas</item>
     </plurals>
     <plurals name="time_remaining_minutes">
-        <item quantity="one">%d minuto restante</item>
-        <item quantity="other">%d minutos restantes</item>
+        <item quantity="one">Comienza en %d minuto</item>
+        <item quantity="other">Comienza en %d minutos</item>
     </plurals>
 
     <!-- MoreScreen -->

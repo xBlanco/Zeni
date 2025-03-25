@@ -44,7 +44,7 @@
         O campo de data de término não pode estar vazio
     </string>
     <string name="error_creating_trip_start_and_end_empty">
-        A data de início não pode ser posterior à data de término
+        As datas de início e término são obrigatórias
     </string>
     <string name="error_creating_trip_fields_empty">
         Todos os campos são obrigatórios
@@ -52,8 +52,8 @@
     <string name="error_creating_trip_end_before_start">
         A data de término não pode ser anterior à data de início
     </string>
-    <string name="error_creating_trip_start_before_today">
-        A data de início não pode ser anterior à data de hoje
+    <string name="error_creating_trip_start_in_past">
+        Os actividades não podem ser programados para começar no passado
     </string>
     <string name="advert_title_deleting_trip">
         Tem certeza de que deseja excluir esta viagem?
@@ -115,14 +115,14 @@
 
     <!-- ActivityInformation -->
     <plurals name="time_remaining_hours">
-        <item quantity="one">%d hora restante</item>
-        <item quantity="many">%d horas restantes</item>
-        <item quantity="other">%d horas restantes</item>
+        <item quantity="one">Começa em %d hora</item>
+        <item quantity="many">Começa em %d horas</item>
+        <item quantity="other">Começa em %d horas</item>
     </plurals>
     <plurals name="time_remaining_minutes">
-        <item quantity="one">%d minuto restante</item>
-        <item quantity="many">%d minutos restantes</item>
-        <item quantity="other">%d minutos restantes</item>
+        <item quantity="one">Começa em %d minuto</item>
+        <item quantity="many">Começa em %d minutos</item>
+        <item quantity="other">Começa em %d minutos</item>
     </plurals>
 
     <string name="settings_title">Configurações</string>

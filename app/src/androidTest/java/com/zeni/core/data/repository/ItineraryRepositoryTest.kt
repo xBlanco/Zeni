@@ -26,7 +26,7 @@ class ItineraryRepositoryTest {
     @Inject
     lateinit var itineraryRepository: ItineraryRepositoryImpl
 
-    var tripId = 0
+    var tripId = 0L
 
     @Before
     fun setup() = runBlocking {
@@ -65,7 +65,7 @@ class ItineraryRepositoryTest {
         )
 
         val itineraryId = itineraryRepository.addActivity(activity)
-        assert(activity == itineraryRepository.getActivity(tripId, itineraryId).first())
+        assert(activity.copy(id = itineraryId) == itineraryRepository.getActivity(tripId, itineraryId).first())
     }
 
     @Test
@@ -83,9 +83,10 @@ class ItineraryRepositoryTest {
         )
 
         val itineraryId = itineraryRepository.addActivity(activity)
-        val updatedActivity = activity.copy(
-            title = "Updated Activity"
-        )
+        val updatedActivity = itineraryRepository.getActivity(tripId, itineraryId).first()
+            .copy(
+                title = "Updated Activity"
+            )
 
         itineraryRepository.addActivity(updatedActivity)
         assert(updatedActivity == itineraryRepository.getActivity(tripId, itineraryId).first())
