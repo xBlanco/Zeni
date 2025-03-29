@@ -9,6 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.zeni.core.presentation.navigation.NavGraph
 import com.zeni.core.presentation.navigation.ScreenInitial
+import com.zeni.core.presentation.navigation.ScreenLogin
 import com.zeni.core.presentation.theme.ZeniTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
             ZeniTheme {
                 NavGraph(
                     navController = rememberNavController(),
-                    screenInitial = ScreenInitial::class // TODO: Conserve login state for future sessions
+                    screenInitial = ScreenLogin::class // TODO: Conserve login state for future sessions
                 )
             }
         }
