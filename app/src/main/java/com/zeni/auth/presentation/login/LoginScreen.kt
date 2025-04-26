@@ -42,7 +42,9 @@ fun LoginScreen(
     LaunchedEffect(authState) {
         when (authState) {
             is AuthState.Authenticated -> {
-                navController.navigate(ScreenHome)
+                navController.navigate(ScreenHome) {
+                    popUpTo(0) // Limpia todo el stack de navegación
+                }
             }
             is AuthState.Error -> {
                 showAlert = true

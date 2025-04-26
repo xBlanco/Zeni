@@ -10,11 +10,26 @@
     <string name="login_btn">Acceder</string>
 
     <!--    Register Screen-->
-    <string name="register_btn">Register</string>
-    <string name="register_title">Register</string>
-    <string name="register_email">Email</string>
-    <string name="register_password">Password</string>
-    <string name="alert_error">Error</string>
+    <string name="register_btn">Registrar</string>
+    <string name="register_title">Crear una cuenta</string>
+    <string name="register_email">Correo electrónico</string>
+    <string name="register_password">Contraseña</string>
+    <string name="alert_error">El correo y/o la contraseña no són válidos</string>
+    <string name="back_to_register">Volver a registro</string>
+    <string name="register_success_message">Usuario registrado correctamente. Verifica el correo e inicia sesión.</string>
+
+    <!-- Recover Password -->
+    <string name="recover_password_title">Recuperar contraseña</string>
+    <string name="recover_password_btn">Enviar correo de recuperación</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+
+    <!-- Success Dialog -->
+    <string name="success_title">Correo enviado</string>
+    <string name="recover_password_success">Revisa tu bandeja de entrada para restablecer tu contraseña.</string>
+
+    <!--    Profile Screen-->
+    <string name="unknown_user">Unknown user</string>
+    <string name="profile_email">Email: </string>
 
     <!--    Alert Dialog-->
     <string name="alert_title">Alerta</string>

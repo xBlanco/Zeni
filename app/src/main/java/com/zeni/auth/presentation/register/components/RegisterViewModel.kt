@@ -58,6 +58,22 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
             }
     }
 
+    fun recoverPassword(email: String) {
+        if (email.isEmpty()) {
+            _authState.value = AuthState.Error("El correo no puede estar vacío")
+            return
+        }
+
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    _authState.value = AuthState.Idle // O un estado de éxito
+                } else {
+                    _authState.value = AuthState.Error(task.exception?.message ?: "Error al enviar el correo de recuperación")
+                }
+            }
+    }
+
     val registerError: StateFlow<RegisterErrors?>
         field = MutableStateFlow(value = null)
     fun verifyCredentials(): Boolean {

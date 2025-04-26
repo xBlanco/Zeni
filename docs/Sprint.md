@@ -34,15 +34,15 @@
 - [x] T1.1: Connect your app to Firebase.
 - [x] T1.2: Design android screen (login form).
 - [x] T1.3: Implement the actions to be logged in using Firebase (auth & password).
-- [ ] T1.4: Create an action in the app to allow the user log out.
+- [x] T1.4: Create an action in the app to allow the user log out.
 - [x] T1.5: Use Logcat to track all operations and errors.
 
 
-- [ ] T2.1: Design android screen (register form).
+- [x] T2.1: Design android screen (register form).
     • See T3.1
 - [x] T2.2: Implement the actions to be registered using Firebase (auth & password). The implementation must use the design pattern repository.
     • Implement email verification, see firebase documentation.
-- [ ] T2.3: Implement the actions and the view in order to create an option to recover the password. It depends on where you create this feature (new Screen)
+- [x] T2.3: Implement the actions and the view in order to create an option to recover the password. It depends on where you create this feature (new Screen)
 
 
 - [ ] T3.1 Persist the user information in the local DB (create user table).
