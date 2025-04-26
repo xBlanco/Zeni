@@ -14,10 +14,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.zeni.R
+import com.zeni.auth.domain.utils.AuthState
 import com.zeni.core.presentation.components.AppIcon
 import com.zeni.core.presentation.navigation.ScreenHome
 import com.zeni.auth.domain.utils.LoginErrors
 import com.zeni.auth.presentation.login.components.LoginViewModel
+import com.zeni.core.presentation.navigation.ScreenRegister
 
 @Composable
 fun LoginScreen(
@@ -35,18 +37,34 @@ fun LoginScreen(
 
     var showAlert by remember { mutableStateOf(false) }
 
+
+    val authState by viewModel.authState.collectAsState()
+    LaunchedEffect(authState) {
+        when (authState) {
+            is AuthState.Authenticated -> {
+                navController.navigate(ScreenHome)
+            }
+            is AuthState.Error -> {
+                showAlert = true
+            }
+            else -> Unit
+        }
+    }
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
         bottomBar = {
             BottomBar(
                 enabled = loginButtonEnabled,
-                onClick = {
-                    if (viewModel.login()) {
+                onLoginClick = {
+                    viewModel.login(username, password) // Pasa los valores aquí
+                    if (viewModel.authState.value is AuthState.Authenticated) {
                         navController.navigate(ScreenHome)
-                    } else {
-                        showAlert = true
                     }
+                },
+                onRegisterClick = {
+                    navController.navigate(ScreenRegister)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -117,7 +135,8 @@ fun LoginScreen(
                         imeAction = ImeAction.Done
                     ),
                     keyboardActions = KeyboardActions {
-                        if (viewModel.login()) {
+                        viewModel.login(username, password) // Pasa los valores aquí
+                        if (viewModel.authState.value is AuthState.Authenticated) {
                             navController.navigate(ScreenHome)
                         } else {
                             showAlert = true
@@ -148,29 +167,31 @@ fun LoginScreen(
 @Composable
 private fun BottomBar(
     enabled: Boolean,
-    onClick: () -> Unit,
+    onLoginClick: () -> Unit,
+    onRegisterClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Row(
+    Column(
         modifier = modifier
             .navigationBarsPadding()
-            .padding(
-                horizontal = 8.dp
-            ),
-        horizontalArrangement = Arrangement.spacedBy(
-            space = 8.dp,
-            alignment = Alignment.CenterHorizontally
-        ),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(horizontal = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Button(
-            onClick = onClick,
+            onClick = onLoginClick,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(height = 48.dp),
+                .height(48.dp),
             enabled = enabled
         ) {
             Text(text = stringResource(R.string.login_btn))
+        }
+        TextButton(
+            onClick = onRegisterClick,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = stringResource(R.string.register_btn))
         }
     }
 }

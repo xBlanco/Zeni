@@ -80,6 +80,10 @@ dependencies {
     // ROOM dependencies
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
     kapt(libs.androidx.room.compiler)
     androidTestImplementation(libs.androidx.room.ktx)
     androidTestImplementation(libs.androidx.room.runtime)
@@ -114,6 +118,7 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
 
 }
 
