@@ -8,6 +8,8 @@ plugins {
     id("kotlin-kapt")
     alias(libs.plugins.android.hilt)
     alias(libs.plugins.room)
+
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -109,6 +111,10 @@ dependencies {
     kapt(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.android.testing)
     kaptAndroidTest(libs.hilt.compiler)
+
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+    implementation("com.google.firebase:firebase-analytics")
+
 }
 
 // Allow references to generated code

@@ -30,6 +30,34 @@
 - [x] T3.3 Use Logcat to track database operations and errors.
 - [x] T3.4 Update documentation with database schema and usage at design.md.
 
+### Sprint 4
+- [ ] T1.1: Connect your app to Firebase.
+- [ ] T1.2: Design android screen (login form).
+- [ ] T1.3: Implement the actions to be logged in using Firebase (auth & password).
+- [ ] T1.4: Create an action in the app to allow the user log out.
+- [ ] T1.5: Use Logcat to track all operations and errors.
+
+
+- [ ] T2.1: Design android screen (register form).
+    • See T3.1
+- [ ] T2.2: Implement the actions to be registered using Firebase (auth & password). The implementation must use the design pattern repository.
+    • Implement email verification, see firebase documentation.
+- [ ] T2.3: Implement the actions and the view in order to create an option to recover the password. It depends on where you create this feature (new Screen)
+
+
+- [ ] T3.1 Persist the user information in the local DB (create user table).
+    • Minimum information: login, username, birthdate (date field), address, country and phone number, accept receive emails.
+    • Must check if the username is already in use.
+- [ ] T3.2 Change the trip table structure to accept multiple users and show only the trips for the user logged in.
+- [ ] T3.4 Update documentation with database schema and usage at design.md.
+- [ ] T3.5 Persist the application access. It is needed to be persisted every time a user is logged in and logged out, persisting userid and datetime
+
+
+- [ ] T4.1 Improve trip/itinerary screens accordingly to professor feedback.
+    • THE TRIPS MUST HAVE LOCATION, INIT DATE AND END DATE. Itineraries MUST have minimum Title, Description, DATE, START TIME and END TIME.
+- [ ] T4.2 Implement data validation, date and time pickers (e.g., prevent duplicate trip names, check valid dates for an itinerary).
+- [ ] T4.3 Update documentation with database schema and usage at design.md.
+
 ----------------------------------------------------------------------------------------------------
 ## Alex
 ### Sprint 1
