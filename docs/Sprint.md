@@ -58,6 +58,7 @@
 - [x] T4.2 Implement data validation, date and time pickers (e.g., prevent duplicate trip names, check valid dates for an itinerary).
 - [x] T4.3 Update documentation with database schema and usage at design.md.
 
+
 ----------------------------------------------------------------------------------------------------
 ## Alex
 ### Sprint 1
