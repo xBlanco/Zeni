@@ -1,6 +1,6 @@
-package com.zeni.settings.repository
+package com.zeni.core.domain.repository
 
-import com.zeni.settings.domain.model.UserEntity
+import com.zeni.core.data.database.entities.UserEntity
 
 interface UserRepository {
     suspend fun saveUser(user: UserEntity)

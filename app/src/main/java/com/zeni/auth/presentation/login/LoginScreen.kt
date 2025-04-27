@@ -43,7 +43,7 @@ fun LoginScreen(
         when (authState) {
             is AuthState.Authenticated -> {
                 navController.navigate(ScreenHome) {
-                    popUpTo(0) // Limpia todo el stack de navegación
+                    popUpTo(0) // Limpia tódo el stack de navegación
                 }
             }
             is AuthState.Error -> {
@@ -60,7 +60,7 @@ fun LoginScreen(
             BottomBar(
                 enabled = loginButtonEnabled,
                 onLoginClick = {
-                    viewModel.login(username, password) // Pasa los valores aquí
+                    viewModel.login(username, password)
                     if (viewModel.authState.value is AuthState.Authenticated) {
                         navController.navigate(ScreenHome)
                     }
@@ -137,7 +137,7 @@ fun LoginScreen(
                         imeAction = ImeAction.Done
                     ),
                     keyboardActions = KeyboardActions {
-                        viewModel.login(username, password) // Pasa los valores aquí
+                        viewModel.login(username, password)
                         if (viewModel.authState.value is AuthState.Authenticated) {
                             navController.navigate(ScreenHome)
                         } else {
