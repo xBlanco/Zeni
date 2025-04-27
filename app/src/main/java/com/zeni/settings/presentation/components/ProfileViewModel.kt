@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.zeni.R
 import com.zeni.auth.domain.utils.AuthState
-import com.zeni.core.data.database.entities.UserEntity
-import com.zeni.core.domain.repository.UserRepository
+import com.zeni.settings.domain.model.UserEntity
+import com.zeni.settings.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

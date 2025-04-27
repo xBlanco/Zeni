@@ -1,14 +1,14 @@
-package com.zeni.core.data.database.dao
+package com.zeni.auth.presentation.register.data
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.zeni.core.data.database.entities.UserEntity
+import com.zeni.settings.domain.model.UserEntity
 
 @Dao
 interface UserDao {
-    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: UserEntity)
 
     @Query("SELECT * FROM users WHERE username = :username LIMIT 1")

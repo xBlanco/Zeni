@@ -1,8 +1,8 @@
 package com.zeni.settings.di
 
-import com.zeni.core.domain.repository.UserRepository
-import com.zeni.core.data.repository.UserRepositoryImpl
-import com.zeni.core.data.database.dao.UserDao
+import com.zeni.settings.repository.UserRepository
+import com.zeni.settings.repository.UserRepositoryImpl
+import com.zeni.auth.presentation.register.data.UserDao
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
