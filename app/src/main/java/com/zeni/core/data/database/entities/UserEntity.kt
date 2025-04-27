@@ -1,4 +1,4 @@
-package com.zeni.settings.domain.model
+package com.zeni.core.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

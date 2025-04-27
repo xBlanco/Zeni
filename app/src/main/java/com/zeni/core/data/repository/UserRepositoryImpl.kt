@@ -1,7 +1,8 @@
-package com.zeni.settings.repository
+package com.zeni.core.data.repository
 
-import com.zeni.auth.presentation.register.data.UserDao
-import com.zeni.settings.domain.model.UserEntity
+import com.zeni.core.data.database.dao.UserDao
+import com.zeni.core.data.database.entities.UserEntity
+import com.zeni.core.domain.repository.UserRepository
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(

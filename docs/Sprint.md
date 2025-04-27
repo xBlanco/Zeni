@@ -53,10 +53,10 @@
 - [ ] T3.5 Persist the application access. It is needed to be persisted every time a user is logged in and logged out, persisting userid and datetime
 
 
-- [ ] T4.1 Improve trip/itinerary screens accordingly to professor feedback.
+- [x] T4.1 Improve trip/itinerary screens accordingly to professor feedback.
     • THE TRIPS MUST HAVE LOCATION, INIT DATE AND END DATE. Itineraries MUST have minimum Title, Description, DATE, START TIME and END TIME.
-- [ ] T4.2 Implement data validation, date and time pickers (e.g., prevent duplicate trip names, check valid dates for an itinerary).
-- [ ] T4.3 Update documentation with database schema and usage at design.md.
+- [x] T4.2 Implement data validation, date and time pickers (e.g., prevent duplicate trip names, check valid dates for an itinerary).
+- [x] T4.3 Update documentation with database schema and usage at design.md.
 
 ----------------------------------------------------------------------------------------------------
 ## Alex

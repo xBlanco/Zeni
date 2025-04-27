@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import com.zeni.core.data.database.Migrations
 import com.zeni.core.data.database.TripsDatabase
-import com.zeni.auth.presentation.register.data.UserDao
+import com.zeni.core.data.database.dao.UserDao
 import com.zeni.core.data.AppDatabase
 import dagger.Module
 import dagger.Provides
