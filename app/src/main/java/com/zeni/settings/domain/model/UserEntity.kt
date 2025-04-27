@@ -1,4 +1,4 @@
-package com.zeni.auth.presentation.register.data
+package com.zeni.settings.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

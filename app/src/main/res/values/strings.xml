@@ -30,6 +30,14 @@
     <!--    Profile Screen-->
     <string name="unknown_user">Unknown user</string>
     <string name="profile_email">Email: </string>
+    <string name="profile_username">Nombre de usuario</string>
+    <string name="profile_birthdate">Fecha de nacimiento</string>
+    <string name="profile_address">Dirección</string>
+    <string name="profile_country">País</string>
+    <string name="profile_phone">Teléfono</string>
+    <string name="profile_accept_emails">Aceptar recibir correos</string>
+    <string name="save_button">Guardar</string>
+    <string name="error_username_taken">El nombre de usuario ya está en uso</string>
 
     <!--    Alert Dialog-->
     <string name="alert_title">Alerta</string>
