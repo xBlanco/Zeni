@@ -5,7 +5,7 @@
 
     <!--    Login Screen-->
     <string name="login_title">Iniciar Sesión</string>
-    <string name="login_user">Usuario</string>
+    <string name="login_user">Correo</string>
     <string name="login_pass">Contraseña</string>
     <string name="login_btn">Acceder</string>
 
@@ -17,6 +17,8 @@
     <string name="alert_error">El correo y/o la contraseña no són válidos</string>
     <string name="back_to_register">Volver a registro</string>
     <string name="register_success_message">Usuario registrado correctamente. Verifica el correo e inicia sesión.</string>
+    <string name="email_already_exists">Ese correo ya está registrado</string>
+    <string name="email_does_not_exist">Ese correo no está registrado</string>
 
     <!-- Recover Password -->
     <string name="recover_password_title">Recuperar contraseña</string>
@@ -70,7 +72,7 @@
     <string name="add_trip_button">Crear viaje</string>
     <string name="save_trip_button">Actualizar viaje</string>
     <string name="delete_trip_button">Borrar viaje</string>
-    <string name="error_creating_trip_name_empty">
+    <string name="error_creating_trip_name_empty" translatable="false">
         El campo de nombre no puede estar vacío
     </string>
     <string name="error_creating_trip_destination_empty">

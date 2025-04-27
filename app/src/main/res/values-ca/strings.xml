@@ -10,6 +10,7 @@
     <string name="login_btn">Accedir</string>
 
     <!--    Diàleg d\'alerta -->
+    <string name="error_username_empty">El nom d\'usuari no pot ser buit</string>
     <string name="alert_title">Alerta</string>
     <string name="alert_message">Usuari o contrasenya incorrectes</string>
     <string name="alert_btn">D\'acord</string>
@@ -27,6 +28,7 @@
     <!--  Pantalla d\'edició/creació de viatge  -->
     <string name="add_trip_title">Afegir viatge</string>
     <string name="editing_trip_title">Editant viatge</string>
+    <string name="name_text_label">Nom d\'usuari</string>
     <string name="destination_text_label">Destinació</string>
     <string name="select_start_date_text_label">Data d\'inici</string>
     <string name="select_start_date_text">Data d\'inici: %s</string>
@@ -68,6 +70,7 @@
     <string name="trip_title">Viatge a %s</string>
     <string name="edit_trip">Editar viatge</string>
     <string name="add_activity">Afegir activitat</string>
+    <string name="trip_name">Nom: %s</string>
     <string name="trip_destiny">Destinació: %s</string>
     <string name="trip_start_date">Data d\'inici: %s</string>
     <string name="trip_end_date">Data de fi: %s</string>
@@ -77,6 +80,7 @@
         Crea una activitat per fer alguna cosa durant el teu viatge a %s
     </string>
     <string name="trip_activity_name">Nom: %s</string>
+    <string name="trip_activity_trip_name">Part del teu viatge: %s</string>
     <string name="trip_activity_description">Descripció: %s</string>
     <string name="trip_activity_date">Data: %s</string>
     <string name="trip_activity_time">Hora: %s</string>
@@ -161,4 +165,31 @@
     <!-- Altres -->
     <string name="accept_button">Acceptar</string>
     <string name="cancel_button">Cancel·lar</string>
+    <string name="register_btn">Registrar</string>
+    <string name="register_title">Crear un compte</string>
+    <string name="register_email">Correu electrònic</string>
+    <string name="register_password">Contrasenya</string>
+    <string name="alert_error">El correu i/o la contrasenya no són vàlids</string>
+    <string name="back_to_register">Tornar a registre</string>
+    <string name="register_success_message">Usuari registrat correctament. Verifica el correu i inicia sessió.</string>
+    <string name="email_does_not_exist">Aquest correu no està registrat</string>
+    <string name="recover_password_title">Recuperar contrasenya</string>
+    <string name="recover_password_btn">Enviar correu de recuperació</string>
+    <string name="forgot_password">Has oblidat la contrasenya?</string>
+    <string name="success_title">Correu enviat</string>
+    <string name="recover_password_success">Revisa la safata d\'entrada per restablir la contrasenya.</string>
+    <string name="unknown_user">Unknown user</string>
+    <string name="profile_email">Email:</string>
+    <string name="profile_username">Nom d\'usuari</string>
+    <string name="profile_birthdate">Data de naixement</string>
+    <string name="profile_address">Direcció</string>
+    <string name="profile_country">País</string>
+    <string name="profile_phone">Telèfon</string>
+    <string name="profile_accept_emails">Acceptar rebre correus</string>
+    <string name="save_button">Desa</string>
+    <string name="user_window_alert">Usuari</string>
+    <string name="error_username_taken">El nom d\'usuari ja està en ús</string>
+    <string name="success_user_updated">Dades actualitzades correctament</string>
+    <string name="success_user_created">Usuari creat correctament</string>
+    <string name="email_already_exists">Aquest correu ja està registrat</string>
 </resources>

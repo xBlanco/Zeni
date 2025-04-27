@@ -49,8 +49,8 @@
     • Minimum information: login, username, birthdate (date field), address, country and phone number, accept receive emails.
     • Must check if the username is already in use.
 - [ ] T3.2 Change the trip table structure to accept multiple users and show only the trips for the user logged in.
-- [ ] T3.4 Update documentation with database schema and usage at design.md.
-- [ ] T3.5 Persist the application access. It is needed to be persisted every time a user is logged in and logged out, persisting userid and datetime
+- [x] T3.4 Update documentation with database schema and usage at design.md.
+- [x] T3.5 Persist the application access. It is needed to be persisted every time a user is logged in and logged out, persisting userid and datetime
 
 
 - [x] T4.1 Improve trip/itinerary screens accordingly to professor feedback.

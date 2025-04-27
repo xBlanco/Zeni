@@ -3,6 +3,7 @@ package com.zeni.auth.presentation.register.components
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.zeni.auth.domain.utils.AuthState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,10 +11,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 import com.zeni.auth.domain.utils.RegisterErrors
+import com.zeni.core.data.database.entities.UserEntity
+import com.zeni.core.domain.repository.UserRepository
+import kotlinx.coroutines.launch
 
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor() : ViewModel() {
+class RegisterViewModel @Inject constructor(
+    private val userRepository: UserRepository // Inyección de dependencia
+) : ViewModel() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -42,6 +48,26 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
                 if (task.isSuccessful) {
                     _authState.value = AuthState.Authenticated
                     sendEmailVerification()
+
+                    // Generar datos aleatorios
+                    val randomUsername = "User" + (1000..9999999).random()
+                    val randomAddress = "Address " + (1..100).random()
+                    val randomCountry = listOf("España", "Francia", "Italia").random()
+                    val randomPhone = "+34" + (600000000..699999999).random()
+
+                    // Guardar en la base de datos
+                    viewModelScope.launch {
+                        val newUser = UserEntity(
+                            login = email,
+                            username = randomUsername,
+                            birthdate = "2000-01-01",
+                            address = randomAddress,
+                            country = randomCountry,
+                            phoneNumber = randomPhone,
+                            acceptEmails = false
+                        )
+                        userRepository.saveUser(newUser)
+                    }
                 } else {
                     _authState.value = AuthState.Error(task.exception?.message ?: "Something went wrong")
                 }
