@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Zeni</string>
     <string name="app_version_prefix">"Version "</string>
 
     <!--    Login Screen-->
@@ -9,6 +10,7 @@
     <string name="login_btn">Access</string>
 
     <!--    Alert Dialog-->
+    <string name="error_username_empty">Username cannot be empty</string>
     <string name="alert_title">Alert</string>
     <string name="alert_message">Incorrect username or password</string>
     <string name="alert_btn">OK</string>
@@ -24,6 +26,7 @@
     <!--  UpsertTripScreen  -->
     <string name="add_trip_title">Add Trip</string>
     <string name="editing_trip_title">Editing Trip</string>
+    <string name="name_text_label">Username</string>
     <string name="destination_text_label">Destination</string>
     <string name="select_start_date_text_label">Start Date</string>
     <string name="select_start_date_text">Start Date: %s</string>
@@ -64,6 +67,7 @@
     <string name="trip_title">Trip to %s</string>
     <string name="edit_trip">Edit Trip</string>
     <string name="add_activity">Add Activity</string>
+    <string name="trip_name">Name: %s</string>
     <string name="trip_destiny">Destination: %s</string>
     <string name="trip_start_date">Start Date: %s</string>
     <string name="trip_end_date">End Date: %s</string>
@@ -73,13 +77,16 @@
         Create an activity to do something during your trip to %s
     </string>
     <string name="trip_activity_name">Name: %s</string>
+    <string name="trip_activity_trip_name">Part of your trip: %s</string>
     <string name="trip_activity_description">Description: %s</string>
     <string name="trip_activity_date">Date: %s</string>
     <string name="trip_activity_time">Time: %s</string>
 
     <!-- ItineraryScreen -->
+    <string name="trip_sample">Trip %s</string>
     <string name="itinerary_title">Today\'s Itinerary</string>
     <string name="itinerary_tab_text">Itinerary</string>
+    <string name="itinerary_sample">Itinerary %s</string>
     <string name="edit_itinerary">Edit Itinerary</string>
     <string name="itinerary_activity_name">Name</string>
     <string name="itinerary_activity_description">Description</string>
@@ -146,4 +153,31 @@
     <!--  Others  -->
     <string name="accept_button">Accept</string>
     <string name="cancel_button">Cancel</string>
+    <string name="register_btn">Register</string>
+    <string name="register_title">Create an account</string>
+    <string name="register_email">Email</string>
+    <string name="register_password">Password</string>
+    <string name="alert_error">Email and/or password are invalid</string>
+    <string name="back_to_register">Return to registration</string>
+    <string name="register_success_message">User registered successfully. Verify your email and log in.</string>
+    <string name="email_does_not_exist">This email is not registered</string>
+    <string name="recover_password_title">Recover password</string>
+    <string name="recover_password_btn">Send recovery mail</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="success_title">Mail sent</string>
+    <string name="recover_password_success">Please check your inbox to reset your password.</string>
+    <string name="unknown_user">Unknown user</string>
+    <string name="profile_email">Email:</string>
+    <string name="profile_username">Username</string>
+    <string name="profile_birthdate">Date of birth</string>
+    <string name="profile_address">Direction</string>
+    <string name="profile_country">Country</string>
+    <string name="profile_phone">Phone</string>
+    <string name="profile_accept_emails">Agree to receive emails</string>
+    <string name="save_button">Save</string>
+    <string name="user_window_alert">User</string>
+    <string name="error_username_taken">Username is already in use</string>
+    <string name="success_user_updated">Data updated successfully</string>
+    <string name="success_user_created">User successfully created</string>
+    <string name="email_already_exists">This email is already registered</string>
 </resources>

@@ -5,9 +5,46 @@
 
     <!--    Login Screen-->
     <string name="login_title">Iniciar Sesión</string>
-    <string name="login_user">Usuario</string>
+    <string name="login_user">Correo</string>
     <string name="login_pass">Contraseña</string>
     <string name="login_btn">Acceder</string>
+
+    <!--    Register Screen-->
+    <string name="register_btn">Registrar</string>
+    <string name="register_title">Crear una cuenta</string>
+    <string name="register_email">Correo electrónico</string>
+    <string name="register_password">Contraseña</string>
+    <string name="alert_error">El correo y/o la contraseña no són válidos</string>
+    <string name="back_to_register">Volver a registro</string>
+    <string name="register_success_message">Usuario registrado correctamente. Verifica el correo e inicia sesión.</string>
+    <string name="email_already_exists">Ese correo ya está registrado</string>
+    <string name="email_does_not_exist">Ese correo no está registrado</string>
+
+    <!-- Recover Password -->
+    <string name="recover_password_title">Recuperar contraseña</string>
+    <string name="recover_password_btn">Enviar correo de recuperación</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+
+    <!-- Success Dialog -->
+    <string name="success_title">Correo enviado</string>
+    <string name="recover_password_success">Revisa tu bandeja de entrada para restablecer tu contraseña.</string>
+
+    <!--    Profile Screen-->
+    <string name="unknown_user">Unknown user</string>
+    <string name="profile_email">Email: </string>
+    <string name="profile_username">Nombre de usuario</string>
+    <string name="profile_birthdate">Fecha de nacimiento</string>
+    <string name="profile_address">Dirección</string>
+    <string name="profile_country">País</string>
+    <string name="profile_phone">Teléfono</string>
+    <string name="profile_accept_emails">Aceptar recibir correos</string>
+    <string name="save_button">Guardar</string>
+    <string name="user_window_alert">Usuario</string>
+    <string name="error_username_taken">El nombre de usuario ya está en uso</string>
+    <string name="success_user_updated">Datos actualizados correctamente</string>
+    <string name="success_user_created">Usuario creado correctamente</string>
+    <string name="error_username_empty">El nombre de usuario no puede estar vacío</string>
+
 
     <!--    Alert Dialog-->
     <string name="alert_title">Alerta</string>
@@ -35,7 +72,7 @@
     <string name="add_trip_button">Crear viaje</string>
     <string name="save_trip_button">Actualizar viaje</string>
     <string name="delete_trip_button">Borrar viaje</string>
-    <string name="error_creating_trip_name_empty">
+    <string name="error_creating_trip_name_empty" translatable="false">
         El campo de nombre no puede estar vacío
     </string>
     <string name="error_creating_trip_destination_empty">

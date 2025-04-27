@@ -2,7 +2,6 @@
 
 ## Team
 - Alberto
-- Alex
 
 ## Project Description
 Zeni is a travel planning application designed to help users organize their trips efficiently. The app provides features such as itinerary management, trip planning, and user preferences. It aims to offer a seamless experience for travelers by integrating various functionalities into a single platform.

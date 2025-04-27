@@ -10,6 +10,7 @@
     <string name="login_btn">Connexion</string>
 
     <!--    Boîte de dialogue d\'alerte -->
+    <string name="error_username_empty">Le nom d\'utilisateur ne peut pas être vide</string>
     <string name="alert_title">Alerte</string>
     <string name="alert_message">Identifiant ou mot de passe incorrect</string>
     <string name="alert_btn">D\'accord</string>
@@ -27,6 +28,7 @@
     <!--  Écran d\'ajout/modification de voyage  -->
     <string name="add_trip_title">Ajouter un voyage</string>
     <string name="editing_trip_title">Modifier le voyage</string>
+    <string name="name_text_label">Nom d\'utilisateur</string>
     <string name="destination_text_label">Destination</string>
     <string name="select_start_date_text_label">Date de début</string>
     <string name="select_start_date_text">Date de début: %s</string>
@@ -68,6 +70,7 @@
     <string name="trip_title">Voyage à %s</string>
     <string name="edit_trip">Modifier</string>
     <string name="add_activity">Ajouter activité</string>
+    <string name="trip_name">Nom : %s</string>
     <string name="trip_destiny">Destination: %s</string>
     <string name="trip_start_date">Date de début: %s</string>
     <string name="trip_end_date">Date de fin: %s</string>
@@ -77,6 +80,7 @@
         Créez une activité pour votre voyage à %s
     </string>
     <string name="trip_activity_name">Nom: %s</string>
+    <string name="trip_activity_trip_name">Une partie de votre voyage : %s</string>
     <string name="trip_activity_description">Description: %s</string>
     <string name="trip_activity_date">Date: %s</string>
     <string name="trip_activity_time">Heure: %s</string>
@@ -161,4 +165,31 @@
     <!-- Autres -->
     <string name="accept_button">Accepter</string>
     <string name="cancel_button">Annuler</string>
+    <string name="register_btn">Registre</string>
+    <string name="register_title">Créer un compte</string>
+    <string name="register_email">E-mail</string>
+    <string name="register_password">Mot de passe</string>
+    <string name="alert_error">L\'e-mail et/ou le mot de passe ne sont pas valides</string>
+    <string name="back_to_register">Retour à l\'inscription</string>
+    <string name="register_success_message">L\'utilisateur s\'est enregistré avec succès. Vérifiez votre e-mail et connectez-vous.</string>
+    <string name="email_does_not_exist">Cet email n\'est pas enregistré</string>
+    <string name="recover_password_title">Récupérer le mot de passe</string>
+    <string name="recover_password_btn">Envoyer un courrier de récupération</string>
+    <string name="forgot_password">Vous avez oublié votre mot de passe ?</string>
+    <string name="success_title">Courrier envoyé</string>
+    <string name="recover_password_success">Veuillez vérifier votre boîte de réception pour réinitialiser votre mot de passe.</string>
+    <string name="unknown_user">Utilisateur inconnu</string>
+    <string name="profile_email">E-mail:</string>
+    <string name="profile_username">Nom d\'utilisateur</string>
+    <string name="profile_birthdate">Date de naissance</string>
+    <string name="profile_address">Direction</string>
+    <string name="profile_country">Pays</string>
+    <string name="profile_phone">Téléphone</string>
+    <string name="profile_accept_emails">Accepter de recevoir des e-mails</string>
+    <string name="save_button">Sauvegarder</string>
+    <string name="user_window_alert">Utilisateur</string>
+    <string name="error_username_taken">Le nom d\'utilisateur est déjà utilisé</string>
+    <string name="success_user_updated">Données mises à jour avec succès</string>
+    <string name="success_user_created">Utilisateur créé avec succès</string>
+    <string name="email_already_exists">Cet e-mail est déjà enregistré</string>
 </resources>

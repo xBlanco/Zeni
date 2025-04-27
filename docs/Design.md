@@ -31,6 +31,15 @@ The Model represents the data and business logic of the application. It is respo
   - `url`: `String` - URL of the image.
   - `description`: `String` - Description of the image.
 
+- **User**
+  - `id`: `Int` - Unique identifier for the user.
+  - `login`: `String` - Email of the user.
+  - `username`: `String` - Username of the user.
+  - `birthdate`: `ZonedDateTime` - Birthdate of the user.
+  - `address`: `String` - Address of the user.
+  - `country`: `String` - Country of the user.
+  - `phoneNumber`: `String` - Phone number of the user.
+  - `acceptEmails`: `Boolean` - Whether the user accepts to receive emails.
 
 #### View
 The View is responsible for displaying the data to the user and handling user interactions.
@@ -47,14 +56,18 @@ The ViewModel acts as a bridge between the Model and the View. It holds the data
 
 ### Relationships
 - A `User` can have multiple `Trip`s.
+- A `User` can have multiple `Activity`s.
 - A `Trip` can have multiple `Activity`s.
 - A `Trip` can have multiple `Image`s.
+
 
 ### Visualization of the Model
 ```mermaid
 classDiagram
 Trip --> Image
 Trip --> Activity
+User --> Trip
+User --> Activity
 
 class Trip {
     String name
@@ -78,6 +91,17 @@ class Activity {
     String title
     String description
     ZonedDateTime dateTime
+}
+
+class User {
+    Int id
+    String login
+    String username
+    ZonedDateTime birthdate
+    String address
+    String country
+    String phoneNumber
+    Boolean acceptEmails
 }
 ```
 
@@ -110,8 +134,20 @@ class activity_table {
     date_time INTEGER NOT NULL
 }
 
+  class user_table {
+    id TEXT NOT NULL PRIMARY KEY
+    login TEXT NOT NULL
+    username TEXT NOT NULL
+    birthdate INTEGER NOT NULL
+    address TEXT NOT NULL
+    phoneNumber TEXT NOT NULL
+    acceptEmails INTEGER NOT NULL
+  }
+
 trip_table "1" --o "*" trip_images_table : has
 trip_table "1" --o "*" activity_table : has
+user_table "1" --o "*" trip_table : has
+user_table "1" --o "*" activity_table : has
 ```
 
 
@@ -151,6 +187,23 @@ CREATE TABLE IF NOT EXISTS activity_table (
 );
 CREATE INDEX IF NOT EXISTS index_activity_table_trip_name ON activity_table (trip_name);
 ```
+- user_table
+```
+CREATE TABLE IF NOT EXISTS user_table (
+    id TEXT NOT NULL PRIMARY KEY,
+    login TEXT NOT NULL,
+    username TEXT NOT NULL,
+    birthdate INTEGER NOT NULL,
+    address TEXT NOT NULL,
+    country TEXT NOT NULL,
+    phoneNumber TEXT NOT NULL,
+    acceptEmails INTEGER NOT NULL
+);
+```
+
+
+
+
 
 
 ### Database usage

@@ -41,11 +41,6 @@ fun AboutScreen(navController: NavHostController) {
                 name = context.getString(R.string.developer1_name),
                 image = R.raw.alberto_image,
                 github = context.getString(R.string.developer1_github)
-            ),
-            DevsInfo(
-                name = context.getString(R.string.developer2_name),
-                image = R.raw.may_image,
-                github = context.getString(R.string.developer2_github)
             )
         )
     }

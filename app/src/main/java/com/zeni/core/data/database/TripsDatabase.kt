@@ -13,7 +13,7 @@ import com.zeni.core.data.database.entities.TripImageEntity
     entities = [
         TripEntity::class,
         TripImageEntity::class,
-        ActivityEntity::class
+        ActivityEntity::class,
     ],
     version = 1,
     exportSchema = true
