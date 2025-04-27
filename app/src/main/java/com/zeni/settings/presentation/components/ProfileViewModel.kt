@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.zeni.R
 import com.zeni.auth.domain.utils.AuthState
 import com.zeni.settings.domain.model.UserEntity
 import com.zeni.settings.repository.UserRepository
@@ -12,7 +13,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.zeni.R
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
@@ -27,6 +27,7 @@ class ProfileViewModel @Inject constructor(
     private val _saveState = MutableStateFlow<SaveState>(SaveState.Idle)
     val saveState: StateFlow<SaveState> = _saveState
 
+    val userLogin = MutableStateFlow("")
     val username = MutableStateFlow("")
     val birthdate = MutableStateFlow("")
     val address = MutableStateFlow("")
@@ -37,7 +38,7 @@ class ProfileViewModel @Inject constructor(
 
     fun setUsername(value: String) {
         username.value = value
-        usernameError.value = false
+        usernameError.value = value.isBlank()
     }
 
     fun setBirthdate(value: String) {
@@ -116,6 +117,7 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             val user = userRepository.getUserByLogin(login)
             if (user != null) {
+                userLogin.value = user.login
                 username.value = user.username
                 birthdate.value = user.birthdate
                 address.value = user.address

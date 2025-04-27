@@ -121,7 +121,7 @@ fun LoginScreen(
                         imeAction = ImeAction.Next
                     ),
                     singleLine = true,
-                    shape = MaterialTheme.shapes.extraLarge
+                    shape = MaterialTheme.shapes.large
                 )
 
                 OutlinedTextField(
@@ -145,7 +145,7 @@ fun LoginScreen(
                         }
                     },
                     singleLine = true,
-                    shape = MaterialTheme.shapes.extraLarge
+                    shape = MaterialTheme.shapes.large
                 )
             }
         }

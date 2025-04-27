@@ -41,6 +41,7 @@
     <string name="error_username_taken">El nombre de usuario ya está en uso</string>
     <string name="success_user_updated">Datos actualizados correctamente</string>
     <string name="success_user_created">Usuario creado correctamente</string>
+    <string name="error_username_empty">El nombre de usuario no puede estar vacío</string>
 
 
     <!--    Alert Dialog-->

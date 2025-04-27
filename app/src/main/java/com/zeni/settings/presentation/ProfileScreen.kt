@@ -59,7 +59,7 @@ fun ProfileScreen(
 
     val saveState by viewModel.saveState.collectAsState()
 
-    if (saveState is SaveState.Success || saveState is SaveState.Error) {
+    if (saveState is SaveState.Success || (saveState is SaveState.Error && (saveState as SaveState.Error).message != R.string.error_username_taken)) {
         val message = when (saveState) {
             is SaveState.Success -> stringResource((saveState as SaveState.Success).message)
             is SaveState.Error -> stringResource((saveState as SaveState.Error).message)
@@ -101,6 +101,7 @@ fun ProfileScreen(
     val phoneNumber by viewModel.phoneNumber.collectAsState()
     val acceptEmails by viewModel.acceptEmails.collectAsState()
     val usernameError by viewModel.usernameError.collectAsState()
+    val userLogin by viewModel.userLogin.collectAsState()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -114,10 +115,14 @@ fun ProfileScreen(
                 .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = stringResource(R.string.profile_email, userEmail),
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(16.dp)
+            OutlinedTextField(
+                value = userLogin,
+                onValueChange = {},
+                label = { Text(text = stringResource(R.string.profile_email)) },
+                modifier = Modifier.fillMaxWidth(),
+                readOnly = true,
+                singleLine = true,
+                shape = MaterialTheme.shapes.large
             )
 
             OutlinedTextField(
@@ -126,22 +131,29 @@ fun ProfileScreen(
                 label = { Text(text = stringResource(R.string.profile_username)) },
                 modifier = Modifier.fillMaxWidth(),
                 isError = usernameError,
-                singleLine = true
+                singleLine = true,
+                shape = MaterialTheme.shapes.large
             )
             if (usernameError) {
                 Text(
-                    text = stringResource(R.string.error_username_taken),
+                    text = if (username.isBlank()) {
+                        stringResource(R.string.error_username_empty)
+                    } else {
+                        stringResource(R.string.error_username_taken)
+                    },
                     color = MaterialTheme.colorScheme.error,
                     style = MaterialTheme.typography.bodySmall
                 )
             }
+
 
             OutlinedTextField(
                 value = birthdate,
                 onValueChange = viewModel::setBirthdate,
                 label = { Text(text = stringResource(R.string.profile_birthdate)) },
                 modifier = Modifier.fillMaxWidth(),
-                singleLine = true
+                singleLine = true,
+                shape = MaterialTheme.shapes.large
             )
 
             OutlinedTextField(
@@ -149,7 +161,8 @@ fun ProfileScreen(
                 onValueChange = viewModel::setAddress,
                 label = { Text(text = stringResource(R.string.profile_address)) },
                 modifier = Modifier.fillMaxWidth(),
-                singleLine = true
+                singleLine = true,
+                shape = MaterialTheme.shapes.large
             )
 
             OutlinedTextField(
@@ -157,7 +170,8 @@ fun ProfileScreen(
                 onValueChange = viewModel::setCountry,
                 label = { Text(text = stringResource(R.string.profile_country)) },
                 modifier = Modifier.fillMaxWidth(),
-                singleLine = true
+                singleLine = true,
+                shape = MaterialTheme.shapes.large
             )
 
             OutlinedTextField(
@@ -165,7 +179,8 @@ fun ProfileScreen(
                 onValueChange = viewModel::setPhoneNumber,
                 label = { Text(text = stringResource(R.string.profile_phone)) },
                 modifier = Modifier.fillMaxWidth(),
-                singleLine = true
+                singleLine = true,
+                shape = MaterialTheme.shapes.large
             )
 
             Row(
@@ -183,7 +198,8 @@ fun ProfileScreen(
 
             Button(
                 onClick = { viewModel.saveUserInfo() },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                enabled = username.isNotBlank() && !usernameError
             ) {
                 Text(text = stringResource(R.string.save_button))
             }
