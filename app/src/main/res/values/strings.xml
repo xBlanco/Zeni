@@ -37,7 +37,11 @@
     <string name="profile_phone">Teléfono</string>
     <string name="profile_accept_emails">Aceptar recibir correos</string>
     <string name="save_button">Guardar</string>
+    <string name="user_window_alert">Usuario</string>
     <string name="error_username_taken">El nombre de usuario ya está en uso</string>
+    <string name="success_user_updated">Datos actualizados correctamente</string>
+    <string name="success_user_created">Usuario creado correctamente</string>
+
 
     <!--    Alert Dialog-->
     <string name="alert_title">Alerta</string>

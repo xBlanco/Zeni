@@ -45,7 +45,7 @@
 - [x] T2.3: Implement the actions and the view in order to create an option to recover the password. It depends on where you create this feature (new Screen)
 
 
-- [ ] T3.1 Persist the user information in the local DB (create user table).
+- [x] T3.1 Persist the user information in the local DB (create user table).
     • Minimum information: login, username, birthdate (date field), address, country and phone number, accept receive emails.
     • Must check if the username is already in use.
 - [ ] T3.2 Change the trip table structure to accept multiple users and show only the trips for the user logged in.

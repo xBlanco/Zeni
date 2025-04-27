@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.zeni.R
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
@@ -22,6 +23,9 @@ class ProfileViewModel @Inject constructor(
 
     private val _authState = MutableStateFlow<AuthState>(AuthState.Idle)
     val authState: StateFlow<AuthState> = _authState
+
+    private val _saveState = MutableStateFlow<SaveState>(SaveState.Idle)
+    val saveState: StateFlow<SaveState> = _saveState
 
     val username = MutableStateFlow("")
     val birthdate = MutableStateFlow("")
@@ -60,21 +64,52 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             val login = FirebaseAuth.getInstance().currentUser?.email ?: return@launch
 
-            // Eliminar el usuario existente con el mismo login
-            userRepository.deleteUserByLogin(login)
+            // Verificar si el nombre de usuario ya está en uso
+            val isUsernameTaken = userRepository.isUsernameTaken(username.value)
+            val existingUser = userRepository.getUserByLogin(login)
 
-            // Crear e insertar el nuevo usuario
-            val user = UserEntity(
-                login = login,
-                username = username.value,
-                birthdate = birthdate.value,
-                address = address.value,
-                country = country.value,
-                phoneNumber = phoneNumber.value,
-                acceptEmails = acceptEmails.value
-            )
-            userRepository.saveUser(user)
+            if (isUsernameTaken && (existingUser == null || existingUser.username != username.value)) {
+                usernameError.value = true
+                _saveState.value = SaveState.Error(R.string.error_username_taken)
+                return@launch
+            }
+
+            if (existingUser != null) {
+                // Actualizar los datos del usuario
+                val updatedUser = existingUser.copy(
+                    username = username.value,
+                    birthdate = birthdate.value,
+                    address = address.value,
+                    country = country.value,
+                    phoneNumber = phoneNumber.value,
+                    acceptEmails = acceptEmails.value
+                )
+                userRepository.saveUser(updatedUser)
+                _saveState.value = SaveState.Success(R.string.success_user_updated)
+            } else {
+                // Crear un nuevo usuario
+                val newUser = UserEntity(
+                    login = login,
+                    username = username.value,
+                    birthdate = birthdate.value,
+                    address = address.value,
+                    country = country.value,
+                    phoneNumber = phoneNumber.value,
+                    acceptEmails = acceptEmails.value
+                )
+                userRepository.saveUser(newUser)
+                _saveState.value = SaveState.Success(R.string.success_user_created)            }
         }
+    }
+
+    fun resetSaveState() {
+        _saveState.value = SaveState.Idle
+    }
+
+    sealed class SaveState {
+        object Idle : SaveState()
+        data class Success(val message: Int) : SaveState()
+        data class Error(val message: Int) : SaveState()
     }
 
     fun loadUserInfo(login: String) {

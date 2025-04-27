@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,6 +42,7 @@ import com.zeni.settings.presentation.components.SettingsViewModel
 import androidx.compose.runtime.getValue
 import com.zeni.core.presentation.navigation.ScreenHome
 import com.zeni.core.presentation.navigation.ScreenLogin
+import com.zeni.settings.presentation.components.ProfileViewModel.SaveState
 
 @Composable
 fun ProfileScreen(
@@ -53,6 +55,27 @@ fun ProfileScreen(
         FirebaseAuth.getInstance().currentUser?.email ?: unknownUserText
     } else {
         unknownUserText
+    }
+
+    val saveState by viewModel.saveState.collectAsState()
+
+    if (saveState is SaveState.Success || saveState is SaveState.Error) {
+        val message = when (saveState) {
+            is SaveState.Success -> stringResource((saveState as SaveState.Success).message)
+            is SaveState.Error -> stringResource((saveState as SaveState.Error).message)
+            else -> ""
+        }
+
+        AlertDialog(
+            onDismissRequest = { viewModel.resetSaveState() },
+            title = { Text(text = stringResource(R.string.user_window_alert)) },
+            text = { Text(text = message) },
+            confirmButton = {
+                Button(onClick = { viewModel.resetSaveState() }) {
+                    Text(text = stringResource(R.string.accept_button))
+                }
+            }
+        )
     }
 
     LaunchedEffect(authState) {
@@ -190,7 +213,7 @@ private fun TopBar(navController: NavHostController, userEmail: String, viewMode
                 onClick = {
                     viewModel.signout()
                     navController.navigate(ScreenLogin) {
-                        popUpTo(0) // Limpia todo el stack de navegación
+                        popUpTo(0) // Limpia tódo el stack de navegación
                     }
                 }
             ) {
