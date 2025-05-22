@@ -378,7 +378,7 @@ private fun TopBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun DatePickers(
+fun DatePickers(
     onClose: () -> Unit,
     onSelectedDate: (ZonedDateTime) -> Unit,
     initialSelectedDateMillis: Long? = null,

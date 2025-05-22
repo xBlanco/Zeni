@@ -1,0 +1,317 @@
+[
+  {
+    "id": "BCN01",
+    "name": "Hotel Ramblas",
+    "address": "La Rambla 33, Barcelona",
+    "rating": 4,
+    "rooms": [
+      {
+        "id": "R1",
+        "room_type": "single",
+        "price": 80,
+        "images": [
+          "/images/BCN01R1.png"
+        ]
+      },
+      {
+        "id": "R2",
+        "room_type": "double",
+        "price": 120,
+        "images": [
+          "/images/BCN01R2.png"
+        ]
+      },
+      {
+        "id": "R3",
+        "room_type": "suite",
+        "price": 200,
+        "images": [
+          "/images/BCN01R3.png"
+        ]
+      }
+    ],
+    "image_url": "/images/BCN01.png"
+  },
+  {
+    "id": "BCN02",
+    "name": "Hotel Gaudí",
+    "address": "C/ Nou de la Rambla 12, Barcelona",
+    "rating": 3,
+    "rooms": [
+      {
+        "id": "R1",
+        "room_type": "single",
+        "price": 80,
+        "images": [
+          "/images/BCN02R1.png"
+        ]
+      },
+      {
+        "id": "R2",
+        "room_type": "double",
+        "price": 120,
+        "images": [
+          "/images/BCN02R2.png"
+        ]
+      },
+      {
+        "id": "R3",
+        "room_type": "suite",
+        "price": 200,
+        "images": [
+          "/images/BCN02R3.png"
+        ]
+      }
+    ],
+    "image_url": "/images/BCN02.png"
+  },
+  {
+    "id": "BCN03",
+    "name": "Hotel Sagrada Familia",
+    "address": "C/ Còrsega 541, Barcelona",
+    "rating": 4,
+    "rooms": [
+      {
+        "id": "R1",
+        "room_type": "single",
+        "price": 80,
+        "images": [
+          "/images/BCN03R1.png"
+        ]
+      },
+      {
+        "id": "R2",
+        "room_type": "double",
+        "price": 120,
+        "images": [
+          "/images/BCN03R2.png"
+        ]
+      },
+      {
+        "id": "R3",
+        "room_type": "suite",
+        "price": 200,
+        "images": [
+          "/images/BCN03R3.png",
+          "/images/BCN03R3b.png"
+        ]
+      }
+    ],
+    "image_url": "/images/BCN03.png"
+  },
+  {
+    "id": "PAR01",
+    "name": "Hotel Louvre",
+    "address": "Rue de Rivoli 99, Paris",
+    "rating": 4,
+    "rooms": [
+      {
+        "id": "R1",
+        "room_type": "single",
+        "price": 80,
+        "images": [
+          "/images/PAR01R1.png"
+        ]
+      },
+      {
+        "id": "R2",
+        "room_type": "double",
+        "price": 120,
+        "images": [
+          "/images/PAR01R2.png"
+        ]
+      },
+      {
+        "id": "R3",
+        "room_type": "suite",
+        "price": 200,
+        "images": [
+          "/images/PAR01R3.png"
+        ]
+      }
+    ],
+    "image_url": "/images/PAR01.png"
+  },
+  {
+    "id": "PAR02",
+    "name": "Hotel Bastille",
+    "address": "Boulevard Beaumarchais 25, Paris",
+    "rating": 3,
+    "rooms": [
+      {
+        "id": "R1",
+        "room_type": "single",
+        "price": 80,
+        "images": [
+          "/images/PAR02R1.png"
+        ]
+      },
+      {
+        "id": "R2",
+        "room_type": "double",
+        "price": 120,
+        "images": [
+          "/images/PAR02R2.png"
+        ]
+      },
+      {
+        "id": "R3",
+        "room_type": "suite",
+        "price": 200,
+        "images": [
+          "/images/PAR02R3.png"
+        ]
+      }
+    ],
+    "image_url": "/images/PAR02.png"
+  },
+  {
+    "id": "PAR03",
+    "name": "Hotel Montmartre",
+    "address": "Rue Lepic 18, Paris",
+    "rating": 4,
+    "rooms": [
+      {
+        "id": "R1",
+        "room_type": "single",
+        "price": 80,
+        "images": [
+          "/images/PAR03R1.png"
+        ]
+      },
+      {
+        "id": "R2",
+        "room_type": "double",
+        "price": 120,
+        "images": [
+          "/images/PAR03R2.png"
+        ]
+      },
+      {
+        "id": "R3",
+        "room_type": "suite",
+        "price": 200,
+        "images": [
+          "/images/PAR03R3.png",
+          "/images/PAR03R3b.png",
+          "/images/PAR03R3c.png"
+        ]
+      }
+    ],
+    "image_url": "/images/PAR03.png"
+  },
+  {
+    "id": "LON01",
+    "name": "Hotel Westminster",
+    "address": "Bridge St 1, Londres",
+    "rating": 5,
+    "rooms": [
+      {
+        "id": "R1",
+        "room_type": "single",
+        "price": 80,
+        "images": [
+          "/images/LON01R1.png"
+        ]
+      },
+      {
+        "id": "R2",
+        "room_type": "double",
+        "price": 120,
+        "images": [
+          "/images/LON01R2.png"
+        ]
+      },
+      {
+        "id": "R3",
+        "room_type": "suite",
+        "price": 200,
+        "images": [
+          "/images/LON01R3.png"
+        ]
+      }
+    ],
+    "image_url": "/images/LON01.png"
+  },
+  {
+    "id": "LON02",
+    "name": "Hotel Soho",
+    "address": "Greek St 15, Londres",
+    "rating": 4,
+    "rooms": [
+      {
+        "id": "R1",
+        "room_type": "single",
+        "price": 80,
+        "images": [
+          "/images/LON02R1.png"
+        ]
+      },
+      {
+        "id": "R2",
+        "room_type": "double",
+        "price": 120,
+        "images": [
+          "/images/LON02R2.png"
+        ]
+      },
+      {
+        "id": "R3",
+        "room_type": "suite",
+        "price": 200,
+        "images": [
+          "/images/LON02R3.png"
+        ]
+      }
+    ],
+    "image_url": "/images/LON02.png"
+  },
+  {
+    "id": "LON03",
+    "name": "Hotel Kensington",
+    "address": "Queens Gate 99, Londres",
+    "rating": 4,
+    "rooms": [
+      {
+        "id": "R1",
+        "room_type": "single",
+        "price": 80,
+        "images": [
+          "/images/LON03R1.png"
+        ]
+      },
+      {
+        "id": "R2",
+        "room_type": "double",
+        "price": 120,
+        "images": [
+          "/images/LON03R2.png"
+        ]
+      },
+      {
+        "id": "R3",
+        "room_type": "suite",
+        "price": 200,
+        "images": [
+          "/images/LON03R3.png",
+          "/images/LON03R3b.png",
+          "/images/LON03R3c.png",
+          "/images/LON03R3d.png"
+        ]
+      }
+    ],
+    "image_url": "/images/LON03.png"
+  }
+]
+
+
+//Gets
+• GET /hotels/{group_id}/hotels
+• GET /hotels/{group_id}/availability
+• POST /hotels/{group_id}/reserve
+• POST /hotels/{group_id}/cancel
+• GET /hotels/{group_id}/reservations
+• ADMIN:
+• GET /reservations
+• GET /reservations/{res_id}
+• DELETE /reservations/{res_id}
