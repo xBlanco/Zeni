@@ -25,6 +25,7 @@ android {
 
         testInstrumentationRunner = "com.zeni.HiltTestRunner"
 
+        //noinspection WrongGradleMethod
         room {
             schemaDirectory("$projectDir/schemas")
         }
@@ -116,10 +117,13 @@ dependencies {
     androidTestImplementation(libs.hilt.android.testing)
     kaptAndroidTest(libs.hilt.compiler)
 
-    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-auth")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.google.firebase.auth)
 
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.material3)
 }
 
 // Allow references to generated code

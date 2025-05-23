@@ -58,6 +58,25 @@
 - [x] T4.2 Implement data validation, date and time pickers (e.g., prevent duplicate trip names, check valid dates for an itinerary).
 - [x] T4.3 Update documentation with database schema and usage at design.md.
 
+### Sprint 5
+- [x] T1.1 Add Retrofit dependency and configure the HTTP client.  
+- [x] T1.2 Create the necessary data models and API interfaces to access the hotel API implementing MVVM structure.  
+- [x] T1.3 Create a repository layer to abstract the API usage.  
+- [x] T1.4 Create a unit test to test and connection with /hotels/G16/availability.
+
+- [x] T2.1 Create a screen to search for hotels in London, Paris, or Barcelona, with city, start and end dates.  
+- [x] T2.2 Show hotel and room data returned by the API (typically 3 rooms per hotel).  
+- [ ] T2.3 Allow users to book a room and save the reservation info (ID, room, hotel, price, etc) locally in the trip table or another table creating a new trip and save all reservation info.  
+- [ ] T2.4 Display images of the hotel and rooms on the booking.
+
+- [ ] T3.1 Allow the user to attach multiple images to a trip.  
+- [ ] T3.2 Save images locally in the device database or storage.  
+- [ ] T3.3 Display trip-specific galleries in the trip details screen
+
+- [ ] T4.1 Create a screen to list all local reservations indicating the trip related.  
+- [ ] T4.2 Add functionality to delete a reservation locally and via API (if required).  
+- [ ] T4.3 Show the associated hotel and room images in the list, similar to the example seen in class (RemotePersistence.zip)  
+- [ ] T4.4 Update the "My Trips" screen to indicate whether a trip includes a hotel reservation, and display the corresponding reservation details.
 
 ----------------------------------------------------------------------------------------------------
 ## Alex

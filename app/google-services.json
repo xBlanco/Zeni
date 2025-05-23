@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "16904385692",
+    "project_id": "zeni-a",
+    "storage_bucket": "zeni-a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16904385692:android:c7874b1740b59ed1ed6959",
+        "android_client_info": {
+          "package_name": "com.zeni"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBY_ZkPVZ_nX8bT7lZ2CWmYLoHO2EkBEgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -52,8 +52,9 @@
     <string name="alert_btn">Vale</string>
 
     <!-- Strings for the home screen -->
-    <string name="home_title">Inicio</string>
+    <string name="home_title">Hoteles</string>
     <string name="home_sample" translatable="false">Home Screen</string>
+    <string name="search_hotels" translatable="false">Buscar hoteles</string>
 
     <!--  TripsScreen  -->
     <string name="trips_title">Viajes</string>
